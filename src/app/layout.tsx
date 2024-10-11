@@ -29,10 +29,12 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
-      <body>
-        <Navbar />
+      <body className="h-screen w-screen overflow-hidden">
         <TRPCReactProvider>
-          <main className="p-20">{children}</main>
+          <main className="h-full w-full">
+            <Navbar />
+            {children}
+          </main>
         </TRPCReactProvider>
       </body>
     </html>

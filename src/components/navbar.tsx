@@ -10,7 +10,7 @@ const links = [
 
 export default function Navbar() {
   return (
-    <nav className="flex h-16 w-full items-center justify-between bg-gray-800 p-4 text-white">
+    <nav className="flex h-16 w-full items-center justify-between bg-slate-800 p-4 text-white">
       <div className="flex items-center">
         <Link href={"/"} className="ml-2">
           <div className="flex items-center justify-center">
