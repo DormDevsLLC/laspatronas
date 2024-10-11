@@ -4,7 +4,6 @@ import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 
 import { TRPCReactProvider } from "~/trpc/react";
-import Navbar from "../components/navbar";
 
 export const metadata: Metadata = {
   title: "Las Patronas UCF",
@@ -29,9 +28,9 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
-      <body className="h-screen w-screen overflow-hidden">
+      <body>
         <TRPCReactProvider>
-          <main className="h-full w-full">
+          <main className="h-screen w-[100vw] overflow-x-hidden bg-lime-100">
             <Navbar />
             {children}
           </main>
