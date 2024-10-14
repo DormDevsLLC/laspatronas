@@ -3,6 +3,7 @@ import "~/styles/globals.css";
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 
+import Footer from "~/components/footer";
 import Navbar from "~/components/navbar";
 import { TRPCReactProvider } from "~/trpc/react";
 
@@ -33,7 +34,10 @@ export default function RootLayout({
         <TRPCReactProvider>
           <main className="h-screen overflow-x-hidden bg-lime-100">
             <Navbar />
-            <div id="transition-page">{children}</div>
+            <div id="transition-page" className="min-h-screen">
+              {children}
+            </div>
+            <Footer />
           </main>
         </TRPCReactProvider>
       </body>

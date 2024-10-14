@@ -1,28 +1,10 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
-import { useEffect } from "react";
 import Open from "~/components/open";
+import TransitionLink from "~/components/transition-link";
 import { Button } from "~/components/ui/button";
 
 export default async function Home() {
-  useEffect(() => {
-    // Select the parent main element
-    const mainElement = document.querySelector("main");
-
-    // Add the h-screen class when this component mounts
-    if (mainElement) {
-      mainElement.classList.add("overflow-y-hidden");
-    }
-
-    // Cleanup function to remove the class if the user navigates away
-    return () => {
-      if (mainElement) {
-        mainElement.classList.remove("overflow-y-hidden");
-      }
-    };
-  }, []);
-
   return (
     <div className="relative flex h-[92.5vh] w-screen items-center justify-between overflow-hidden">
       {/* Left-hand image */}
@@ -44,22 +26,22 @@ export default async function Home() {
           </div>
           {/* Buttons below the image */}
           <div className="mt-8 flex animate-fade-right items-center justify-center animate-delay-700">
-            <Link href="/order">
+            <TransitionLink href="/order">
               <Button
                 size={"lg"}
                 className="mr-4 bg-[#1c0230] transition-all duration-300 hover:-translate-y-1 md:p-7 md:text-2xl"
               >
                 Order Now
               </Button>
-            </Link>
-            <Link href="/about">
+            </TransitionLink>
+            <TransitionLink href="/about">
               <Button
                 size={"lg"}
                 className="bg-[#1c0230] transition-all duration-300 hover:-translate-y-1 md:p-7 md:text-2xl"
               >
                 About Us
               </Button>
-            </Link>
+            </TransitionLink>
           </div>
         </div>
       </div>
