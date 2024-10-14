@@ -3,6 +3,7 @@ import "~/styles/globals.css";
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 
+import Navbar from "~/components/navbar";
 import { TRPCReactProvider } from "~/trpc/react";
 
 export const metadata: Metadata = {
@@ -27,12 +28,12 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${GeistSans.variable}`}>
+    <html lang="en" className={`${GeistSans.variable} bg-lime-100`}>
       <body>
         <TRPCReactProvider>
-          <main className="h-screen w-[100vw] overflow-x-hidden bg-lime-100">
+          <main className="h-screen overflow-x-hidden bg-lime-100">
             <Navbar />
-            {children}
+            <div id="transition-page">{children}</div>
           </main>
         </TRPCReactProvider>
       </body>

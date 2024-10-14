@@ -23,14 +23,14 @@ import Image from "next/image";
 export default function About() {
   return (
     <div className="container mx-auto px-4 py-8 sm:px-6 sm:py-16 lg:px-8">
-      <h1 className="mb-8 text-center text-3xl font-bold sm:mb-12 sm:text-4xl">
+      <h1 className="mb-8 animate-fade-down text-center text-3xl font-bold sm:mb-20 sm:text-4xl">
         About Our Restaurant
       </h1>
 
       {/* About Section */}
-      <section className="animate-fade-right animate-delay-300 mb-12 sm:mb-16">
-        <div className="flex flex-col items-center gap-6 sm:gap-8 md:flex-row">
-          <div className="order-2 w-full md:order-1 md:w-1/2">
+      <section className="mb-12 sm:mb-24">
+        <div className="flex flex-col-reverse items-center gap-6 sm:gap-8 md:flex-row">
+          <div className="order-2 w-full animate-fade-right md:order-1 md:w-1/2">
             <h2 className="mb-3 text-2xl font-semibold sm:mb-4 sm:text-3xl">
               Our Story
             </h2>
@@ -49,31 +49,39 @@ export default function About() {
               and passion for Mexican cuisine.
             </p>
           </div>
-          <div className="order-1 w-full md:order-2 md:w-1/2">
-            <Image
-              src="/placeholder.svg?height=400&width=600"
-              alt="Family restaurant interior"
-              width={600}
-              height={400}
-              className="h-auto w-full rounded-lg shadow-md"
-            />
+          <div className="order-1 w-full animate-fade-left animate-delay-700 md:order-2 md:ml-12 md:w-1/2">
+            <div className="relative h-0 w-full pb-[56.25%]">
+              {" "}
+              {/* 16:9 Aspect Ratio */}
+              <Image
+                src="/interior.png"
+                alt="Family restaurant interior"
+                layout="fill"
+                objectFit="cover"
+                className="absolute inset-0 h-full w-full rounded-lg shadow-md"
+              />
+            </div>
           </div>
         </div>
       </section>
 
       {/* Mission Section */}
-      <section className="animate-fade-left animate-delay-500">
-        <div className="flex flex-col items-center gap-6 sm:gap-8 md:flex-row">
-          <div className="w-full md:w-1/2">
-            <Image
-              src="/placeholder.svg?height=400&width=600"
-              alt="Colorful Mexican dishes"
-              width={600}
-              height={400}
-              className="h-auto w-full rounded-lg shadow-md"
-            />
+      <section className="">
+        <div className="flex flex-col-reverse items-center gap-6 sm:gap-8 md:flex-row">
+          <div className="w-full animate-fade-right animate-delay-700 md:mr-12 md:w-1/2">
+            <div className="relative h-0 w-full pb-[56.25%]">
+              {" "}
+              {/* 16:9 Aspect Ratio */}
+              <Image
+                src="/truck.png"
+                alt="Colorful Mexican dishes"
+                layout="fill"
+                objectFit="cover"
+                className="absolute inset-0 h-full w-full rounded-lg shadow-md"
+              />
+            </div>
           </div>
-          <div className="mt-6 w-full md:mt-0 md:w-1/2">
+          <div className="w-full animate-fade-left md:w-1/2">
             <h2 className="mb-3 text-2xl font-semibold sm:mb-4 sm:text-3xl">
               Our Mission
             </h2>

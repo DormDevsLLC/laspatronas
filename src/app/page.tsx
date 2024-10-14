@@ -1,11 +1,30 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
 import Open from "~/components/open";
 import { Button } from "~/components/ui/button";
 
 export default async function Home() {
+  useEffect(() => {
+    // Select the parent main element
+    const mainElement = document.querySelector("main");
+
+    // Add the h-screen class when this component mounts
+    if (mainElement) {
+      mainElement.classList.add("overflow-y-hidden");
+    }
+
+    // Cleanup function to remove the class if the user navigates away
+    return () => {
+      if (mainElement) {
+        mainElement.classList.remove("overflow-y-hidden");
+      }
+    };
+  }, []);
+
   return (
-    <div className="relative flex h-[95vh] w-screen items-center justify-between overflow-hidden bg-lime-100">
+    <div className="relative flex h-[92.5vh] w-screen items-center justify-between overflow-hidden">
       {/* Left-hand image */}
       <div className="flex h-full w-full items-center justify-center lg:w-5/12 lg:items-start lg:justify-normal">
         <div className="relative mb-12 h-auto w-full px-8 md:mb-36 md:px-12 lg:m-20 lg:px-0">
@@ -20,11 +39,11 @@ export default async function Home() {
           />
 
           {/* Buttons below the image */}
-          <div className="animate-fade-right animate-delay-500 mt-6 flex justify-center space-x-28 pt-4">
+          <div className="mt-6 flex animate-fade-right justify-center space-x-28 pt-4 animate-delay-500">
             <Open />
           </div>
           {/* Buttons below the image */}
-          <div className="animate-fade-right animate-delay-700 mt-8 flex items-center justify-center">
+          <div className="mt-8 flex animate-fade-right items-center justify-center animate-delay-700">
             <Link href="/order">
               <Button
                 size={"lg"}
