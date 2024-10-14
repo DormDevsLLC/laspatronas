@@ -5,6 +5,7 @@ import TransitionLink from "./transition-link";
 
 const links = [
   { name: "About", href: "/about" },
+  { name: "Menu", href: "/menu" },
   { name: "Order", href: "/order" },
   { name: "Contact", href: "/contact" },
 ];
