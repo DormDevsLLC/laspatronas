@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
 import TransitionLink from "./transition-link";
 
 const enLinks = [
@@ -17,10 +18,62 @@ const esLinks = [
   { name: "Contacto", href: "/es/contact" },
 ];
 
-export default function Navbar({ language }: { language: string }) {
+export default function Navbar({
+  language,
+  setParentLanguage,
+}: {
+  language: string;
+  setParentLanguage?: (lang: string) => void;
+}) {
+  // Stateful data
+  const [lang, setLang] = useState(language);
+  const [links, setLinks] = useState(
+    language.includes("en") ? enLinks : esLinks,
+  );
+
+  const router = useRouter();
+
   // Get the current URL path
   const currentPath = usePathname();
-  const links = language.includes("en") ? enLinks : esLinks;
+
+  function changeLanguage() {
+    // Check if this is the root page
+    if (currentPath === "/") {
+      // Change the language
+      if (lang.includes("en")) {
+        setLang("es");
+        setParentLanguage?.("es");
+        setLinks(esLinks);
+      } else {
+        setLang("en");
+        setParentLanguage?.("en");
+        setLinks(enLinks);
+      }
+    } else {
+      // Grab the current url and swap
+      if (lang.includes("en")) {
+        const path = currentPath;
+        const newPath = currentPath.replace("/en", "/es");
+        router.push(newPath);
+
+        console.log(newPath);
+      } else {
+        const newPath = currentPath.replace("/es", "/en");
+        router.push(newPath);
+      }
+
+      // Change the language
+      if (lang.includes("en")) {
+        setLang("es");
+        setParentLanguage?.("es");
+        setLinks(esLinks);
+      } else {
+        setLang("en");
+        setParentLanguage?.("en");
+        setLinks(enLinks);
+      }
+    }
+  }
   return (
     <>
       <nav className="flex h-16 w-screen items-center justify-between overflow-hidden bg-[#1c0230] p-4 text-white">
@@ -38,6 +91,12 @@ export default function Navbar({ language }: { language: string }) {
           </TransitionLink>
         </div>
         <div className="flex items-center space-x-8 pr-8">
+          <div
+            onClick={() => changeLanguage()}
+            className="text-xl transition-all duration-300 hover:cursor-pointer hover:text-2xl hover:text-purple-100"
+          >
+            {lang.includes("en") ? "Español" : "English"}
+          </div>
           {links.map((link) => (
             <TransitionLink
               href={link.href}

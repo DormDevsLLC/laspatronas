@@ -1,22 +1,34 @@
 "use client";
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "~/components/navbar";
 import Open from "~/components/open";
 import TransitionLink from "~/components/transition-link";
 import { Button } from "~/components/ui/button";
 
-export default async function Home() {
-  let language = "en-US";
+export default function Home() {
+  // Stateful data
+  const [language, setLang] = useState("en");
+  let startLang;
 
   // Get the language of the web client
   useEffect(() => {
-    language = navigator.language;
+    startLang = navigator.language;
+    if (startLang.includes("en")) {
+      setLang("en");
+    } else {
+      setLang("es");
+    }
   }, []);
 
   return (
     <>
-      <Navbar language={language} />
+      <Navbar
+        language={startLang ?? "en"}
+        setParentLanguage={(lang: string) => {
+          setLang(lang);
+        }}
+      />
       <div
         id="transition-page"
         className="relative flex h-[92.5vh] w-screen items-center justify-between overflow-hidden"
@@ -40,7 +52,9 @@ export default async function Home() {
             </div>
             {/* Buttons below the image */}
             <div className="mt-8 flex animate-fade-right items-center justify-center animate-delay-700">
-              <TransitionLink href="/order">
+              <TransitionLink
+                href={language.includes("en") ? "/en/order" : "/es/order"}
+              >
                 <Button
                   size={"lg"}
                   className="mr-4 bg-[#1c0230] transition-all duration-300 hover:-translate-y-1 md:p-7 md:text-2xl"
@@ -48,7 +62,9 @@ export default async function Home() {
                   {language.includes("en") ? "Order Now" : "Ordenar Ahora"}
                 </Button>
               </TransitionLink>
-              <TransitionLink href="/about">
+              <TransitionLink
+                href={language.includes("en") ? "/en/about" : "/es/about"}
+              >
                 <Button
                   size={"lg"}
                   className="bg-[#1c0230] transition-all duration-300 hover:-translate-y-1 md:p-7 md:text-2xl"
