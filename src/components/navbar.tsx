@@ -3,17 +3,24 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import TransitionLink from "./transition-link";
 
-const links = [
-  { name: "About", href: "/about" },
-  { name: "Menu", href: "/menu" },
-  { name: "Order", href: "/order" },
-  { name: "Contact", href: "/contact" },
+const enLinks = [
+  { name: "About", href: "/en/about" },
+  { name: "Menu", href: "/en/menu" },
+  { name: "Order", href: "/en/order" },
+  { name: "Contact", href: "/en/contact" },
 ];
 
-export default function Navbar() {
+const esLinks = [
+  { name: "Acerca", href: "/es/about" },
+  { name: "Menú", href: "/es/menu" },
+  { name: "Orden", href: "/es/order" },
+  { name: "Contacto", href: "/es/contact" },
+];
+
+export default function Navbar({ language }: { language: string }) {
   // Get the current URL path
   const currentPath = usePathname();
-  console.log(currentPath);
+  const links = language.includes("en") ? enLinks : esLinks;
   return (
     <>
       <nav className="flex h-16 w-screen items-center justify-between overflow-hidden bg-[#1c0230] p-4 text-white">

@@ -4,7 +4,6 @@ import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 
 import Footer from "~/components/footer";
-import Navbar from "~/components/navbar";
 import { TRPCReactProvider } from "~/trpc/react";
 
 export const metadata: Metadata = {
@@ -33,10 +32,7 @@ export default function RootLayout({
       <body>
         <TRPCReactProvider>
           <main className="h-screen overflow-x-hidden bg-lime-100">
-            <Navbar />
-            <div id="transition-page" className="min-h-screen">
-              {children}
-            </div>
+            <div className="min-h-screen">{children}</div>
             <Footer />
           </main>
         </TRPCReactProvider>

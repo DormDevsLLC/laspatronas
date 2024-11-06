@@ -1,6 +1,6 @@
 "use client";
 
-const hours: { [key: string]: string[] } = {
+const enHours: { [key: string]: string[] } = {
   Monday: ["12:00", "21:00"],
   Tuesday: ["12:00", "21:00"],
   Wednesday: ["12:00", "21:00"],
@@ -10,9 +10,37 @@ const hours: { [key: string]: string[] } = {
   Sunday: ["12:00", "21:00"],
 };
 
-export default function Open() {
+const esHours: { [key: string]: string[] } = {
+  Lunes: ["12:00", "21:00"],
+  Martes: ["12:00", "21:00"],
+  Miércoles: ["12:00", "21:00"],
+  Jueves: ["12:00", "21:00"],
+  Viernes: ["12:00", "22:00"],
+  Sábado: ["12:00", "22:00"],
+  Domingo: ["12:00", "21:00"],
+};
+
+// Map from english to spanish days
+const daysMap: { [key: string]: string } = {
+  Monday: "Lunes",
+  Tuesday: "Martes",
+  Wednesday: "Miércoles",
+  Thursday: "Jueves",
+  Friday: "Viernes",
+  Saturday: "Sábado",
+  Sunday: "Domingo",
+};
+
+export default function Open({ language }: { language: string }) {
   // Get current day of the week
-  const today = new Date().toLocaleString("en-us", { weekday: "long" });
+  const enDay = new Date().toLocaleString("en-us", { weekday: "long" });
+  const esDay = daysMap[enDay];
+  const today = language.includes("en") ? enDay : (esDay ?? "");
+
+  // Pick the correct hours based on the language
+  const hours = language.includes("en") ? enHours : esHours;
+
+  console.log(today, hours);
   const todayHours = hours[today];
   console.log(today, todayHours);
 
@@ -52,13 +80,18 @@ export default function Open() {
   return (
     <div className="w-full flex-col content-center items-center justify-center text-center text-3xl lg:text-4xl">
       <div>
-        {today}'s Hours: {displayOpenTime} - {displayCloseTime}
+        {today}'s {language.includes("en") ? "Hours" : "Horas"}:{" "}
+        {displayOpenTime} - {displayCloseTime}
       </div>
       <div className="w-full">
         {isOpen ? (
-          <p className="text-green-500">Open</p>
+          <p className="text-green-500">
+            {language.includes("en") ? "Open" : "Abierta"}
+          </p>
         ) : (
-          <p className="text-red-500">Closed</p>
+          <p className="text-red-500">
+            {language.includes("en") ? "Closed" : "Cerrada"}{" "}
+          </p>
         )}
       </div>
     </div>

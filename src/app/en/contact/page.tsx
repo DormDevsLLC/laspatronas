@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Navbar from "~/components/navbar";
 
 export const metadata: Metadata = {
   title: "Contact | Las Patronas UCF",
@@ -20,6 +21,9 @@ export const metadata: Metadata = {
 
 export default async function Home() {
   return (
-    <h1 className="flex w-full items-center justify-center">Contact Page</h1>
+    <>
+      <Navbar language="en-US" />
+      <h1 id="transition-page" className="flex w-full items-center justify-center">Contact Page</h1>
+    </>
   );
 }
