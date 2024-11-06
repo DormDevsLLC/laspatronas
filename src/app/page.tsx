@@ -1,13 +1,18 @@
 "use client";
 import Image from "next/image";
+import { useEffect } from "react";
 import Navbar from "~/components/navbar";
 import Open from "~/components/open";
 import TransitionLink from "~/components/transition-link";
 import { Button } from "~/components/ui/button";
 
 export default async function Home() {
+  let language = "en-US";
+
   // Get the language of the web client
-  const language = navigator.language;
+  useEffect(() => {
+    language = navigator.language;
+  }, []);
 
   return (
     <>
