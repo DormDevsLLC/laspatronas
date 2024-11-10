@@ -40,9 +40,7 @@ export default function Open({ language }: { language: string }) {
   // Pick the correct hours based on the language
   const hours = language.includes("en") ? enHours : esHours;
 
-  console.log(today, hours);
   const todayHours = hours[today];
-  console.log(today, todayHours);
 
   // Extract opening and closing hours for today
   const [openTime, closeTime] = todayHours ?? [];

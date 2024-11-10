@@ -56,7 +56,6 @@ export default function Navbar({
         const newPath = currentPath.replace("/en", "/es");
         router.push(newPath);
 
-        console.log(newPath);
       } else {
         const newPath = currentPath.replace("/es", "/en");
         router.push(newPath);
