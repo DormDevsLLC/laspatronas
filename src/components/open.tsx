@@ -95,3 +95,37 @@ export default function Open({ language }: { language: string }) {
     </div>
   );
 }
+
+export function isOpen() {
+  // Get current day of the week
+  const today = new Date().toLocaleString("en-us", { weekday: "long" });
+
+  // Pick the correct hours based on the language
+  const hours = enHours;
+
+  const todayHours = hours[today];
+
+  // Extract opening and closing hours for today
+  const [openTime, closeTime] = todayHours ?? [];
+
+  // If the restaurant is closed today
+  if (!openTime || !closeTime) {
+    return false;
+  }
+
+  // Current time
+  const now = new Date();
+  const currentTime = now.getHours() * 60 + now.getMinutes(); // Time in minutes from midnight
+
+  // Convert open and close times to minutes from midnight for easy comparison
+  const [openHour, openMinute] = openTime.split(":").map(Number);
+  const openInMinutes = (openHour ?? 0) * 60 + openMinute!;
+
+  const [closeHour, closeMinute] = closeTime.split(":").map(Number);
+  const closeInMinutes = (closeHour ?? 0) * 60 + closeMinute!;
+
+  // Check if the restaurant is open
+  const isOpen = currentTime >= openInMinutes && currentTime <= closeInMinutes;
+
+  return isOpen;
+}
