@@ -52,7 +52,7 @@ export default async function Home() {
               </TabsTrigger>
             </TabsList>
             <TabsContent value="pickup">
-              <Card className="mb-12 h-full items-center py-8">
+              <Card className="mb-12 h-full items-center bg-gray-50 py-8">
                 <RestaurantMenuEN />
               </Card>
             </TabsContent>

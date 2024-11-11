@@ -1,0 +1,45 @@
+[
+    {
+      "id": "1",
+      "name": "Classic Burger",
+      "description": "Juicy beef patty with fresh toppings",
+      "price": 10.99,
+      "category": "Main Courses"
+    },
+    {
+      "id": "2",
+      "name": "Caesar Salad",
+      "description": "Crisp romaine lettuce with Caesar dressing",
+      "price": 8.99,
+      "category": "Starters"
+    },
+    {
+      "id": "3",
+      "name": "Margherita Pizza",
+      "description": "Traditional pizza with tomato and mozzarella",
+      "price": 12.99,
+      "category": "Main Courses"
+    },
+    {
+      "id": "4",
+      "name": "Chocolate Brownie",
+      "description": "Rich chocolate brownie with vanilla ice cream",
+      "price": 6.99,
+      "category": "Desserts"
+    },
+    {
+      "id": "5",
+      "name": "Garlic Bread",
+      "description": "Toasted bread with garlic butter",
+      "price": 4.99,
+      "category": "Starters"
+    },
+    {
+      "id": "6",
+      "name": "Tiramisu",
+      "description": "Classic Italian coffee-flavored dessert",
+      "price": 7.99,
+      "category": "Desserts"
+    }
+  ]
+  

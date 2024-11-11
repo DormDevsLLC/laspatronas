@@ -2,6 +2,7 @@
 
 import { Minus, Search, ShoppingCart, Trash } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
+import menuItems from "./data/menuen.json"; // Import the JSON file
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import {
@@ -24,55 +25,10 @@ type MenuItem = {
 
 type CartItem = MenuItem & { quantity: number };
 
-const menuItems: MenuItem[] = [
-  {
-    id: "1",
-    name: "Tacos",
-    description: "Three tacos with your choice of meat",
-    price: 10.99,
-    category: "Main Courses",
-  },
-  {
-    id: "2",
-    name: "Chips and Guacamole",
-    description: "Freshly made guacamole with crispy tortilla chips",
-    price: 8.99,
-    category: "Starters",
-  },
-  {
-    id: "3",
-    name: "Burrito",
-    description: "Large burrito with rice, beans, and your choice of meat",
-    price: 12.99,
-    category: "Main Courses",
-  },
-  {
-    id: "4",
-    name: "Chocolate Brownie",
-    description: "Rich chocolate brownie with vanilla ice cream",
-    price: 6.99,
-    category: "Desserts",
-  },
-  {
-    id: "5",
-    name: "Chips and Queso",
-    description: "Warm queso dip with crispy tortilla chips",
-    price: 4.99,
-    category: "Starters",
-  },
-  {
-    id: "6",
-    name: "Flautas",
-    description: "Crispy flautas with your choice of dessert filling",
-    price: 7.99,
-    category: "Desserts",
-  },
-];
-
-export default function RestaurantMenu() {
+export default function RestaurantMenuEN() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [cart, setCart] = useState<CartItem[]>([]); // Initialize as empty array
-  const [filteredItems, setFilteredItems] = useState(menuItems);
+  const [cart, setCart] = useState<CartItem[] | null>(null); // Initialize cart as null
+  const [filteredItems, setFilteredItems] = useState<MenuItem[]>(menuItems);
 
   const [customerName, setCustomerName] = useState("");
   const [customerPhone, setCustomerPhone] = useState("");
@@ -96,13 +52,15 @@ export default function RestaurantMenu() {
       const savedCart = localStorage.getItem("cart");
       if (savedCart) {
         setCart(JSON.parse(savedCart));
+      } else {
+        setCart([]);
       }
     }
   }, []);
 
   // Save cart to localStorage whenever it changes
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" && cart !== null) {
       localStorage.setItem("cart", JSON.stringify(cart));
     }
   }, [cart]);
@@ -117,22 +75,26 @@ export default function RestaurantMenu() {
   }, [searchTerm]);
 
   const addToCart = (item: MenuItem) => {
+    if (cart === null) return;
     setCart((prevCart) => {
-      const existingItem = prevCart.find((cartItem) => cartItem.id === item.id);
+      const existingItem = prevCart!.find(
+        (cartItem) => cartItem.id === item.id,
+      );
       if (existingItem) {
-        return prevCart.map((cartItem) =>
+        return prevCart!.map((cartItem) =>
           cartItem.id === item.id
             ? { ...cartItem, quantity: cartItem.quantity + 1 }
             : cartItem,
         );
       }
-      return [...prevCart, { ...item, quantity: 1 }];
+      return [...prevCart!, { ...item, quantity: 1 }];
     });
   };
 
   const decreaseQuantity = (itemId: string) => {
+    if (cart === null) return;
     setCart((prevCart) =>
-      prevCart
+      prevCart!
         .map((cartItem) =>
           cartItem.id === itemId
             ? { ...cartItem, quantity: cartItem.quantity - 1 }
@@ -143,8 +105,9 @@ export default function RestaurantMenu() {
   };
 
   const removeFromCart = (itemId: string) => {
+    if (cart === null) return;
     setCart((prevCart) =>
-      prevCart.filter((cartItem) => cartItem.id !== itemId),
+      prevCart!.filter((cartItem) => cartItem.id !== itemId),
     );
   };
 
@@ -156,6 +119,7 @@ export default function RestaurantMenu() {
   };
 
   const handleCheckout = () => {
+    if (cart === null) return;
     const subtotal = cart.reduce(
       (total, item) => total + item.price * item.quantity,
       0,
@@ -188,6 +152,11 @@ export default function RestaurantMenu() {
     alert("Thank you for your order!");
   };
 
+  // If cart is null, it means it's still loading
+  if (cart === null) {
+    return null; // Or you can return a loading indicator
+  }
+
   return (
     <div className="container mx-auto p-4">
       <h1 className="mb-6 text-3xl font-bold">Our Menu</h1>
@@ -201,7 +170,7 @@ export default function RestaurantMenu() {
           className="w-full"
         />
       </div>
-      <nav className="sticky top-0 z-10 mb-8 border-b bg-background py-4">
+      <nav className="sticky top-0 z-10 mb-8 border-b py-4">
         <ul className="flex flex-wrap gap-2">
           {categories.map((category) => (
             <li key={category}>
