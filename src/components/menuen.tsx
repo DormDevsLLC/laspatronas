@@ -174,7 +174,7 @@ export default function RestaurantMenu() {
     }
     const [openHours, openMinutes] = displayOpenTime24.split(":").map(Number);
     const openTime = new Date();
-    openTime.setHours(openHours, openMinutes, 0, 0);
+    openTime.setHours(openHours!, openMinutes, 0, 0);
 
     // The earliest possible time is the later of minTime and openTime
     const earliestTime = minTime > openTime ? minTime : openTime;
