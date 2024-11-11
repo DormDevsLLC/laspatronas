@@ -3,19 +3,18 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import TransitionLink from "./transition-link";
+import { Button } from "./ui/button";
 
 const enLinks = [
   { name: "About", href: "/en/about" },
-  { name: "Menu", href: "/en/menu" },
-  { name: "Order", href: "/en/order" },
   { name: "Contact", href: "/en/contact" },
+  { name: "Order", href: "/en/order" },
 ];
 
 const esLinks = [
   { name: "Acerca", href: "/es/about" },
-  { name: "Menú", href: "/es/menu" },
-  { name: "Orden", href: "/es/order" },
   { name: "Contacto", href: "/es/contact" },
+  { name: "Orden", href: "/es/order" },
 ];
 
 export default function Navbar({
@@ -55,7 +54,6 @@ export default function Navbar({
         const path = currentPath;
         const newPath = currentPath.replace("/en", "/es");
         router.push(newPath);
-
       } else {
         const newPath = currentPath.replace("/es", "/en");
         router.push(newPath);
@@ -102,7 +100,16 @@ export default function Navbar({
               key={link.href}
               className={`${link.href == currentPath ? "text-2xl text-purple-200 underline" : ""}text-xl transition-all duration-300 hover:text-2xl hover:text-purple-100`}
             >
-              {link.name}
+              {link.href === "/es/order" || link.href === "/en/order" ? (
+                <Button
+                  className="bg-[#a40c96] text-xl transition-all duration-300 hover:bg-[#750B6B] hover:text-2xl hover:text-purple-100"
+                  size={"lg"}
+                >
+                  {link.name}
+                </Button>
+              ) : (
+                link.name
+              )}
             </TransitionLink>
           ))}
         </div>

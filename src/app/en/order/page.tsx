@@ -35,10 +35,10 @@ export default async function Home() {
     <>
       <Navbar language="en-US" />
       <div id="transition-page" className="h-full">
-        <h1 className="my-10 w-full text-center text-2xl font-bold">
+        <h1 className="my-10 w-full animate-fade-down text-center text-2xl font-bold">
           Place an Order!
         </h1>
-        <div className="flex h-full w-full items-center justify-center">
+        <div className="flex h-full w-full animate-fade-up items-center justify-center">
           <Tabs
             defaultValue="pickup"
             className="h-full w-full px-2 md:px-8 lg:px-12 xl:px-24"
@@ -52,7 +52,7 @@ export default async function Home() {
               </TabsTrigger>
             </TabsList>
             <TabsContent value="pickup">
-              <Card className="mb-12 h-full items-center bg-gray-50 py-8">
+              <Card className="mb-12 h-full items-center py-8">
                 <RestaurantMenuEN />
               </Card>
             </TabsContent>

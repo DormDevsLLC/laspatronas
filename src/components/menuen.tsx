@@ -2,7 +2,9 @@
 
 import { Minus, Search, ShoppingCart, Trash } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import menuItems from "./data/menuen.json"; // Import the JSON file
+import { useToast } from "~/hooks/use-toast";
+import menuItems from "./data/menuen.json";
+import { getIsOpen, isOpen } from "./open";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import {
@@ -25,7 +27,7 @@ type MenuItem = {
 
 type CartItem = MenuItem & { quantity: number };
 
-export default function RestaurantMenuEN() {
+export default function RestaurantMenu() {
   const [searchTerm, setSearchTerm] = useState("");
   const [cart, setCart] = useState<CartItem[] | null>(null); // Initialize cart as null
   const [filteredItems, setFilteredItems] = useState<MenuItem[]>(menuItems);
@@ -33,11 +35,22 @@ export default function RestaurantMenuEN() {
   const [customerName, setCustomerName] = useState("");
   const [customerPhone, setCustomerPhone] = useState("");
   const [customerEmail, setCustomerEmail] = useState("");
+  const [specialRequests, setSpecialRequests] = useState("");
+
+  const [pickupTimeOption, setPickupTimeOption] = useState("ASAP"); // 'ASAP' or 'Later'
+  const [pickupTime, setPickupTime] = useState(""); // If 'Later' is selected, store the time here
+  const [timeError, setTimeError] = useState("");
+
+  const [emailError, setEmailError] = useState("");
+  const [phoneError, setPhoneError] = useState("");
+
+  const { toast } = useToast();
 
   const categories = Array.from(
     new Set(menuItems.map((item) => item.category)),
   );
   const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
+  const cartRef = useRef<HTMLDivElement | null>(null);
 
   const registerSectionRef = useCallback(
     (category: string, element: HTMLElement | null) => {
@@ -74,6 +87,19 @@ export default function RestaurantMenuEN() {
     setFilteredItems(filtered);
   }, [searchTerm]);
 
+  const isValidEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const isValidPhoneNumber = (phone: string) => {
+    const phoneRegex = /^\d{10}$/; // Simple regex for 10-digit phone numbers
+    return phoneRegex.test(phone);
+  };
+
+  // Check if the restaurant is open
+  const restaurantIsOpen = isOpen();
+
   const addToCart = (item: MenuItem) => {
     if (cart === null) return;
     setCart((prevCart) => {
@@ -88,6 +114,16 @@ export default function RestaurantMenuEN() {
         );
       }
       return [...prevCart!, { ...item, quantity: 1 }];
+    });
+    toast({
+      title: "Item added to cart",
+      description: `${item.name} has been added to your cart. Total cost of cart: $${(
+        (cart ?? []).reduce(
+          (total, cartItem) => total + cartItem.price * cartItem.quantity,
+          0,
+        ) + item.price
+      ).toFixed(2)}
+      `,
     });
   };
 
@@ -118,8 +154,131 @@ export default function RestaurantMenuEN() {
     }
   };
 
+  const scrollToCart = () => {
+    if (cartRef.current) {
+      cartRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  function getMinPickupTime() {
+    const now = new Date();
+    // Add preparation time, e.g., 15 minutes
+    const minTime = new Date(now.getTime());
+    minTime.setMinutes(minTime.getMinutes() + 15);
+
+    // Get the restaurant's opening time
+    const { displayOpenTime24 } = getIsOpen("en");
+    if (!displayOpenTime24) {
+      // Restaurant is closed today
+      return null;
+    }
+    const [openHours, openMinutes] = displayOpenTime24.split(":").map(Number);
+    const openTime = new Date();
+    openTime.setHours(openHours, openMinutes, 0, 0);
+
+    // The earliest possible time is the later of minTime and openTime
+    const earliestTime = minTime > openTime ? minTime : openTime;
+
+    return earliestTime.toTimeString().slice(0, 5); // HH:MM format
+  }
+
+  function getMaxPickupTime() {
+    const { displayCloseTime24 } = getIsOpen("en");
+    if (!displayCloseTime24) {
+      // Restaurant is closed today
+      return null;
+    }
+    const [closeHours, closeMinutes] = displayCloseTime24
+      .split(":")
+      .map(Number);
+    const closeTime = new Date();
+    closeTime.setHours(closeHours!, closeMinutes, 0, 0);
+
+    return closeTime.toTimeString().slice(0, 5); // HH:MM format
+  }
+
+  // Validate pickup time during input
+  useEffect(() => {
+    if (pickupTimeOption === "Later" && pickupTime) {
+      const [hours, minutes] = pickupTime.split(":").map(Number);
+      const pickupDateTime = new Date();
+      pickupDateTime.setHours(hours!, minutes, 0, 0);
+
+      // Get earliest and latest possible pickup times
+      const earliestTimeString = getMinPickupTime();
+      const latestTimeString = getMaxPickupTime();
+
+      if (earliestTimeString && latestTimeString) {
+        const [earliestHours, earliestMinutes] = earliestTimeString
+          .split(":")
+          .map(Number);
+        const earliestDateTime = new Date();
+        earliestDateTime.setHours(earliestHours!, earliestMinutes, 0, 0);
+
+        const [latestHours, latestMinutes] = latestTimeString
+          .split(":")
+          .map(Number);
+        const latestDateTime = new Date();
+        latestDateTime.setHours(latestHours!, latestMinutes, 0, 0);
+        // Move latestDateTime back by 15 minutes
+        latestDateTime.setMinutes(latestDateTime.getMinutes() - 15);
+
+        if (pickupDateTime < earliestDateTime) {
+          setTimeError(
+            "Please select a time at least 15 minutes from now and after the restaurant opens.",
+          );
+        } else if (pickupDateTime > latestDateTime) {
+          setTimeError(
+            "Please select a time 15 minutes before the restaurant closes.",
+          );
+        } else {
+          setTimeError("");
+        }
+      } else {
+        // Restaurant is closed today
+        setTimeError("Cannot select a time; the restaurant is closed today.");
+      }
+    } else {
+      setTimeError("");
+    }
+  }, [pickupTime, pickupTimeOption]);
+
   const handleCheckout = () => {
     if (cart === null) return;
+
+    if (!restaurantIsOpen) {
+      toast({
+        title: "Restaurant is closed",
+        description:
+          "We are currently closed. You cannot place orders at this time. Check back during our regular business hours!",
+      });
+      return;
+    }
+
+    let valid = true;
+
+    if (!isValidEmail(customerEmail)) {
+      setEmailError("Please enter a valid email address.");
+      valid = false;
+    } else {
+      setEmailError("");
+    }
+
+    if (!isValidPhoneNumber(customerPhone)) {
+      setPhoneError("Please enter a valid 10-digit phone number.");
+      valid = false;
+    } else {
+      setPhoneError("");
+    }
+
+    if (timeError) {
+      valid = false;
+    }
+
+    if (!valid) {
+      return;
+    }
+
     const subtotal = cart.reduce(
       (total, item) => total + item.price * item.quantity,
       0,
@@ -131,6 +290,9 @@ export default function RestaurantMenuEN() {
       name: customerName,
       phone: customerPhone,
       email: customerEmail,
+      specialRequests,
+      pickupTimeOption,
+      pickupTime: pickupTimeOption === "ASAP" ? "ASAP" : pickupTime,
       items: cart.map((item) => ({
         name: item.name,
         quantity: item.quantity,
@@ -143,14 +305,50 @@ export default function RestaurantMenuEN() {
     };
 
     console.log("Order Details:", orderDetails);
+    const formattedPickupTime =
+      pickupTimeOption === "ASAP" ? "ASAP" : formatTime(pickupTime);
+
+    toast({
+      title: "Order Placed",
+      description: `Your order has been placed! Your total is $${total.toFixed(
+        2,
+      )}. ${
+        pickupTimeOption == "ASAP"
+          ? "Your order will be ready ASAP."
+          : `Your order will be ready at ${formattedPickupTime}.`
+      } Thank you!`,
+    });
+
+    function formatTime(time: string) {
+      const [hours, minutes] = time.split(":").map(Number);
+      const period = hours! >= 12 ? "PM" : "AM";
+      const formattedHours = hours! % 12 || 12;
+      return `${formattedHours}:${minutes!.toString().padStart(2, "0")} ${period}`;
+    }
 
     // Clear cart and customer information
     setCart([]);
     setCustomerName("");
     setCustomerPhone("");
     setCustomerEmail("");
-    alert("Thank you for your order!");
+    setSpecialRequests("");
+    setPickupTimeOption("ASAP");
+    setPickupTime("");
+    setTimeError("");
   };
+
+  const isTimeValid =
+    pickupTimeOption === "ASAP" ||
+    (pickupTimeOption === "Later" && pickupTime.trim() !== "");
+
+  const isFormValid =
+    customerName.trim() !== "" &&
+    isValidEmail(customerEmail) &&
+    isValidPhoneNumber(customerPhone) &&
+    cart !== null &&
+    cart.length > 0 &&
+    isTimeValid &&
+    timeError === "";
 
   // If cart is null, it means it's still loading
   if (cart === null) {
@@ -160,6 +358,12 @@ export default function RestaurantMenuEN() {
   return (
     <div className="container mx-auto p-4">
       <h1 className="mb-6 text-3xl font-bold">Our Menu</h1>
+      {!restaurantIsOpen && (
+        <div className="mb-4 font-semibold text-red-500">
+          We are currently closed. You cannot place orders at this time. Check
+          back during our regular business hours!
+        </div>
+      )}
       <div className="mb-4 flex items-center space-x-2">
         <Search className="h-5 w-5 text-gray-500" />
         <Input
@@ -170,19 +374,53 @@ export default function RestaurantMenuEN() {
           className="w-full"
         />
       </div>
-      <nav className="sticky top-0 z-10 mb-8 border-b py-4">
-        <ul className="flex flex-wrap gap-2">
-          {categories.map((category) => (
-            <li key={category}>
+      <nav className="sticky top-0 z-10 mb-8 border-b bg-background py-4">
+        {/* Mobile Layout */}
+        <div className="flex justify-between md:hidden">
+          <div className="flex flex-nowrap items-center space-x-2 overflow-x-auto">
+            {categories.map((category) => (
               <Button
+                key={category}
                 variant="outline"
+                size={"sm"}
                 onClick={() => scrollToSection(category)}
+                className="flex-shrink-0 text-sm"
               >
                 {category}
               </Button>
-            </li>
-          ))}
-        </ul>
+            ))}
+          </div>
+          <Button onClick={scrollToCart} className="ml-2 flex-shrink-0">
+            Checkout
+          </Button>
+        </div>
+        {/* Desktop Layout */}
+        <div className="hidden items-center justify-between md:flex md:flex-wrap">
+          <div className="mb-2 flex flex-wrap gap-2">
+            {categories.map((category, index) => (
+              <Button
+                key={category}
+                variant="outline"
+                onClick={() => scrollToSection(category)}
+                className="animate-fade-right"
+                style={{
+                  animationDelay: `${index * 75 + 100}ms`,
+                }}
+              >
+                {category}
+              </Button>
+            ))}
+            <Button
+              onClick={scrollToCart}
+              style={{
+                animationDelay: `${categories.length * 75 + 100}ms`,
+              }}
+              className="animate-fade-right"
+            >
+              Checkout
+            </Button>
+          </div>
+        </div>
       </nav>
       {categories.map((category) => (
         <section
@@ -199,8 +437,14 @@ export default function RestaurantMenuEN() {
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             {filteredItems
               .filter((item) => item.category === category)
-              .map((item) => (
-                <Card key={item.id}>
+              .map((item, index) => (
+                <Card
+                  key={item.id}
+                  className="animate-fade-right"
+                  style={{
+                    animationDelay: `${index * 150 + 200}ms`,
+                  }}
+                >
                   <CardHeader>
                     <CardTitle>{item.name}</CardTitle>
                   </CardHeader>
@@ -209,14 +453,19 @@ export default function RestaurantMenuEN() {
                     <p className="mt-2 font-bold">${item.price.toFixed(2)}</p>
                   </CardContent>
                   <CardFooter>
-                    <Button onClick={() => addToCart(item)}>Add to Cart</Button>
+                    <Button
+                      onClick={() => addToCart(item)}
+                      disabled={!restaurantIsOpen}
+                    >
+                      {restaurantIsOpen ? "Add to Cart" : "Closed"}
+                    </Button>
                   </CardFooter>
                 </Card>
               ))}
           </div>
         </section>
       ))}
-      <div className="mt-8">
+      <div className="mt-8" ref={cartRef}>
         <h2 className="mb-4 text-2xl font-bold">Your Cart</h2>
         {cart.length === 0 ? (
           <p>Your cart is empty</p>
@@ -240,6 +489,7 @@ export default function RestaurantMenuEN() {
                     variant="ghost"
                     size="icon"
                     onClick={() => decreaseQuantity(item.id)}
+                    disabled={!restaurantIsOpen}
                   >
                     <Minus className="h-4 w-4 text-gray-500" />
                   </Button>
@@ -247,6 +497,7 @@ export default function RestaurantMenuEN() {
                     variant="ghost"
                     size="icon"
                     onClick={() => removeFromCart(item.id)}
+                    disabled={!restaurantIsOpen}
                   >
                     <Trash className="h-4 w-4 text-red-500" />
                   </Button>
@@ -276,6 +527,9 @@ export default function RestaurantMenuEN() {
                   placeholder="Your Phone Number"
                   required
                 />
+                {phoneError && (
+                  <p className="text-sm text-red-500">{phoneError}</p>
+                )}
               </div>
               <div>
                 <Label htmlFor="email">Email</Label>
@@ -286,6 +540,66 @@ export default function RestaurantMenuEN() {
                   onChange={(e) => setCustomerEmail(e.target.value)}
                   placeholder="Your Email"
                   required
+                />
+                {emailError && (
+                  <p className="text-sm text-red-500">{emailError}</p>
+                )}
+              </div>
+              {/* Pickup Time */}
+              <div>
+                <Label>Pickup Time</Label>
+                <div className="flex items-center space-x-4">
+                  <label className="flex items-center">
+                    <input
+                      type="radio"
+                      name="pickupTimeOption"
+                      value="ASAP"
+                      checked={pickupTimeOption === "ASAP"}
+                      onChange={(e) => setPickupTimeOption(e.target.value)}
+                      className="mr-2"
+                      disabled={!restaurantIsOpen}
+                    />
+                    ASAP
+                  </label>
+                  <label className="flex items-center">
+                    <input
+                      type="radio"
+                      name="pickupTimeOption"
+                      value="Later"
+                      checked={pickupTimeOption === "Later"}
+                      onChange={(e) => setPickupTimeOption(e.target.value)}
+                      className="mr-2"
+                      disabled={!restaurantIsOpen}
+                    />
+                    Specify Time
+                  </label>
+                </div>
+                {pickupTimeOption === "Later" && (
+                  <div className="mt-2">
+                    <Input
+                      type="time"
+                      value={pickupTime}
+                      onChange={(e) => setPickupTime(e.target.value)}
+                      min={getMinPickupTime() || "00:00"}
+                      max={getMaxPickupTime() || "23:59"}
+                      disabled={!restaurantIsOpen}
+                    />
+                    {timeError && (
+                      <p className="text-sm text-red-500">{timeError}</p>
+                    )}
+                  </div>
+                )}
+              </div>
+              <div>
+                <Label htmlFor="specialRequests">
+                  Special Requests / Notes
+                </Label>
+                <textarea
+                  id="specialRequests"
+                  value={specialRequests}
+                  onChange={(e) => setSpecialRequests(e.target.value)}
+                  placeholder="Any substitutions, removals, food allergies, etc."
+                  className="w-full rounded border p-2"
                 />
               </div>
             </div>
@@ -328,18 +642,17 @@ export default function RestaurantMenuEN() {
                 </span>
               </div>
             </div>
+            {/* Disclaimer */}
+            <p className="mt-4 text-sm text-gray-500">
+              Please note: Purchases for pickup orders must be made in-store.
+            </p>
             {/* Checkout Button */}
             <Button
               className="mt-6 w-full"
               onClick={handleCheckout}
-              disabled={
-                !customerName ||
-                !customerPhone ||
-                !customerEmail ||
-                cart.length === 0
-              }
+              disabled={!isFormValid || !restaurantIsOpen}
             >
-              Checkout
+              {restaurantIsOpen ? "Checkout" : "Closed"}
             </Button>
           </div>
         )}

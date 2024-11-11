@@ -20,7 +20,7 @@ const esHours: { [key: string]: string[] } = {
   Domingo: ["12:00", "21:00"],
 };
 
-// Map from english to spanish days
+// Map from English to Spanish days
 const daysMap: { [key: string]: string } = {
   Monday: "Lunes",
   Tuesday: "Martes",
@@ -31,9 +31,20 @@ const daysMap: { [key: string]: string } = {
   Sunday: "Domingo",
 };
 
-export default function Open({ language }: { language: string }) {
+// Function to determine if the store is open
+export function getIsOpen(
+  language: string = "en",
+  date: Date = new Date(),
+): {
+  isOpen: boolean;
+  today: string;
+  displayOpenTime: string;
+  displayCloseTime: string;
+  displayOpenTime24: string;
+  displayCloseTime24: string;
+} {
   // Get current day of the week
-  const enDay = new Date().toLocaleString("en-us", { weekday: "long" });
+  const enDay = date.toLocaleString("en-us", { weekday: "long" });
   const esDay = daysMap[enDay];
   const today = language.includes("en") ? enDay : (esDay ?? "");
 
@@ -47,33 +58,65 @@ export default function Open({ language }: { language: string }) {
 
   // If the restaurant is closed today
   if (!openTime || !closeTime) {
-    return <p className="text-2xl font-bold text-red-500">Closed</p>;
+    return {
+      isOpen: false,
+      today,
+      displayOpenTime: "",
+      displayCloseTime: "",
+      displayOpenTime24: "",
+      displayCloseTime24: "",
+    };
   }
 
   // Current time
-  const now = new Date();
+  const now = date;
   const currentTime = now.getHours() * 60 + now.getMinutes(); // Time in minutes from midnight
 
   // Convert open and close times to minutes from midnight for easy comparison
   const [openHour, openMinute] = openTime.split(":").map(Number);
-  const openInMinutes = (openHour ?? 0) * 60 + openMinute!;
+  const openInMinutes = (openHour ?? 0) * 60 + (openMinute ?? 0);
 
   const [closeHour, closeMinute] = closeTime.split(":").map(Number);
-  const closeInMinutes = (closeHour ?? 0) * 60 + closeMinute!;
+  const closeInMinutes = (closeHour ?? 0) * 60 + (closeMinute ?? 0);
 
   // Check if the restaurant is open
   const isOpen = currentTime >= openInMinutes && currentTime <= closeInMinutes;
 
-  // Convert open and close times to 12-hour format
-  const openHours =
-    (openHour ?? 0) > 12 ? (openHour ?? 0) - 12 : (openHour ?? 0);
-  const closeHours =
-    closeHour !== undefined ? (closeHour > 12 ? closeHour - 12 : closeHour) : 0;
-  const openSuffix = (openHour ?? 0) >= 12 ? "PM" : "AM";
-  const closeSuffix =
-    closeHour !== undefined ? (closeHour >= 12 ? "PM" : "AM") : "";
-  const displayOpenTime = `${openHours}:${(openMinute ?? 0).toString().padStart(2, "0")} ${openSuffix}`;
-  const displayCloseTime = `${closeHours}:${(closeMinute ?? 0).toString().padStart(2, "0")} ${closeSuffix}`;
+  // Convert open and close times to 12-hour format and 24-hour format
+  const formatTime = (hour: number, minute: number) => {
+    const suffix = hour >= 12 ? "PM" : "AM";
+    const formattedHour = hour % 12 === 0 ? 12 : hour % 12;
+    const formattedTime12 = `${formattedHour}:${minute
+      .toString()
+      .padStart(2, "0")} ${suffix}`;
+    const formattedTime24 = `${hour.toString().padStart(2, "0")}:${minute
+      .toString()
+      .padStart(2, "0")}`;
+    return { formattedTime12, formattedTime24 };
+  };
+
+  const {
+    formattedTime12: displayOpenTime,
+    formattedTime24: displayOpenTime24,
+  } = formatTime(openHour ?? 0, openMinute ?? 0);
+  const {
+    formattedTime12: displayCloseTime,
+    formattedTime24: displayCloseTime24,
+  } = formatTime(closeHour ?? 0, closeMinute ?? 0);
+
+  return {
+    isOpen,
+    today,
+    displayOpenTime,
+    displayCloseTime,
+    displayOpenTime24,
+    displayCloseTime24,
+  };
+}
+
+export default function Open({ language }: { language: string }) {
+  const { isOpen, today, displayOpenTime, displayCloseTime } =
+    getIsOpen(language);
 
   return (
     <div className="w-full flex-col content-center items-center justify-center text-center text-3xl lg:text-4xl">
@@ -88,7 +131,7 @@ export default function Open({ language }: { language: string }) {
           </p>
         ) : (
           <p className="text-red-500">
-            {language.includes("en") ? "Closed" : "Cerrada"}{" "}
+            {language.includes("en") ? "Closed" : "Cerrada"}
           </p>
         )}
       </div>
@@ -96,36 +139,7 @@ export default function Open({ language }: { language: string }) {
   );
 }
 
+// Simple function to check if the store is open (default to English)
 export function isOpen() {
-  // Get current day of the week
-  const today = new Date().toLocaleString("en-us", { weekday: "long" });
-
-  // Pick the correct hours based on the language
-  const hours = enHours;
-
-  const todayHours = hours[today];
-
-  // Extract opening and closing hours for today
-  const [openTime, closeTime] = todayHours ?? [];
-
-  // If the restaurant is closed today
-  if (!openTime || !closeTime) {
-    return false;
-  }
-
-  // Current time
-  const now = new Date();
-  const currentTime = now.getHours() * 60 + now.getMinutes(); // Time in minutes from midnight
-
-  // Convert open and close times to minutes from midnight for easy comparison
-  const [openHour, openMinute] = openTime.split(":").map(Number);
-  const openInMinutes = (openHour ?? 0) * 60 + openMinute!;
-
-  const [closeHour, closeMinute] = closeTime.split(":").map(Number);
-  const closeInMinutes = (closeHour ?? 0) * 60 + closeMinute!;
-
-  // Check if the restaurant is open
-  const isOpen = currentTime >= openInMinutes && currentTime <= closeInMinutes;
-
-  return isOpen;
+  return getIsOpen("en").isOpen;
 }
