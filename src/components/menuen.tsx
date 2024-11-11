@@ -71,9 +71,7 @@ const menuItems: MenuItem[] = [
 
 export default function RestaurantMenu() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [cart, setCart] = useState<CartItem[]>(() =>
-    JSON.parse(localStorage.getItem("cart") || "[]"),
-  );
+  const [cart, setCart] = useState<CartItem[]>([]); // Initialize as empty array
   const [filteredItems, setFilteredItems] = useState(menuItems);
 
   const [customerName, setCustomerName] = useState("");
@@ -92,8 +90,21 @@ export default function RestaurantMenu() {
     [],
   );
 
+  // Load cart from localStorage on client side
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
+    if (typeof window !== "undefined") {
+      const savedCart = localStorage.getItem("cart");
+      if (savedCart) {
+        setCart(JSON.parse(savedCart));
+      }
+    }
+  }, []);
+
+  // Save cart to localStorage whenever it changes
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
   }, [cart]);
 
   useEffect(() => {
@@ -169,16 +180,12 @@ export default function RestaurantMenu() {
 
     console.log("Order Details:", orderDetails);
 
-    // Print each item and quantity in order
-    cart.forEach((item) => {
-      console.log(`${item.name} x ${item.quantity}`);
-    });
-
     // Clear cart and customer information
     setCart([]);
     setCustomerName("");
     setCustomerPhone("");
     setCustomerEmail("");
+    alert("Thank you for your order!");
   };
 
   return (
