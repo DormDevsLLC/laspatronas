@@ -1,11 +1,11 @@
 "use client";
 
-import { Minus, Search, ShoppingCart, Trash } from "lucide-react";
+// Import necessary components and hooks
+import { Minus, Search, Trash } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useToast } from "~/hooks/use-toast";
-import menuItems from "./data/menuen.json";
-import { getIsOpen, isOpen } from "./open";
-import { Badge } from "./ui/badge";
+import { useToast } from "~/hooks/use-toast"; // Custom toast hook for notifications
+import menuItems from "./data/menuen.json"; // Menu items data
+import { getIsOpen, isOpen } from "./open"; // Functions to check if the restaurant is open
 import { Button } from "./ui/button";
 import {
   Card,
@@ -17,6 +17,7 @@ import {
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 
+// Define the structure of a menu item
 type MenuItem = {
   id: string;
   name: string;
@@ -25,33 +26,43 @@ type MenuItem = {
   category: string;
 };
 
+// Extend MenuItem to include quantity for cart items
 type CartItem = MenuItem & { quantity: number };
 
 export default function RestaurantMenu() {
+  // State variables for search term, cart, and filtered items
   const [searchTerm, setSearchTerm] = useState("");
   const [cart, setCart] = useState<CartItem[] | null>(null); // Initialize cart as null
   const [filteredItems, setFilteredItems] = useState<MenuItem[]>(menuItems);
 
+  // State variables for customer information
   const [customerName, setCustomerName] = useState("");
   const [customerPhone, setCustomerPhone] = useState("");
   const [customerEmail, setCustomerEmail] = useState("");
   const [specialRequests, setSpecialRequests] = useState("");
 
+  // State variables for pickup time selection
   const [pickupTimeOption, setPickupTimeOption] = useState("ASAP"); // 'ASAP' or 'Later'
   const [pickupTime, setPickupTime] = useState(""); // If 'Later' is selected, store the time here
-  const [timeError, setTimeError] = useState("");
+  const [timeError, setTimeError] = useState(""); // Error message for invalid time
 
+  // State variables for form validation errors
   const [emailError, setEmailError] = useState("");
   const [phoneError, setPhoneError] = useState("");
 
+  // Use the custom toast hook for notifications
   const { toast } = useToast();
 
+  // Extract unique categories from the menu items
   const categories = Array.from(
     new Set(menuItems.map((item) => item.category)),
   );
+
+  // Refs for section elements and cart
   const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
   const cartRef = useRef<HTMLDivElement | null>(null);
 
+  // Callback to register section refs for smooth scrolling
   const registerSectionRef = useCallback(
     (category: string, element: HTMLElement | null) => {
       sectionRefs.current[category] = element;
@@ -59,14 +70,14 @@ export default function RestaurantMenu() {
     [],
   );
 
-  // Load cart from localStorage on client side
+  // Load cart from localStorage when the component mounts (client-side only)
   useEffect(() => {
     if (typeof window !== "undefined") {
       const savedCart = localStorage.getItem("cart");
       if (savedCart) {
-        setCart(JSON.parse(savedCart));
+        setCart(JSON.parse(savedCart)); // Set cart from saved data
       } else {
-        setCart([]);
+        setCart([]); // Initialize cart as empty
       }
     }
   }, []);
@@ -78,6 +89,7 @@ export default function RestaurantMenu() {
     }
   }, [cart]);
 
+  // Update filtered items whenever the search term changes
   useEffect(() => {
     const filtered = menuItems.filter(
       (item) =>
@@ -87,34 +99,41 @@ export default function RestaurantMenu() {
     setFilteredItems(filtered);
   }, [searchTerm]);
 
+  // Helper function to validate email format
   const isValidEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
 
+  // Helper function to validate phone number format (10-digit numbers)
   const isValidPhoneNumber = (phone: string) => {
-    const phoneRegex = /^\d{10}$/; // Simple regex for 10-digit phone numbers
+    const phoneRegex = /^\d{10}$/;
     return phoneRegex.test(phone);
   };
 
-  // Check if the restaurant is open
+  // Check if the restaurant is currently open
   const restaurantIsOpen = isOpen();
 
+  // Function to add an item to the cart
   const addToCart = (item: MenuItem) => {
-    if (cart === null) return;
+    if (cart === null) return; // If cart is not initialized yet
     setCart((prevCart) => {
+      // Check if the item already exists in the cart
       const existingItem = prevCart!.find(
         (cartItem) => cartItem.id === item.id,
       );
       if (existingItem) {
+        // If it exists, increment the quantity
         return prevCart!.map((cartItem) =>
           cartItem.id === item.id
             ? { ...cartItem, quantity: cartItem.quantity + 1 }
             : cartItem,
         );
       }
+      // If not, add it to the cart with quantity 1
       return [...prevCart!, { ...item, quantity: 1 }];
     });
+    // Show a toast notification
     toast({
       title: "Item added to cart",
       description: `${item.name} has been added to your cart. Total cost of cart: $${(
@@ -127,19 +146,22 @@ export default function RestaurantMenu() {
     });
   };
 
+  // Function to decrease the quantity of an item in the cart
   const decreaseQuantity = (itemId: string) => {
     if (cart === null) return;
-    setCart((prevCart) =>
-      prevCart!
-        .map((cartItem) =>
-          cartItem.id === itemId
-            ? { ...cartItem, quantity: cartItem.quantity - 1 }
-            : cartItem,
-        )
-        .filter((cartItem) => cartItem.quantity > 0),
+    setCart(
+      (prevCart) =>
+        prevCart!
+          .map((cartItem) =>
+            cartItem.id === itemId
+              ? { ...cartItem, quantity: cartItem.quantity - 1 }
+              : cartItem,
+          )
+          .filter((cartItem) => cartItem.quantity > 0), // Remove item if quantity is 0
     );
   };
 
+  // Function to remove an item from the cart
   const removeFromCart = (itemId: string) => {
     if (cart === null) return;
     setCart((prevCart) =>
@@ -147,6 +169,7 @@ export default function RestaurantMenu() {
     );
   };
 
+  // Function to scroll to a specific category section
   const scrollToSection = (category: string) => {
     const element = sectionRefs.current[category];
     if (element) {
@@ -154,15 +177,17 @@ export default function RestaurantMenu() {
     }
   };
 
+  // Function to scroll to the cart section
   const scrollToCart = () => {
     if (cartRef.current) {
       cartRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
 
+  // Function to get the earliest possible pickup time
   function getMinPickupTime() {
     const now = new Date();
-    // Add preparation time, e.g., 15 minutes
+    // Add preparation time (e.g., 15 minutes)
     const minTime = new Date(now.getTime());
     minTime.setMinutes(minTime.getMinutes() + 15);
 
@@ -174,14 +199,15 @@ export default function RestaurantMenu() {
     }
     const [openHours, openMinutes] = displayOpenTime24.split(":").map(Number);
     const openTime = new Date();
-    openTime.setHours(openHours!, openMinutes, 0, 0);
+    openTime.setHours(openHours!, openMinutes!, 0, 0);
 
     // The earliest possible time is the later of minTime and openTime
     const earliestTime = minTime > openTime ? minTime : openTime;
 
-    return earliestTime.toTimeString().slice(0, 5); // HH:MM format
+    return earliestTime.toTimeString().slice(0, 5); // Return in HH:MM format
   }
 
+  // Function to get the latest possible pickup time
   function getMaxPickupTime() {
     const { displayCloseTime24 } = getIsOpen("en");
     if (!displayCloseTime24) {
@@ -192,37 +218,40 @@ export default function RestaurantMenu() {
       .split(":")
       .map(Number);
     const closeTime = new Date();
-    closeTime.setHours(closeHours!, closeMinutes, 0, 0);
+    closeTime.setHours(closeHours!, closeMinutes!, 0, 0);
 
-    return closeTime.toTimeString().slice(0, 5); // HH:MM format
+    return closeTime.toTimeString().slice(0, 5); // Return in HH:MM format
   }
 
-  // Validate pickup time during input
+  // Effect to validate the pickup time during user input
   useEffect(() => {
     if (pickupTimeOption === "Later" && pickupTime) {
+      // Parse the selected pickup time
       const [hours, minutes] = pickupTime.split(":").map(Number);
       const pickupDateTime = new Date();
-      pickupDateTime.setHours(hours!, minutes, 0, 0);
+      pickupDateTime.setHours(hours!, minutes!, 0, 0);
 
       // Get earliest and latest possible pickup times
       const earliestTimeString = getMinPickupTime();
       const latestTimeString = getMaxPickupTime();
 
       if (earliestTimeString && latestTimeString) {
+        // Parse earliest and latest times
         const [earliestHours, earliestMinutes] = earliestTimeString
           .split(":")
           .map(Number);
         const earliestDateTime = new Date();
-        earliestDateTime.setHours(earliestHours!, earliestMinutes, 0, 0);
+        earliestDateTime.setHours(earliestHours!, earliestMinutes!, 0, 0);
 
         const [latestHours, latestMinutes] = latestTimeString
           .split(":")
           .map(Number);
         const latestDateTime = new Date();
-        latestDateTime.setHours(latestHours!, latestMinutes, 0, 0);
-        // Move latestDateTime back by 15 minutes
+        latestDateTime.setHours(latestHours!, latestMinutes!, 0, 0);
+        // Move latestDateTime back by 15 minutes (preparation time)
         latestDateTime.setMinutes(latestDateTime.getMinutes() - 15);
 
+        // Validate the pickup time
         if (pickupDateTime < earliestDateTime) {
           setTimeError(
             "Please select a time at least 15 minutes from now and after the restaurant opens.",
@@ -232,21 +261,23 @@ export default function RestaurantMenu() {
             "Please select a time 15 minutes before the restaurant closes.",
           );
         } else {
-          setTimeError("");
+          setTimeError(""); // Time is valid
         }
       } else {
         // Restaurant is closed today
         setTimeError("Cannot select a time; the restaurant is closed today.");
       }
     } else {
-      setTimeError("");
+      setTimeError(""); // Reset error if ASAP is selected or time is cleared
     }
   }, [pickupTime, pickupTimeOption]);
 
+  // Function to handle checkout and place the order
   const handleCheckout = () => {
     if (cart === null) return;
 
     if (!restaurantIsOpen) {
+      // Notify the user if the restaurant is closed
       toast({
         title: "Restaurant is closed",
         description:
@@ -257,6 +288,7 @@ export default function RestaurantMenu() {
 
     let valid = true;
 
+    // Validate email
     if (!isValidEmail(customerEmail)) {
       setEmailError("Please enter a valid email address.");
       valid = false;
@@ -264,6 +296,7 @@ export default function RestaurantMenu() {
       setEmailError("");
     }
 
+    // Validate phone number
     if (!isValidPhoneNumber(customerPhone)) {
       setPhoneError("Please enter a valid 10-digit phone number.");
       valid = false;
@@ -271,21 +304,25 @@ export default function RestaurantMenu() {
       setPhoneError("");
     }
 
+    // Check if there's a time error
     if (timeError) {
       valid = false;
     }
 
     if (!valid) {
+      // If any validation fails, do not proceed
       return;
     }
 
+    // Calculate order totals
     const subtotal = cart.reduce(
       (total, item) => total + item.price * item.quantity,
       0,
     );
-    const salesTax = subtotal * 0.06;
+    const salesTax = subtotal * 0.06; // Assuming 6% sales tax
     const total = subtotal + salesTax;
 
+    // Create an object with order details
     const orderDetails = {
       name: customerName,
       phone: customerPhone,
@@ -304,10 +341,13 @@ export default function RestaurantMenu() {
       total: total.toFixed(2),
     };
 
-    console.log("Order Details:", orderDetails);
+    console.log("Order Details:", orderDetails); // Log order details (could be sent to a server)
+
+    // Format pickup time for the toast message
     const formattedPickupTime =
       pickupTimeOption === "ASAP" ? "ASAP" : formatTime(pickupTime);
 
+    // Show a toast notification for successful order
     toast({
       title: "Order Placed",
       description: `Your order has been placed! Your total is $${total.toFixed(
@@ -319,14 +359,17 @@ export default function RestaurantMenu() {
       } Thank you!`,
     });
 
+    // Helper function to format time from 24-hour to 12-hour format
     function formatTime(time: string) {
       const [hours, minutes] = time.split(":").map(Number);
       const period = hours! >= 12 ? "PM" : "AM";
       const formattedHours = hours! % 12 || 12;
-      return `${formattedHours}:${minutes!.toString().padStart(2, "0")} ${period}`;
+      return `${formattedHours}:${minutes!
+        .toString()
+        .padStart(2, "0")} ${period}`;
     }
 
-    // Clear cart and customer information
+    // Clear cart and customer information after order is placed
     setCart([]);
     setCustomerName("");
     setCustomerPhone("");
@@ -337,10 +380,12 @@ export default function RestaurantMenu() {
     setTimeError("");
   };
 
+  // Check if the pickup time is valid
   const isTimeValid =
     pickupTimeOption === "ASAP" ||
     (pickupTimeOption === "Later" && pickupTime.trim() !== "");
 
+  // Check if the entire form is valid
   const isFormValid =
     customerName.trim() !== "" &&
     isValidEmail(customerEmail) &&
@@ -350,20 +395,26 @@ export default function RestaurantMenu() {
     isTimeValid &&
     timeError === "";
 
-  // If cart is null, it means it's still loading
+  // If cart is null (still loading), render nothing or a loader
   if (cart === null) {
-    return null; // Or you can return a loading indicator
+    return null; // Could return a loading indicator here
   }
 
+  // Main component rendering
   return (
     <div className="container mx-auto p-4">
+      {/* Header */}
       <h1 className="mb-6 text-3xl font-bold">Our Menu</h1>
+
+      {/* Display message if the restaurant is closed */}
       {!restaurantIsOpen && (
         <div className="mb-4 font-semibold text-red-500">
           We are currently closed. You cannot place orders at this time. Check
           back during our regular business hours!
         </div>
       )}
+
+      {/* Search bar */}
       <div className="mb-4 flex items-center space-x-2">
         <Search className="h-5 w-5 text-gray-500" />
         <Input
@@ -374,6 +425,8 @@ export default function RestaurantMenu() {
           className="w-full"
         />
       </div>
+
+      {/* Navigation for categories and cart */}
       <nav className="sticky top-0 z-10 mb-8 border-b bg-background py-4">
         {/* Mobile Layout */}
         <div className="flex justify-between md:hidden">
@@ -422,6 +475,8 @@ export default function RestaurantMenu() {
           </div>
         </div>
       </nav>
+
+      {/* Menu sections */}
       {categories.map((category) => (
         <section
           key={category}
@@ -465,12 +520,15 @@ export default function RestaurantMenu() {
           </div>
         </section>
       ))}
+
+      {/* Cart section */}
       <div className="mt-8" ref={cartRef}>
         <h2 className="mb-4 text-2xl font-bold">Your Cart</h2>
         {cart.length === 0 ? (
           <p>Your cart is empty</p>
         ) : (
           <div>
+            {/* List of items in the cart */}
             {cart.map((item) => (
               <div
                 key={item.id}
@@ -504,8 +562,10 @@ export default function RestaurantMenu() {
                 </div>
               </div>
             ))}
-            {/* Customer Information */}
+
+            {/* Customer Information Form */}
             <div className="mt-6 space-y-4">
+              {/* Name Field */}
               <div>
                 <Label htmlFor="name">Name</Label>
                 <Input
@@ -517,6 +577,8 @@ export default function RestaurantMenu() {
                   required
                 />
               </div>
+
+              {/* Phone Number Field */}
               <div>
                 <Label htmlFor="phone">Phone Number</Label>
                 <Input
@@ -531,6 +593,8 @@ export default function RestaurantMenu() {
                   <p className="text-sm text-red-500">{phoneError}</p>
                 )}
               </div>
+
+              {/* Email Field */}
               <div>
                 <Label htmlFor="email">Email</Label>
                 <Input
@@ -545,10 +609,12 @@ export default function RestaurantMenu() {
                   <p className="text-sm text-red-500">{emailError}</p>
                 )}
               </div>
-              {/* Pickup Time */}
+
+              {/* Pickup Time Selection */}
               <div>
                 <Label>Pickup Time</Label>
                 <div className="flex items-center space-x-4">
+                  {/* ASAP Option */}
                   <label className="flex items-center">
                     <input
                       type="radio"
@@ -561,6 +627,7 @@ export default function RestaurantMenu() {
                     />
                     ASAP
                   </label>
+                  {/* Specify Time Option */}
                   <label className="flex items-center">
                     <input
                       type="radio"
@@ -574,6 +641,7 @@ export default function RestaurantMenu() {
                     Specify Time
                   </label>
                 </div>
+                {/* Time Input Field */}
                 {pickupTimeOption === "Later" && (
                   <div className="mt-2">
                     <Input
@@ -590,6 +658,8 @@ export default function RestaurantMenu() {
                   </div>
                 )}
               </div>
+
+              {/* Special Requests Field */}
               <div>
                 <Label htmlFor="specialRequests">
                   Special Requests / Notes
@@ -603,6 +673,7 @@ export default function RestaurantMenu() {
                 />
               </div>
             </div>
+
             {/* Order Summary */}
             <div className="mt-6">
               <div className="flex justify-between">
@@ -642,10 +713,12 @@ export default function RestaurantMenu() {
                 </span>
               </div>
             </div>
+
             {/* Disclaimer */}
             <p className="mt-4 text-sm text-gray-500">
               Please note: Purchases for pickup orders must be made in-store.
             </p>
+
             {/* Checkout Button */}
             <Button
               className="mt-6 w-full"
@@ -657,11 +730,6 @@ export default function RestaurantMenu() {
           </div>
         )}
       </div>
-      <Badge variant="secondary" className="fixed bottom-4 right-4 p-3">
-        <ShoppingCart className="mr-2 h-6 w-6" />
-        <span className="sr-only">Items in cart:</span>
-        {cart.reduce((total, item) => total + item.quantity, 0)}
-      </Badge>
     </div>
   );
 }
