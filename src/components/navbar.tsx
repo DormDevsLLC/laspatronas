@@ -17,6 +17,10 @@ const esLinks = [
   { name: "Orden", href: "/es/order" },
 ];
 
+function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 export default function Navbar({
   language,
   setParentLanguage,
@@ -31,6 +35,14 @@ export default function Navbar({
   );
 
   const router = useRouter();
+
+  const handleTransition = async (href: string) => {
+    const transitionDiv = document.getElementById("transition-page");
+    transitionDiv?.classList.add("page-transition");
+    await sleep(500);
+    router.push(href);
+    transitionDiv?.classList.remove("page-transition");
+  };
 
   // Get the current URL path
   const currentPath = usePathname();
@@ -51,12 +63,11 @@ export default function Navbar({
     } else {
       // Grab the current url and swap
       if (lang.includes("en")) {
-        const path = currentPath;
         const newPath = currentPath.replace("/en", "/es");
-        router.push(newPath);
+        handleTransition(newPath);
       } else {
         const newPath = currentPath.replace("/es", "/en");
-        router.push(newPath);
+        handleTransition(newPath);
       }
 
       // Change the language
