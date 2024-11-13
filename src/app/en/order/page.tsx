@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import RestaurantMenuEN from "~/components/menuen";
+import RestaurantMenu from "~/components/menu";
 import Navbar from "~/components/navbar";
 import { Button } from "~/components/ui/button";
 import {
@@ -53,7 +53,7 @@ export default async function Home() {
             </TabsList>
             <TabsContent value="pickup">
               <Card className="mb-12 h-full items-center py-8">
-                <RestaurantMenuEN />
+                <RestaurantMenu language="en" />
               </Card>
             </TabsContent>
             <TabsContent value="delivery" className="h-full">

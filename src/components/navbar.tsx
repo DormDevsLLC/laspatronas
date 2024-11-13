@@ -73,7 +73,7 @@ export default function Navbar({
   }
   return (
     <>
-      <nav className="flex h-16 w-screen items-center justify-between overflow-hidden bg-[#1c0230] p-4 text-white">
+      <nav className="flex h-16 w-screen items-center justify-between overflow-hidden bg-[#1c0230] p-4 text-white transition-all duration-300">
         <div className="items-center justify-center">
           <TransitionLink href={"/"} className="ml-2 flex">
             <div className="flex items-center justify-center">
@@ -87,28 +87,28 @@ export default function Navbar({
             </div>
           </TransitionLink>
         </div>
-        <div className="flex items-center space-x-8 pr-8">
+        <div className="flex items-center space-x-8 pr-8 transition-all duration-300">
           <div
             onClick={() => changeLanguage()}
-            className="text-xl transition-all duration-300 hover:cursor-pointer hover:text-2xl hover:text-purple-100"
+            className="text-xl transition-all duration-300 hover:cursor-pointer hover:text-purple-100"
           >
             {lang.includes("en") ? "Español" : "English"}
           </div>
           {links.map((link) => (
-            <TransitionLink
-              href={link.href}
-              key={link.href}
-              className={`${link.href == currentPath ? "text-2xl text-purple-200 underline" : ""}text-xl transition-all duration-300 hover:text-2xl hover:text-purple-100`}
-            >
+            <TransitionLink href={link.href} key={link.href}>
               {link.href === "/es/order" || link.href === "/en/order" ? (
                 <Button
-                  className="bg-[#a40c96] text-xl transition-all duration-300 hover:bg-[#750B6B] hover:text-2xl hover:text-purple-100"
+                  className="bg-[#a40c96] text-xl transition-all duration-300 hover:bg-[#750B6B]"
                   size={"lg"}
                 >
                   {link.name}
                 </Button>
               ) : (
-                link.name
+                <div
+                  className={`transition-all duration-300 hover:text-purple-100 ${link.href == currentPath ? "text-2xl text-purple-200" : "text-xl"}`}
+                >
+                  {link.name}
+                </div>
               )}
             </TransitionLink>
           ))}

@@ -2,9 +2,11 @@
 
 // Import necessary components and hooks
 import { Minus, Search, Trash } from "lucide-react";
+import { useRouter } from "next/navigation"; // Import useRouter
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useToast } from "~/hooks/use-toast"; // Custom toast hook for notifications
-import menuItems from "./data/menuen.json"; // Menu items data
+import menuItemsEn from "./data/menuen.json"; // English menu items data
+import menuItemsEs from "./data/menues.json"; // Spanish menu items data
 import { getIsOpen, isOpen } from "./open"; // Functions to check if the restaurant is open
 import { Button } from "./ui/button";
 import {
@@ -29,7 +31,16 @@ type MenuItem = {
 // Extend MenuItem to include quantity for cart items
 type CartItem = MenuItem & { quantity: number };
 
-export default function RestaurantMenu() {
+interface RestaurantMenuProps {
+  language: string; // "en" or "es"
+}
+
+export default function RestaurantMenu({ language }: RestaurantMenuProps) {
+  const router = useRouter();
+
+  // Select the appropriate menu items based on the language
+  const menuItems = language === "en" ? menuItemsEn : menuItemsEs;
+
   // State variables for search term, cart, and filtered items
   const [searchTerm, setSearchTerm] = useState("");
   const [cart, setCart] = useState<CartItem[] | null>(null); // Initialize cart as null
@@ -70,17 +81,66 @@ export default function RestaurantMenu() {
     [],
   );
 
-  // Load cart from localStorage when the component mounts (client-side only)
+  // Load cart from localStorage when the component mounts or when language changes
   useEffect(() => {
     if (typeof window !== "undefined") {
       const savedCart = localStorage.getItem("cart");
       if (savedCart) {
-        setCart(JSON.parse(savedCart)); // Set cart from saved data
+        const parsedCart = JSON.parse(savedCart) as CartItem[];
+
+        if (parsedCart.length > 0) {
+          // Check if the first item exists in the current menu data
+          const firstItemInMenu = menuItems.find(
+            (menuItem) => menuItem.id === parsedCart[0]!.id,
+          );
+
+          if (firstItemInMenu) {
+            // The cart items are in the current language
+            setCart(
+              parsedCart
+                .map((cartItem) => {
+                  // Find the corresponding menu item to update name and description
+                  const menuItem = menuItems.find(
+                    (item) => item.id === cartItem.id,
+                  );
+                  if (menuItem) {
+                    return { ...menuItem, quantity: cartItem.quantity };
+                  } else {
+                    // If item not found, exclude it from the cart
+                    return null;
+                  }
+                })
+                .filter(Boolean) as CartItem[],
+            );
+          } else {
+            // The cart items are in a different language
+            // Map over the cart items and replace them using the correct menu data
+            const updatedCart = parsedCart
+              .map((cartItem) => {
+                // Find the corresponding item in the current menu data
+                const correspondingItem = menuItems.find(
+                  (menuItem) => menuItem.id === cartItem.id,
+                );
+                if (correspondingItem) {
+                  return { ...correspondingItem, quantity: cartItem.quantity };
+                } else {
+                  // If item not found, exclude it from the cart
+                  return null;
+                }
+              })
+              .filter(Boolean) as CartItem[];
+            setCart(updatedCart);
+          }
+        } else {
+          // Cart is empty
+          setCart([]);
+        }
       } else {
-        setCart([]); // Initialize cart as empty
+        // No cart in localStorage
+        setCart([]);
       }
     }
-  }, []);
+  }, [language, menuItems]); // Add language and menuItems as dependencies
 
   // Save cart to localStorage whenever it changes
   useEffect(() => {
@@ -89,7 +149,7 @@ export default function RestaurantMenu() {
     }
   }, [cart]);
 
-  // Update filtered items whenever the search term changes
+  // Update filtered items whenever the search term or language changes
   useEffect(() => {
     const filtered = menuItems.filter(
       (item) =>
@@ -97,7 +157,7 @@ export default function RestaurantMenu() {
         item.description.toLowerCase().includes(searchTerm.toLowerCase()),
     );
     setFilteredItems(filtered);
-  }, [searchTerm]);
+  }, [searchTerm, menuItems]);
 
   // Helper function to validate email format
   const isValidEmail = (email: string) => {
@@ -135,14 +195,15 @@ export default function RestaurantMenu() {
     });
     // Show a toast notification
     toast({
-      title: "Item added to cart",
-      description: `${item.name} has been added to your cart. Total cost of cart: $${(
-        (cart ?? []).reduce(
-          (total, cartItem) => total + cartItem.price * cartItem.quantity,
-          0,
-        ) + item.price
-      ).toFixed(2)}
-      `,
+      title:
+        language === "en"
+          ? "Item added to cart"
+          : "Artículo añadido al carrito",
+      description: `${item.name} ${
+        language === "en"
+          ? "has been added to your cart."
+          : "ha sido añadido a tu carrito."
+      }`,
     });
   };
 
@@ -192,7 +253,7 @@ export default function RestaurantMenu() {
     minTime.setMinutes(minTime.getMinutes() + 15);
 
     // Get the restaurant's opening time
-    const { displayOpenTime24 } = getIsOpen("en");
+    const { displayOpenTime24 } = getIsOpen(language);
     if (!displayOpenTime24) {
       // Restaurant is closed today
       return null;
@@ -209,7 +270,7 @@ export default function RestaurantMenu() {
 
   // Function to get the latest possible pickup time
   function getMaxPickupTime() {
-    const { displayCloseTime24 } = getIsOpen("en");
+    const { displayCloseTime24 } = getIsOpen(language);
     if (!displayCloseTime24) {
       // Restaurant is closed today
       return null;
@@ -254,34 +315,47 @@ export default function RestaurantMenu() {
         // Validate the pickup time
         if (pickupDateTime < earliestDateTime) {
           setTimeError(
-            "Please select a time at least 15 minutes from now and after the restaurant opens.",
+            language === "en"
+              ? "Please select a time at least 15 minutes from now and after the restaurant opens."
+              : "Por favor, selecciona una hora al menos 15 minutos desde ahora y después de que el restaurante abra.",
           );
         } else if (pickupDateTime > latestDateTime) {
           setTimeError(
-            "Please select a time 15 minutes before the restaurant closes.",
+            language === "en"
+              ? "Please select a time 15 minutes before the restaurant closes."
+              : "Por favor, selecciona una hora 15 minutos antes de que el restaurante cierre.",
           );
         } else {
           setTimeError(""); // Time is valid
         }
       } else {
         // Restaurant is closed today
-        setTimeError("Cannot select a time; the restaurant is closed today.");
+        setTimeError(
+          language === "en"
+            ? "Cannot select a time; the restaurant is closed today."
+            : "No se puede seleccionar una hora; el restaurante está cerrado hoy.",
+        );
       }
     } else {
       setTimeError(""); // Reset error if ASAP is selected or time is cleared
     }
-  }, [pickupTime, pickupTimeOption]);
+  }, [pickupTime, pickupTimeOption, language]);
 
   // Function to handle checkout and place the order
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     if (cart === null) return;
 
     if (!restaurantIsOpen) {
       // Notify the user if the restaurant is closed
       toast({
-        title: "Restaurant is closed",
+        title:
+          language === "en"
+            ? "Restaurant is closed"
+            : "El restaurante está cerrado",
         description:
-          "We are currently closed. You cannot place orders at this time. Check back during our regular business hours!",
+          language === "en"
+            ? "We are currently closed. You cannot place orders at this time. Check back during our regular business hours!"
+            : "Actualmente estamos cerrados. No puedes hacer pedidos en este momento. ¡Vuelve durante nuestro horario comercial habitual!",
       });
       return;
     }
@@ -290,7 +364,11 @@ export default function RestaurantMenu() {
 
     // Validate email
     if (!isValidEmail(customerEmail)) {
-      setEmailError("Please enter a valid email address.");
+      setEmailError(
+        language === "en"
+          ? "Please enter a valid email address."
+          : "Por favor, introduce una dirección de correo electrónico válida.",
+      );
       valid = false;
     } else {
       setEmailError("");
@@ -298,7 +376,11 @@ export default function RestaurantMenu() {
 
     // Validate phone number
     if (!isValidPhoneNumber(customerPhone)) {
-      setPhoneError("Please enter a valid 10-digit phone number.");
+      setPhoneError(
+        language === "en"
+          ? "Please enter a valid 10-digit phone number."
+          : "Por favor, introduce un número de teléfono válido de 10 dígitos.",
+      );
       valid = false;
     } else {
       setPhoneError("");
@@ -341,23 +423,9 @@ export default function RestaurantMenu() {
       total: total.toFixed(2),
     };
 
-    console.log("Order Details:", orderDetails); // Log order details (could be sent to a server)
-
     // Format pickup time for the toast message
     const formattedPickupTime =
       pickupTimeOption === "ASAP" ? "ASAP" : formatTime(pickupTime);
-
-    // Show a toast notification for successful order
-    toast({
-      title: "Order Placed",
-      description: `Your order has been placed! Your total is $${total.toFixed(
-        2,
-      )}. ${
-        pickupTimeOption == "ASAP"
-          ? "Your order will be ready ASAP."
-          : `Your order will be ready at ${formattedPickupTime}.`
-      } Thank you!`,
-    });
 
     // Helper function to format time from 24-hour to 12-hour format
     function formatTime(time: string) {
@@ -369,15 +437,64 @@ export default function RestaurantMenu() {
         .padStart(2, "0")} ${period}`;
     }
 
-    // Clear cart and customer information after order is placed
-    setCart([]);
-    setCustomerName("");
-    setCustomerPhone("");
-    setCustomerEmail("");
-    setSpecialRequests("");
-    setPickupTimeOption("ASAP");
-    setPickupTime("");
-    setTimeError("");
+    // Send order details to the API route
+    try {
+      const response = await fetch("/api/order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          customerEmail: customerEmail,
+          customerName: customerName,
+          orderDetails: orderDetails,
+          customerPhone: customerPhone,
+          language: language,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      // Show a toast notification for successful order
+      toast({
+        title: language === "en" ? "Order Placed" : "Pedido Realizado",
+        description:
+          language === "en"
+            ? `Your order has been placed! Your total is $${total.toFixed(
+                2,
+              )}. ${
+                pickupTimeOption == "ASAP"
+                  ? "Your order will be ready ASAP."
+                  : `Your order will be ready at ${formattedPickupTime}.`
+              } Thank you!`
+            : `¡Tu pedido ha sido realizado! Tu total es $${total.toFixed(
+                2,
+              )}. ${
+                pickupTimeOption == "ASAP"
+                  ? "Tu pedido estará listo lo antes posible."
+                  : `Tu pedido estará listo a las ${formattedPickupTime}.`
+              } ¡Gracias!`,
+      });
+
+      // Clear cart and customer information after order is placed
+      setCart([]);
+      setCustomerName("");
+      setCustomerPhone("");
+      setCustomerEmail("");
+      setSpecialRequests("");
+      setPickupTimeOption("ASAP");
+      setPickupTime("");
+      setTimeError("");
+    } catch (error) {
+      console.error("Error placing order:", error);
+      toast({
+        title: language === "en" ? "Order Failed" : "Pedido Fallido",
+        description:
+          language === "en"
+            ? "There was an issue placing your order. Please try again later."
+            : "Hubo un problema al realizar tu pedido. Por favor, inténtalo de nuevo más tarde.",
+      });
+    }
   };
 
   // Check if the pickup time is valid
@@ -402,15 +519,18 @@ export default function RestaurantMenu() {
 
   // Main component rendering
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 md:p-12">
       {/* Header */}
-      <h1 className="mb-6 text-3xl font-bold">Our Menu</h1>
+      <h1 className="mb-6 text-3xl font-bold">
+        {language === "en" ? "Our Menu" : "Nuestro Menú"}
+      </h1>
 
       {/* Display message if the restaurant is closed */}
       {!restaurantIsOpen && (
         <div className="mb-4 font-semibold text-red-500">
-          We are currently closed. You cannot place orders at this time. Check
-          back during our regular business hours!
+          {language === "en"
+            ? "We are currently closed. You cannot place orders at this time. Check back during our regular business hours!"
+            : "Actualmente estamos cerrados. No puedes hacer pedidos en este momento. ¡Vuelve durante nuestro horario comercial habitual!"}
         </div>
       )}
 
@@ -419,7 +539,9 @@ export default function RestaurantMenu() {
         <Search className="h-5 w-5 text-gray-500" />
         <Input
           type="text"
-          placeholder="Search menu..."
+          placeholder={
+            language === "en" ? "Search menu..." : "Buscar en el menú..."
+          }
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="w-full"
@@ -444,7 +566,7 @@ export default function RestaurantMenu() {
             ))}
           </div>
           <Button onClick={scrollToCart} className="ml-2 flex-shrink-0">
-            Checkout
+            {language === "en" ? "Checkout" : "Pagar"}
           </Button>
         </div>
         {/* Desktop Layout */}
@@ -470,7 +592,7 @@ export default function RestaurantMenu() {
               }}
               className="animate-fade-right"
             >
-              Checkout
+              {language === "en" ? "Checkout" : "Pagar"}
             </Button>
           </div>
         </div>
@@ -512,7 +634,13 @@ export default function RestaurantMenu() {
                       onClick={() => addToCart(item)}
                       disabled={!restaurantIsOpen}
                     >
-                      {restaurantIsOpen ? "Add to Cart" : "Closed"}
+                      {restaurantIsOpen
+                        ? language === "en"
+                          ? "Add to Cart"
+                          : "Añadir al Carrito"
+                        : language === "en"
+                          ? "Closed"
+                          : "Cerrado"}
                     </Button>
                   </CardFooter>
                 </Card>
@@ -523,9 +651,13 @@ export default function RestaurantMenu() {
 
       {/* Cart section */}
       <div className="mt-8" ref={cartRef}>
-        <h2 className="mb-4 text-2xl font-bold">Your Cart</h2>
+        <h2 className="mb-4 text-2xl font-bold">
+          {language === "en" ? "Your Cart" : "Tu Carrito"}
+        </h2>
         {cart.length === 0 ? (
-          <p>Your cart is empty</p>
+          <p>
+            {language === "en" ? "Your cart is empty" : "Tu carrito está vacío"}
+          </p>
         ) : (
           <div>
             {/* List of items in the cart */}
@@ -567,26 +699,34 @@ export default function RestaurantMenu() {
             <div className="mt-6 space-y-4">
               {/* Name Field */}
               <div>
-                <Label htmlFor="name">Name</Label>
+                <Label htmlFor="name">
+                  {language === "en" ? "Name" : "Nombre"}
+                </Label>
                 <Input
                   id="name"
                   type="text"
                   value={customerName}
                   onChange={(e) => setCustomerName(e.target.value)}
-                  placeholder="Your Name"
+                  placeholder={language === "en" ? "Your Name" : "Tu Nombre"}
                   required
                 />
               </div>
 
               {/* Phone Number Field */}
               <div>
-                <Label htmlFor="phone">Phone Number</Label>
+                <Label htmlFor="phone">
+                  {language === "en" ? "Phone Number" : "Número de Teléfono"}
+                </Label>
                 <Input
                   id="phone"
                   type="tel"
                   value={customerPhone}
                   onChange={(e) => setCustomerPhone(e.target.value)}
-                  placeholder="Your Phone Number"
+                  placeholder={
+                    language === "en"
+                      ? "Your Phone Number"
+                      : "Tu Número de Teléfono"
+                  }
                   required
                 />
                 {phoneError && (
@@ -602,7 +742,9 @@ export default function RestaurantMenu() {
                   type="email"
                   value={customerEmail}
                   onChange={(e) => setCustomerEmail(e.target.value)}
-                  placeholder="Your Email"
+                  placeholder={
+                    language === "en" ? "Your Email" : "Tu Correo Electrónico"
+                  }
                   required
                 />
                 {emailError && (
@@ -612,7 +754,9 @@ export default function RestaurantMenu() {
 
               {/* Pickup Time Selection */}
               <div>
-                <Label>Pickup Time</Label>
+                <Label>
+                  {language === "en" ? "Pickup Time" : "Hora de Recogida"}
+                </Label>
                 <div className="flex items-center space-x-4">
                   {/* ASAP Option */}
                   <label className="flex items-center">
@@ -625,7 +769,7 @@ export default function RestaurantMenu() {
                       className="mr-2"
                       disabled={!restaurantIsOpen}
                     />
-                    ASAP
+                    {language === "en" ? "ASAP" : "Lo Antes Posible"}
                   </label>
                   {/* Specify Time Option */}
                   <label className="flex items-center">
@@ -638,7 +782,7 @@ export default function RestaurantMenu() {
                       className="mr-2"
                       disabled={!restaurantIsOpen}
                     />
-                    Specify Time
+                    {language === "en" ? "Specify Time" : "Especificar Hora"}
                   </label>
                 </div>
                 {/* Time Input Field */}
@@ -662,13 +806,19 @@ export default function RestaurantMenu() {
               {/* Special Requests Field */}
               <div>
                 <Label htmlFor="specialRequests">
-                  Special Requests / Notes
+                  {language === "en"
+                    ? "Special Requests / Notes"
+                    : "Peticiones Especiales / Notas"}
                 </Label>
                 <textarea
                   id="specialRequests"
                   value={specialRequests}
                   onChange={(e) => setSpecialRequests(e.target.value)}
-                  placeholder="Any substitutions, removals, food allergies, etc."
+                  placeholder={
+                    language === "en"
+                      ? "Any substitutions, removals, food allergies, etc."
+                      : "Cualquier sustitución, eliminación, alergias alimentarias, etc."
+                  }
                   className="w-full rounded border p-2"
                 />
               </div>
@@ -677,7 +827,7 @@ export default function RestaurantMenu() {
             {/* Order Summary */}
             <div className="mt-6">
               <div className="flex justify-between">
-                <span>Subtotal:</span>
+                <span>{language === "en" ? "Subtotal:" : "Subtotal:"}</span>
                 <span>
                   $
                   {cart
@@ -689,7 +839,9 @@ export default function RestaurantMenu() {
                 </span>
               </div>
               <div className="flex justify-between">
-                <span>Sales Tax (6%):</span>
+                <span>
+                  {language === "en" ? "Sales Tax (6%):" : "Impuesto (6%):"}
+                </span>
                 <span>
                   $
                   {(
@@ -701,7 +853,7 @@ export default function RestaurantMenu() {
                 </span>
               </div>
               <div className="mt-2 flex justify-between font-bold">
-                <span>Total:</span>
+                <span>{language === "en" ? "Total:" : "Total:"}</span>
                 <span>
                   $
                   {(
@@ -716,7 +868,9 @@ export default function RestaurantMenu() {
 
             {/* Disclaimer */}
             <p className="mt-4 text-sm text-gray-500">
-              Please note: Purchases for pickup orders must be made in-store.
+              {language === "en"
+                ? "Please note: Purchases for pickup orders must be made in-store."
+                : "Por favor, ten en cuenta: Las compras para pedidos de recogida deben hacerse en la tienda."}
             </p>
 
             {/* Checkout Button */}
@@ -725,7 +879,13 @@ export default function RestaurantMenu() {
               onClick={handleCheckout}
               disabled={!isFormValid || !restaurantIsOpen}
             >
-              {restaurantIsOpen ? "Checkout" : "Closed"}
+              {restaurantIsOpen
+                ? language === "en"
+                  ? "Checkout"
+                  : "Pagar"
+                : language === "en"
+                  ? "Closed"
+                  : "Cerrado"}
             </Button>
           </div>
         )}
