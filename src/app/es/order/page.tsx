@@ -13,20 +13,20 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 
 export const metadata: Metadata = {
-  title: "Order | Las Patronas UCF",
+  title: "Ordenar | Las Patronas UCF",
   description:
-    "Order from Las Patronas, a family owned Mexican restaurant in Orlando, Florida, serving authentic Mexican cuisine.",
+    "Haz tu pedido en Las Patronas, un restaurante mexicano familiar en Orlando, Florida, que sirve auténtica cocina mexicana.",
   keywords: [
     "Las Patronas",
-    "Mexican Restaurant",
+    "Restaurante Mexicano",
     "Orlando",
-    "University of Central Florida",
+    "Universidad de Florida Central",
     "UCF",
-    "Authentic Mexican Cuisine",
+    "Auténtica Cocina Mexicana",
     "Tacos",
     "Burritos",
     "Quesadillas",
-    "Family Owned",
+    "Familiar",
   ],
 };
 

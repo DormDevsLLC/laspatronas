@@ -5,20 +5,20 @@ import TransitionLink from "~/components/transition-link";
 import { Card } from "~/components/ui/card";
 
 export const metadata: Metadata = {
-  title: "Order | Las Patronas UCF",
+  title: "Menú | Las Patronas UCF",
   description:
-    "Browse the Menu for Las Patronas, a family owned Mexican restaurant in Orlando, Florida, serving authentic Mexican cuisine.",
+    "Explora el menú de Las Patronas, un restaurante mexicano familiar en Orlando, Florida, que sirve auténtica cocina mexicana.",
   keywords: [
     "Las Patronas",
-    "Mexican Restaurant",
+    "Restaurante Mexicano",
     "Orlando",
-    "University of Central Florida",
+    "Universidad de Florida Central",
     "UCF",
-    "Authentic Mexican Cuisine",
+    "Auténtica Cocina Mexicana",
     "Tacos",
     "Burritos",
     "Quesadillas",
-    "Family Owned",
+    "Familiar",
   ],
 };
 

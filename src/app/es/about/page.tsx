@@ -1,20 +1,20 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About | Las Patronas UCF",
+  title: "Acerca de | Las Patronas UCF",
   description:
-    "Learn more about Las Patronas, a family owned Mexican restaurant in Orlando, Florida, serving authentic Mexican cuisine.",
+    "Conoce más sobre Las Patronas, un restaurante mexicano familiar en Orlando, Florida, que sirve auténtica cocina mexicana.",
   keywords: [
     "Las Patronas",
-    "Mexican Restaurant",
+    "Restaurante Mexicano",
     "Orlando",
-    "University of Central Florida",
+    "Universidad de Florida Central",
     "UCF",
-    "Authentic Mexican Cuisine",
+    "Auténtica Cocina Mexicana",
     "Tacos",
     "Burritos",
     "Quesadillas",
-    "Family Owned",
+    "Familiar",
   ],
 };
 
@@ -24,41 +24,43 @@ import Navbar from "~/components/navbar";
 export default function About() {
   return (
     <>
-      <Navbar language="es-US" />
-      <div id="transition-page" className="container mx-auto px-4 py-8 sm:px-6 sm:py-16 lg:px-8">
+      <Navbar language="es-ES" />
+      <div
+        id="transition-page"
+        className="container mx-auto px-4 py-8 sm:px-6 sm:py-16 lg:px-8"
+      >
         <h1 className="mb-8 animate-fade-down text-center text-3xl font-bold sm:mb-20 sm:text-4xl">
-          About Our Restaurant
+          Acerca de Nuestro Restaurante
         </h1>
 
-        {/* About Section */}
-        <section className="mb-12 sm:mb-24">
+        {/* Sección Acerca de */}
+        <section className="mb-12 sm:mb-32">
           <div className="flex flex-col-reverse items-center gap-6 sm:gap-8 md:flex-row">
             <div className="order-2 w-full animate-fade-right md:order-1 md:w-1/2">
               <h2 className="mb-3 text-2xl font-semibold sm:mb-4 sm:text-3xl">
-                Our Story
+                Nuestra Historia
               </h2>
               <p className="text-base text-gray-700 sm:text-lg">
-                Welcome to Las Patronas, a family-owned Mexican restaurant that
-                has been serving authentic flavors for over three generations.
-                Our journey began in 1965 when our grandparents, Maria and Jose,
-                brought their cherished family recipes from Oaxaca to this
-                vibrant community.
+                Bienvenidos a Las Patronas, un restaurante mexicano familiar que
+                combina sabores tradicionales con pasión moderna para ofrecer
+                los sabores más auténticos de México. Comenzando como un food
+                truck en 2021, hemos crecido hasta convertirnos en un
+                restaurante de servicio completo que sirve a la comunidad de UCF
+                y más allá.
               </p>
               <p className="mt-3 text-base text-gray-700 sm:mt-4 sm:text-lg">
-                Today, we continue to honor their legacy by crafting each dish
-                with the same love, care, and traditional techniques that have
-                been passed down through our family. From our homemade salsas to
-                our slow-cooked mole, every bite tells the story of our heritage
-                and passion for Mexican cuisine.
+                Nos enorgullece ofrecer una experiencia inolvidable de cocina
+                mexicana. Si buscas un restaurante auténtico con un ambiente
+                animado, Las Patronas es el lugar indicado.
               </p>
             </div>
-            <div className="order-1 w-full animate-fade-left animate-delay-500 md:order-2 md:ml-12 md:w-1/2">
+            <div className="order-1 w-full animate-fade-left animate-delay-500 md:order-2 md:ml-12 md:w-1/2 lg:w-5/12">
               <div className="relative h-0 w-full pb-[56.25%]">
                 {" "}
-                {/* 16:9 Aspect Ratio */}
+                {/* Relación de aspecto 16:9 */}
                 <Image
                   src="/interior.png"
-                  alt="Family restaurant interior"
+                  alt="Interior de restaurante familiar"
                   layout="fill"
                   objectFit="cover"
                   className="absolute inset-0 h-full w-full rounded-lg shadow-md"
@@ -68,16 +70,16 @@ export default function About() {
           </div>
         </section>
 
-        {/* Mission Section */}
+        {/* Sección Misión */}
         <section className="">
           <div className="flex flex-col-reverse items-center gap-6 sm:gap-8 md:flex-row">
-            <div className="w-full animate-fade-right animate-delay-500 md:mr-12 md:w-1/2">
+            <div className="w-full animate-fade-right animate-delay-500 md:mr-12 md:w-1/2 lg:w-5/12">
               <div className="relative h-0 w-full pb-[56.25%]">
                 {" "}
-                {/* 16:9 Aspect Ratio */}
+                {/* Relación de aspecto 16:9 */}
                 <Image
                   src="/truck.png"
-                  alt="Colorful Mexican dishes"
+                  alt="Platos mexicanos coloridos"
                   layout="fill"
                   objectFit="cover"
                   className="absolute inset-0 h-full w-full rounded-lg shadow-md"
@@ -86,24 +88,34 @@ export default function About() {
             </div>
             <div className="w-full animate-fade-left md:w-1/2">
               <h2 className="mb-3 text-2xl font-semibold sm:mb-4 sm:text-3xl">
-                Our Mission
+                Nuestra Misión
               </h2>
               <p className="text-base text-gray-700 sm:text-lg">
-                At Las Patronas, our mission is to create a warm and inviting
-                atmosphere where families and friends can come together to enjoy
-                delicious, authentic Mexican cuisine. We are committed to:
+                En Las Patronas, nuestra misión es crear un ambiente cálido y
+                acogedor donde las familias y amigos puedan reunirse para
+                disfrutar de deliciosa y auténtica cocina mexicana. Estamos
+                comprometidos a:
               </p>
               <ul className="mt-3 list-inside list-disc space-y-1 text-base text-gray-700 sm:mt-4 sm:space-y-2 sm:text-lg">
-                <li>Preserving and sharing our family's culinary traditions</li>
-                <li>Using fresh, high-quality ingredients in every dish</li>
                 <li>
-                  Providing exceptional service that makes every guest feel like
-                  family
+                  Preservar y compartir las tradiciones culinarias de nuestra
+                  familia
                 </li>
                 <li>
-                  Supporting our local community through partnerships and events
+                  Utilizar ingredientes frescos y de alta calidad en cada plato
                 </li>
-                <li>Continuously innovating while staying true to our roots</li>
+                <li>
+                  Brindar un servicio excepcional que haga sentir a cada cliente
+                  como en familia
+                </li>
+                <li>
+                  Apoyar a nuestra comunidad local a través de colaboraciones y
+                  eventos
+                </li>
+                <li>
+                  Innovar continuamente mientras permanecemos fieles a nuestras
+                  raíces
+                </li>
               </ul>
             </div>
           </div>

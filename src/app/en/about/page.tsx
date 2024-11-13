@@ -34,7 +34,7 @@ export default function About() {
         </h1>
 
         {/* About Section */}
-        <section className="mb-12 sm:mb-24">
+        <section className="mb-12 sm:mb-32">
           <div className="flex flex-col-reverse items-center gap-6 sm:gap-8 md:flex-row">
             <div className="order-2 w-full animate-fade-right md:order-1 md:w-1/2">
               <h2 className="mb-3 text-2xl font-semibold sm:mb-4 sm:text-3xl">
@@ -42,20 +42,18 @@ export default function About() {
               </h2>
               <p className="text-base text-gray-700 sm:text-lg">
                 Welcome to Las Patronas, a family-owned Mexican restaurant that
-                has been serving authentic flavors for over three generations.
-                Our journey began in 1965 when our grandparents, Maria and Jose,
-                brought their cherished family recipes from Oaxaca to this
-                vibrant community.
+                combines traditional flavors with modern passion to offer the
+                most authentic flavors of Mexico. Starting off as a food truck
+                in 2021, we have since grown into a full-service restaurant that
+                serves the UCF community and beyond.
               </p>
               <p className="mt-3 text-base text-gray-700 sm:mt-4 sm:text-lg">
-                Today, we continue to honor their legacy by crafting each dish
-                with the same love, care, and traditional techniques that have
-                been passed down through our family. From our homemade salsas to
-                our slow-cooked mole, every bite tells the story of our heritage
-                and passion for Mexican cuisine.
+                We are proud to offer an unforgettable Mexican cuisine. If you
+                are looking for an authentic restauraunt with a lively
+                atmosphere, Las Patronas is the place to be.
               </p>
             </div>
-            <div className="order-1 w-full animate-fade-left animate-delay-500 md:order-2 md:ml-12 md:w-1/2">
+            <div className="order-1 w-full animate-fade-left animate-delay-500 md:order-2 md:ml-12 md:w-1/2 lg:w-5/12">
               <div className="relative h-0 w-full pb-[56.25%]">
                 {" "}
                 {/* 16:9 Aspect Ratio */}
@@ -74,7 +72,7 @@ export default function About() {
         {/* Mission Section */}
         <section className="">
           <div className="flex flex-col-reverse items-center gap-6 sm:gap-8 md:flex-row">
-            <div className="w-full animate-fade-right animate-delay-500 md:mr-12 md:w-1/2">
+            <div className="w-full animate-fade-right animate-delay-500 md:mr-12 md:w-1/2 lg:w-5/12">
               <div className="relative h-0 w-full pb-[56.25%]">
                 {" "}
                 {/* 16:9 Aspect Ratio */}
