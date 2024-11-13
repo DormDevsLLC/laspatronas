@@ -52,7 +52,7 @@ export default function About() {
                 and passion for Mexican cuisine.
               </p>
             </div>
-            <div className="order-1 w-full animate-fade-left animate-delay-700 md:order-2 md:ml-12 md:w-1/2">
+            <div className="order-1 w-full animate-fade-left animate-delay-500 md:order-2 md:ml-12 md:w-1/2">
               <div className="relative h-0 w-full pb-[56.25%]">
                 {" "}
                 {/* 16:9 Aspect Ratio */}
@@ -71,7 +71,7 @@ export default function About() {
         {/* Mission Section */}
         <section className="">
           <div className="flex flex-col-reverse items-center gap-6 sm:gap-8 md:flex-row">
-            <div className="w-full animate-fade-right animate-delay-700 md:mr-12 md:w-1/2">
+            <div className="w-full animate-fade-right animate-delay-500 md:mr-12 md:w-1/2">
               <div className="relative h-0 w-full pb-[56.25%]">
                 {" "}
                 {/* 16:9 Aspect Ratio */}

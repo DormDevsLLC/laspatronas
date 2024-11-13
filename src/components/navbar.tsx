@@ -7,13 +7,13 @@ import { Button } from "./ui/button";
 
 const enLinks = [
   { name: "About", href: "/en/about" },
-  { name: "Contact", href: "/en/contact" },
+  { name: "Menu", href: "/en/menu" },
   { name: "Order", href: "/en/order" },
 ];
 
 const esLinks = [
   { name: "Acerca", href: "/es/about" },
-  { name: "Contacto", href: "/es/contact" },
+  { name: "Menú", href: "/es/menu" },
   { name: "Orden", href: "/es/order" },
 ];
 

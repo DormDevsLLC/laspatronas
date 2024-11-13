@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import RestaurantMenu from "~/components/menu";
 import Navbar from "~/components/navbar";
+import OrderPage from "~/components/order";
 import { Button } from "~/components/ui/button";
 import {
   Card,
@@ -35,9 +35,13 @@ export default async function Home() {
     <>
       <Navbar language="en-US" />
       <div id="transition-page" className="h-full">
-        <h1 className="my-10 w-full animate-fade-down text-center text-2xl font-bold">
-          Place an Order!
+        <h1 className="mb-2 mt-10 w-full animate-fade-down text-center text-3xl font-bold">
+          Place an Order
         </h1>
+        <div className="mb-4 w-full animate-fade-up px-4 text-center text-lg">
+          We hope you're hungry. We look forward to serving you! Place an order
+          here.
+        </div>
         <div className="flex h-full w-full animate-fade-up items-center justify-center">
           <Tabs
             defaultValue="pickup"
@@ -53,7 +57,7 @@ export default async function Home() {
             </TabsList>
             <TabsContent value="pickup">
               <Card className="mb-12 h-full items-center py-8">
-                <RestaurantMenu language="en" />
+                <OrderPage language="en" />
               </Card>
             </TabsContent>
             <TabsContent value="delivery" className="h-full">

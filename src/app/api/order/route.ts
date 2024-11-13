@@ -25,7 +25,7 @@ export async function POST(request: Request) {
         ? "Your Order Confirmation"
         : "Confirmación de tu Pedido"
     } - Las Patronas UCF`;
-    const subjectEstablishment = `$${orderDetails.total} Order | Pickup ${orderDetails.pickupTime} | ${customerName}`;
+    const subjectEstablishment = `$${orderDetails.total} Order | Pickup ${orderDetails.pickupTime} | ${orderDetails.specialRequests && "SPECIAL REQUESTS | "} ${customerName}`;
 
     // Send email to customer
     await resend.emails.send({
