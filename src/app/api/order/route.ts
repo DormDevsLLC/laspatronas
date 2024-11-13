@@ -19,10 +19,6 @@ export async function POST(request: Request) {
       language,
     } = body;
 
-    // Log all of the data
-    console.log("Customer Name:", customerName);
-    console.log("Customer Email:", customerEmail);
-    console.log("Customer Phone:", customerPhone);
 
     // Prepare email content based on language
     const subjectCustomer =
@@ -30,7 +26,7 @@ export async function POST(request: Request) {
         ? "Your Order Confirmation"
         : "Confirmación de tu Pedido";
     const subjectEstablishment =
-      language === "en" ? "New Order Received" : "Nuevo Pedido Recibido";
+      `${orderDetails}`
 
     // Send email to customer
     await resend.emails.send({

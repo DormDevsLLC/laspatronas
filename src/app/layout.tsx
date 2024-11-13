@@ -5,7 +5,6 @@ import { type Metadata } from "next";
 
 import Footer from "~/components/footer";
 import { Toaster } from "~/components/ui/toaster";
-import { TRPCReactProvider } from "~/trpc/react";
 
 export const metadata: Metadata = {
   title: "Las Patronas UCF",
@@ -31,13 +30,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${GeistSans.variable} bg-lime-100`}>
       <body>
-        <TRPCReactProvider>
-          <main className="h-screen overflow-x-hidden bg-lime-100">
-            <div className="min-h-screen">{children}</div>
-            <Footer />
-          </main>
-          <Toaster />
-        </TRPCReactProvider>
+        <main className="h-screen overflow-x-hidden bg-lime-100">
+          <div className="min-h-screen">{children}</div>
+          <Footer />
+        </main>
+        <Toaster />
       </body>
     </html>
   );
