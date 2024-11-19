@@ -1,10 +1,10 @@
 // /app/api/order/route.ts
 
+import dotenv from "dotenv";
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { EmailTemplateCustomer } from "~/components/email-customer";
 import { EmailTemplateEstablishment } from "~/components/email-establishment";
-import dotenv from 'dotenv';
 dotenv.config();
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -27,7 +27,7 @@ export async function POST(request: Request) {
         ? "Your Order Confirmation"
         : "Confirmación de tu Pedido"
     } - Las Patronas UCF`;
-    const subjectEstablishment = `$${orderDetails.total} Order | Pickup ${orderDetails.pickupTime} | ${orderDetails.specialRequests && "SPECIAL REQUESTS | "} ${customerName}`;
+    const subjectEstablishment = `$${orderDetails.total} Order | Pickup ${formatTime(orderDetails.pickupTime)} | ${orderDetails.specialRequests && "SPECIAL REQUESTS | "} ${customerName}`;
 
     // Send email to customer
     await resend.emails.send({
@@ -59,4 +59,12 @@ export async function POST(request: Request) {
       { status: 500 },
     );
   }
+}
+
+// Helper function to format time from 24-hour to 12-hour format
+function formatTime(time: string) {
+  const [hours, minutes] = time.split(":").map(Number);
+  const period = hours! >= 12 ? "PM" : "AM";
+  const formattedHours = hours! % 12 || 12;
+  return `${formattedHours}:${minutes!.toString().padStart(2, "0")} ${period}`;
 }
