@@ -56,7 +56,7 @@ export default async function Home() {
               </TabsTrigger>
             </TabsList>
             <TabsContent value="pickup">
-              <Card className="mb-12 h-full items-center py-8">
+              <Card className="h-full items-center">
                 <OrderPage language="es" />
               </Card>
             </TabsContent>

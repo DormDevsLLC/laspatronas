@@ -519,376 +519,388 @@ export default function OrderPage({ language }: RestaurantMenuProps) {
 
   // Main component rendering
   return (
-    <div className="container mx-auto p-4 md:p-12">
-      {/* Header */}
-      <h1 className="mb-6 text-3xl font-bold">
-        {language === "en" ? "Our Menu" : "Nuestro Menú"}
-      </h1>
+    <div className="rounded-xl border-8 border-[#a80c94] bg-[#a80c94]">
+      <div className="container mx-auto rounded-xl border-8 border-[#200434] bg-[#f0ccf4] p-4 md:p-12">
+        {/* Header */}
+        <h1 className="mb-6 text-3xl font-bold">
+          {language === "en" ? "Our Menu" : "Nuestro Menú"}
+        </h1>
 
-      {/* Display message if the restaurant is closed */}
-      {!restaurantIsOpen && (
-        <div className="mb-4 font-semibold text-red-500">
-          {language === "en"
-            ? "We are currently closed. You cannot place orders at this time. Check back during our regular business hours!"
-            : "Actualmente estamos cerrados. No puedes hacer pedidos en este momento. ¡Vuelve durante nuestro horario comercial habitual!"}
-        </div>
-      )}
-
-      {/* Search bar */}
-      <div className="mb-4 flex items-center space-x-2">
-        <Search className="h-5 w-5 text-gray-500" />
-        <Input
-          type="text"
-          placeholder={
-            language === "en" ? "Search menu..." : "Buscar en el menú..."
-          }
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full"
-        />
-      </div>
-
-      {/* Navigation for categories and cart */}
-      <nav className="sticky top-0 z-10 mb-8 border-b bg-background py-4">
-        {/* Mobile Layout */}
-        <div className="flex justify-between md:hidden">
-          <div className="flex flex-nowrap items-center space-x-2 overflow-x-auto">
-            {categories.map((category) => (
-              <Button
-                key={category}
-                variant="outline"
-                size={"sm"}
-                onClick={() => scrollToSection(category)}
-                className="flex-shrink-0 text-sm"
-              >
-                {category}
-              </Button>
-            ))}
+        {/* Display message if the restaurant is closed */}
+        {!restaurantIsOpen && (
+          <div className="mb-4 font-semibold text-red-500">
+            {language === "en"
+              ? "We are currently closed. You cannot place orders at this time. Check back during our regular business hours!"
+              : "Actualmente estamos cerrados. No puedes hacer pedidos en este momento. ¡Vuelve durante nuestro horario comercial habitual!"}
           </div>
-          <Button onClick={scrollToCart} className="ml-2 flex-shrink-0">
-            {language === "en" ? "Checkout" : "Pagar"}
-          </Button>
+        )}
+
+        {/* Search bar */}
+        <div className="mb-4 flex items-center space-x-2">
+          <Search className="h-5 w-5 text-gray-500" />
+          <Input
+            type="text"
+            placeholder={
+              language === "en" ? "Search menu..." : "Buscar en el menú..."
+            }
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full border-gray-800"
+          />
         </div>
-        {/* Desktop Layout */}
-        <div className="hidden items-center justify-between md:flex md:flex-wrap">
-          <div className="mb-2 flex flex-wrap gap-2">
-            {categories.map((category, index) => (
-              <Button
-                key={category}
-                variant="outline"
-                onClick={() => scrollToSection(category)}
-                className="animate-fade-right"
-                style={{
-                  animationDelay: `${index * 75 + 100}ms`,
-                }}
-              >
-                {category}
-              </Button>
-            ))}
-            <Button
-              onClick={scrollToCart}
-              style={{
-                animationDelay: `${categories.length * 75 + 100}ms`,
-              }}
-              className="animate-fade-right"
-            >
+
+        {/* Navigation for categories and cart */}
+        <nav className="sticky top-0 z-10 mb-8 bg-[#f0ccf4] py-4">
+          {/* Mobile Layout */}
+          <div className="flex justify-between md:hidden">
+            <div className="flex flex-nowrap items-center space-x-2 overflow-x-auto">
+              {categories.map((category) => (
+                <Button
+                  key={category}
+                  variant="outline"
+                  size={"sm"}
+                  onClick={() => scrollToSection(category)}
+                  className="flex-shrink-0 bg-[#f8cca4] text-sm"
+                >
+                  {category}
+                </Button>
+              ))}
+            </div>
+            <Button onClick={scrollToCart} className="ml-2 flex-shrink-0">
               {language === "en" ? "Checkout" : "Pagar"}
             </Button>
           </div>
-        </div>
-      </nav>
-
-      {/* Menu sections */}
-      {categories.map((category) => (
-        <section
-          key={category}
-          ref={(el) => registerSectionRef(category, el)}
-          className="mb-12 scroll-mt-20"
-        >
-          <h2
-            className="mb-4 text-2xl font-bold"
-            id={`section-${category.toLowerCase().replace(" ", "-")}`}
-          >
-            {category}
-          </h2>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {filteredItems
-              .filter((item) => item.category === category)
-              .map((item, index) => (
-                <Card
-                  key={item.id}
-                  className="animate-fade-right"
+          {/* Desktop Layout */}
+          <div className="hidden items-center justify-between md:flex md:flex-wrap">
+            <div className="mb-2 flex flex-wrap gap-2">
+              {categories.map((category, index) => (
+                <Button
+                  key={category}
+                  variant="outline"
+                  onClick={() => scrollToSection(category)}
+                  className="animate-fade-right border-none bg-[#f8cca4]"
                   style={{
-                    animationDelay: `${index * 150 + 200}ms`,
+                    animationDelay: `${index * 75 + 100}ms`,
                   }}
                 >
-                  <CardHeader>
-                    <CardTitle>{item.name}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p>{item.description}</p>
-                    <p className="mt-2 font-bold">${item.price.toFixed(2)}</p>
-                  </CardContent>
-                  <CardFooter>
+                  {category}
+                </Button>
+              ))}
+              <Button
+                onClick={scrollToCart}
+                style={{
+                  animationDelay: `${categories.length * 75 + 100}ms`,
+                }}
+                className="animate-fade-right bg-[#a80c94] text-white"
+              >
+                {language === "en" ? "Checkout" : "Pagar"}
+              </Button>
+            </div>
+          </div>
+        </nav>
+
+        {/* Menu sections */}
+        {categories.map((category) => (
+          <section
+            key={category}
+            ref={(el) => registerSectionRef(category, el)}
+            className="mb-12 scroll-mt-20"
+          >
+            <h2
+              className="mb-4 text-2xl font-bold"
+              id={`section-${category.toLowerCase().replace(" ", "-")}`}
+            >
+              {category}
+            </h2>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {filteredItems
+                .filter((item) => item.category === category)
+                .map((item, index) => (
+                  <Card
+                    key={item.id}
+                    className="flex animate-fade-right flex-col justify-between border-none bg-[#f8cca4]"
+                    style={{
+                      animationDelay: `${index * 150 + 200}ms`,
+                    }}
+                  >
+                    <CardHeader>
+                      <CardTitle>{item.name}</CardTitle>
+                    </CardHeader>
+                    <CardContent className="flex-grow">
+                      <p>{item.description}</p>
+                    </CardContent>
+                    <CardFooter className="mt-auto">
+                      <div className="flex w-full items-center justify-between">
+                        <p className="mt-2 font-bold">
+                          ${item.price.toFixed(2)}
+                        </p>
+                        <Button
+                          onClick={() => addToCart(item)}
+                          disabled={!restaurantIsOpen}
+                          className="bg-[#a80c94] text-white"
+                        >
+                          {restaurantIsOpen
+                            ? language === "en"
+                              ? "Add to Cart"
+                              : "Añadir al Carrito"
+                            : language === "en"
+                              ? "Closed"
+                              : "Cerrado"}
+                        </Button>
+                      </div>
+                    </CardFooter>
+                  </Card>
+                ))}
+            </div>
+          </section>
+        ))}
+
+        {/* Cart section */}
+        <div className="mt-8" ref={cartRef}>
+          <h2 className="mb-4 text-2xl font-bold">
+            {language === "en" ? "Your Cart" : "Tu Carrito"}
+          </h2>
+          {cart.length === 0 ? (
+            <p>
+              {language === "en"
+                ? "Your cart is empty"
+                : "Tu carrito está vacío"}
+            </p>
+          ) : (
+            <div>
+              {/* List of items in the cart */}
+              {cart.map((item) => (
+                <div
+                  key={item.id}
+                  className="mb-2 flex items-center justify-between"
+                >
+                  <div>
+                    <span>
+                      {item.name} x {item.quantity}
+                    </span>
+                    <span className="ml-2 text-sm text-gray-500">
+                      (${(item.price * item.quantity).toFixed(2)})
+                    </span>
+                  </div>
+                  <div className="flex items-center space-x-2">
                     <Button
-                      onClick={() => addToCart(item)}
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => decreaseQuantity(item.id)}
                       disabled={!restaurantIsOpen}
                     >
-                      {restaurantIsOpen
-                        ? language === "en"
-                          ? "Add to Cart"
-                          : "Añadir al Carrito"
-                        : language === "en"
-                          ? "Closed"
-                          : "Cerrado"}
+                      <Minus className="h-4 w-4 text-gray-500" />
                     </Button>
-                  </CardFooter>
-                </Card>
-              ))}
-          </div>
-        </section>
-      ))}
-
-      {/* Cart section */}
-      <div className="mt-8" ref={cartRef}>
-        <h2 className="mb-4 text-2xl font-bold">
-          {language === "en" ? "Your Cart" : "Tu Carrito"}
-        </h2>
-        {cart.length === 0 ? (
-          <p>
-            {language === "en" ? "Your cart is empty" : "Tu carrito está vacío"}
-          </p>
-        ) : (
-          <div>
-            {/* List of items in the cart */}
-            {cart.map((item) => (
-              <div
-                key={item.id}
-                className="mb-2 flex items-center justify-between"
-              >
-                <div>
-                  <span>
-                    {item.name} x {item.quantity}
-                  </span>
-                  <span className="ml-2 text-sm text-gray-500">
-                    (${(item.price * item.quantity).toFixed(2)})
-                  </span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => decreaseQuantity(item.id)}
-                    disabled={!restaurantIsOpen}
-                  >
-                    <Minus className="h-4 w-4 text-gray-500" />
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => removeFromCart(item.id)}
-                    disabled={!restaurantIsOpen}
-                  >
-                    <Trash className="h-4 w-4 text-red-500" />
-                  </Button>
-                </div>
-              </div>
-            ))}
-
-            {/* Customer Information Form */}
-            <div className="mt-6 space-y-4">
-              {/* Name Field */}
-              <div>
-                <Label htmlFor="name">
-                  {language === "en" ? "Name" : "Nombre"}
-                </Label>
-                <Input
-                  id="name"
-                  type="text"
-                  value={customerName}
-                  onChange={(e) => setCustomerName(e.target.value)}
-                  placeholder={language === "en" ? "Your Name" : "Tu Nombre"}
-                  required
-                />
-              </div>
-
-              {/* Phone Number Field */}
-              <div>
-                <Label htmlFor="phone">
-                  {language === "en" ? "Phone Number" : "Número de Teléfono"}
-                </Label>
-                <Input
-                  id="phone"
-                  type="tel"
-                  value={customerPhone}
-                  onChange={(e) => setCustomerPhone(e.target.value)}
-                  placeholder={
-                    language === "en"
-                      ? "Your Phone Number"
-                      : "Tu Número de Teléfono"
-                  }
-                  required
-                />
-                {phoneError && (
-                  <p className="text-sm text-red-500">{phoneError}</p>
-                )}
-              </div>
-
-              {/* Email Field */}
-              <div>
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  value={customerEmail}
-                  onChange={(e) => setCustomerEmail(e.target.value)}
-                  placeholder={
-                    language === "en" ? "Your Email" : "Tu Correo Electrónico"
-                  }
-                  required
-                />
-                {emailError && (
-                  <p className="text-sm text-red-500">{emailError}</p>
-                )}
-              </div>
-
-              {/* Pickup Time Selection */}
-              <div>
-                <Label>
-                  {language === "en" ? "Pickup Time" : "Hora de Recogida"}
-                </Label>
-                <div className="flex items-center space-x-4">
-                  {/* ASAP Option */}
-                  <label className="flex items-center">
-                    <input
-                      type="radio"
-                      name="pickupTimeOption"
-                      value="ASAP"
-                      checked={pickupTimeOption === "ASAP"}
-                      onChange={(e) => setPickupTimeOption(e.target.value)}
-                      className="mr-2"
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => removeFromCart(item.id)}
                       disabled={!restaurantIsOpen}
-                    />
-                    {language === "en" ? "ASAP" : "Lo Antes Posible"}
-                  </label>
-                  {/* Specify Time Option */}
-                  <label className="flex items-center">
-                    <input
-                      type="radio"
-                      name="pickupTimeOption"
-                      value="Later"
-                      checked={pickupTimeOption === "Later"}
-                      onChange={(e) => setPickupTimeOption(e.target.value)}
-                      className="mr-2"
-                      disabled={!restaurantIsOpen}
-                    />
-                    {language === "en" ? "Specify Time" : "Especificar Hora"}
-                  </label>
-                </div>
-                {/* Time Input Field */}
-                {pickupTimeOption === "Later" && (
-                  <div className="mt-2">
-                    <Input
-                      type="time"
-                      value={pickupTime}
-                      onChange={(e) => setPickupTime(e.target.value)}
-                      min={getMinPickupTime() || "00:00"}
-                      max={getMaxPickupTime() || "23:59"}
-                      disabled={!restaurantIsOpen}
-                    />
-                    {timeError && (
-                      <p className="text-sm text-red-500">{timeError}</p>
-                    )}
+                    >
+                      <Trash className="h-4 w-4 text-red-500" />
+                    </Button>
                   </div>
-                )}
+                </div>
+              ))}
+
+              {/* Customer Information Form */}
+              <div className="mt-6 space-y-4">
+                {/* Name Field */}
+                <div>
+                  <Label htmlFor="name">
+                    {language === "en" ? "Name" : "Nombre"}
+                  </Label>
+                  <Input
+                    id="name"
+                    type="text"
+                    value={customerName}
+                    onChange={(e) => setCustomerName(e.target.value)}
+                    placeholder={language === "en" ? "Your Name" : "Tu Nombre"}
+                    className="border-none bg-white"
+                    required
+                  />
+                </div>
+
+                {/* Phone Number Field */}
+                <div>
+                  <Label htmlFor="phone">
+                    {language === "en" ? "Phone Number" : "Número de Teléfono"}
+                  </Label>
+                  <Input
+                    id="phone"
+                    type="tel"
+                    value={customerPhone}
+                    onChange={(e) => setCustomerPhone(e.target.value)}
+                    placeholder={
+                      language === "en"
+                        ? "Your Phone Number"
+                        : "Tu Número de Teléfono"
+                    }
+                    required
+                    className="border-none bg-white"
+                  />
+                  {phoneError && (
+                    <p className="text-sm text-red-500">{phoneError}</p>
+                  )}
+                </div>
+
+                {/* Email Field */}
+                <div>
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    value={customerEmail}
+                    onChange={(e) => setCustomerEmail(e.target.value)}
+                    placeholder={
+                      language === "en" ? "Your Email" : "Tu Correo Electrónico"
+                    }
+                    required
+                    className="border-none bg-white"
+                  />
+                  {emailError && (
+                    <p className="text-sm text-red-500">{emailError}</p>
+                  )}
+                </div>
+
+                {/* Pickup Time Selection */}
+                <div>
+                  <Label>
+                    {language === "en" ? "Pickup Time" : "Hora de Recogida"}
+                  </Label>
+                  <div className="flex items-center space-x-4">
+                    {/* ASAP Option */}
+                    <label className="flex items-center">
+                      <input
+                        type="radio"
+                        name="pickupTimeOption"
+                        value="ASAP"
+                        checked={pickupTimeOption === "ASAP"}
+                        onChange={(e) => setPickupTimeOption(e.target.value)}
+                        className="mr-2"
+                        disabled={!restaurantIsOpen}
+                      />
+                      {language === "en" ? "ASAP" : "Lo Antes Posible"}
+                    </label>
+                    {/* Specify Time Option */}
+                    <label className="flex items-center">
+                      <input
+                        type="radio"
+                        name="pickupTimeOption"
+                        value="Later"
+                        checked={pickupTimeOption === "Later"}
+                        onChange={(e) => setPickupTimeOption(e.target.value)}
+                        className="mr-2"
+                        disabled={!restaurantIsOpen}
+                      />
+                      {language === "en" ? "Specify Time" : "Especificar Hora"}
+                    </label>
+                  </div>
+                  {/* Time Input Field */}
+                  {pickupTimeOption === "Later" && (
+                    <div className="mt-2">
+                      <Input
+                        type="time"
+                        value={pickupTime}
+                        onChange={(e) => setPickupTime(e.target.value)}
+                        min={getMinPickupTime() || "00:00"}
+                        max={getMaxPickupTime() || "23:59"}
+                        disabled={!restaurantIsOpen}
+                      />
+                      {timeError && (
+                        <p className="text-sm text-red-500">{timeError}</p>
+                      )}
+                    </div>
+                  )}
+                </div>
+
+                {/* Special Requests Field */}
+                <div>
+                  <Label htmlFor="specialRequests">
+                    {language === "en"
+                      ? "Special Requests / Notes"
+                      : "Peticiones Especiales / Notas"}
+                  </Label>
+                  <textarea
+                    id="specialRequests"
+                    value={specialRequests}
+                    onChange={(e) => setSpecialRequests(e.target.value)}
+                    placeholder={
+                      language === "en"
+                        ? "Any substitutions, removals, food allergies, etc."
+                        : "Cualquier sustitución, eliminación, alergias alimentarias, etc."
+                    }
+                    className="w-full rounded border p-2"
+                  />
+                </div>
               </div>
 
-              {/* Special Requests Field */}
-              <div>
-                <Label htmlFor="specialRequests">
-                  {language === "en"
-                    ? "Special Requests / Notes"
-                    : "Peticiones Especiales / Notas"}
-                </Label>
-                <textarea
-                  id="specialRequests"
-                  value={specialRequests}
-                  onChange={(e) => setSpecialRequests(e.target.value)}
-                  placeholder={
-                    language === "en"
-                      ? "Any substitutions, removals, food allergies, etc."
-                      : "Cualquier sustitución, eliminación, alergias alimentarias, etc."
-                  }
-                  className="w-full rounded border p-2"
-                />
+              {/* Order Summary */}
+              <div className="mt-6">
+                <div className="flex justify-between">
+                  <span>{language === "en" ? "Subtotal:" : "Subtotal:"}</span>
+                  <span>
+                    $
+                    {cart
+                      .reduce(
+                        (total, item) => total + item.price * item.quantity,
+                        0,
+                      )
+                      .toFixed(2)}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span>
+                    {language === "en" ? "Sales Tax (6%):" : "Impuesto (6%):"}
+                  </span>
+                  <span>
+                    $
+                    {(
+                      cart.reduce(
+                        (total, item) => total + item.price * item.quantity,
+                        0,
+                      ) * 0.06
+                    ).toFixed(2)}
+                  </span>
+                </div>
+                <div className="mt-2 flex justify-between font-bold">
+                  <span>{language === "en" ? "Total:" : "Total:"}</span>
+                  <span>
+                    $
+                    {(
+                      cart.reduce(
+                        (total, item) => total + item.price * item.quantity,
+                        0,
+                      ) * 1.06
+                    ).toFixed(2)}
+                  </span>
+                </div>
               </div>
+
+              {/* Disclaimer */}
+              <p className="mt-4 text-sm text-gray-500">
+                {language === "en"
+                  ? "Please note: Purchases for pickup orders must be made in-store."
+                  : "Por favor, ten en cuenta: Las compras para pedidos de recogida deben hacerse en la tienda."}
+              </p>
+
+              {/* Checkout Button */}
+              <Button
+                className="mt-6 w-full bg-[#a80c94] text-white"
+                onClick={handleCheckout}
+                disabled={!isFormValid || !restaurantIsOpen}
+              >
+                {restaurantIsOpen
+                  ? language === "en"
+                    ? "Checkout"
+                    : "Pagar"
+                  : language === "en"
+                    ? "Closed"
+                    : "Cerrado"}
+              </Button>
             </div>
-
-            {/* Order Summary */}
-            <div className="mt-6">
-              <div className="flex justify-between">
-                <span>{language === "en" ? "Subtotal:" : "Subtotal:"}</span>
-                <span>
-                  $
-                  {cart
-                    .reduce(
-                      (total, item) => total + item.price * item.quantity,
-                      0,
-                    )
-                    .toFixed(2)}
-                </span>
-              </div>
-              <div className="flex justify-between">
-                <span>
-                  {language === "en" ? "Sales Tax (6%):" : "Impuesto (6%):"}
-                </span>
-                <span>
-                  $
-                  {(
-                    cart.reduce(
-                      (total, item) => total + item.price * item.quantity,
-                      0,
-                    ) * 0.06
-                  ).toFixed(2)}
-                </span>
-              </div>
-              <div className="mt-2 flex justify-between font-bold">
-                <span>{language === "en" ? "Total:" : "Total:"}</span>
-                <span>
-                  $
-                  {(
-                    cart.reduce(
-                      (total, item) => total + item.price * item.quantity,
-                      0,
-                    ) * 1.06
-                  ).toFixed(2)}
-                </span>
-              </div>
-            </div>
-
-            {/* Disclaimer */}
-            <p className="mt-4 text-sm text-gray-500">
-              {language === "en"
-                ? "Please note: Purchases for pickup orders must be made in-store."
-                : "Por favor, ten en cuenta: Las compras para pedidos de recogida deben hacerse en la tienda."}
-            </p>
-
-            {/* Checkout Button */}
-            <Button
-              className="mt-6 w-full"
-              onClick={handleCheckout}
-              disabled={!isFormValid || !restaurantIsOpen}
-            >
-              {restaurantIsOpen
-                ? language === "en"
-                  ? "Checkout"
-                  : "Pagar"
-                : language === "en"
-                  ? "Closed"
-                  : "Cerrado"}
-            </Button>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );
