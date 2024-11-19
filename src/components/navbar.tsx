@@ -4,6 +4,16 @@ import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import TransitionLink from "./transition-link";
 import { Button } from "./ui/button";
+import { GiHamburgerMenu } from "react-icons/gi";
+
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "~/components/ui/sheet";
 
 const enLinks = [
   { name: "About", href: "/en/about" },
@@ -82,10 +92,49 @@ export default function Navbar({
       }
     }
   }
+  const [open, setOpen] = useState<boolean>(false);
   return (
     <>
       <nav className="flex h-16 w-screen items-center justify-between overflow-hidden bg-[#1c0230] p-4 text-white transition-all duration-300">
-        <div className="items-center justify-center">
+        <div className="sm:block md:hidden">
+
+          // Sheet for mobile 
+          <TransitionLink href={"/"} className="ml-2 flex">
+            <Sheet>
+              <SheetTrigger>
+                <GiHamburgerMenu size={40} />
+              </SheetTrigger>
+              <SheetContent className="roundedw-[400px] bg-[#1c0230] p-4 sm:w-[540px]">
+                <SheetHeader>
+                  <Image
+                    src="/logo.png"
+                    alt="Las Patronas UCF"
+                    width={500}
+                    height={300}
+                  />
+                  <div className="relative my-4">
+                    <div className="absolute inset-0 flex items-center">
+                      <div className="w-full border-t border-white"></div>
+                    </div>
+                  </div>
+                  <div className="text-2xl text-white sm:flex">Espanol</div>
+                  <div className="w-full border-t border-white"></div>
+                  <div className="text-2xl text-white sm:flex">About</div>
+                  <div className="w-full border-t border-white"></div>
+                  <div className="text-2xl text-white sm:flex">Menu</div>
+                  <div className="w-full border-t border-white"></div>
+                  <div className="text-2xl text-white sm:flex">Order</div>
+                  <div className="w-full border-t border-white"></div>
+                  <SheetTitle></SheetTitle>
+                  <SheetDescription></SheetDescription>
+                </SheetHeader>
+                <button className="absolute right-5 top-2 text-white">X</button>
+              </SheetContent>
+            </Sheet>
+          </TransitionLink>
+        </div>
+
+        <div className="hidden items-center justify-center sm:flex">
           <TransitionLink href={"/"} className="ml-2 flex">
             <div className="flex items-center justify-center">
               <Image
@@ -94,14 +143,14 @@ export default function Navbar({
                 width={50}
                 height={50}
               />
-              <div className="text-xl">Las Patronas UCF</div>
+              <div className="hidden text-xl sm:flex">Las Patronas UCF</div>
             </div>
           </TransitionLink>
         </div>
         <div className="flex items-center space-x-8 pr-8 transition-all duration-300">
           <div
             onClick={() => changeLanguage()}
-            className="text-xl transition-all duration-300 hover:cursor-pointer hover:text-purple-100"
+            className="hidden text-xl transition-all duration-300 hover:cursor-pointer hover:text-purple-100 md:flex"
           >
             {lang.includes("en") ? "Español" : "English"}
           </div>
@@ -109,14 +158,14 @@ export default function Navbar({
             <TransitionLink href={link.href} key={link.href}>
               {link.href === "/es/order" || link.href === "/en/order" ? (
                 <Button
-                  className="bg-[#a40c96] text-xl transition-all duration-300 hover:bg-[#750B6B]"
+                  className="hidden bg-[#a40c96] text-xl transition-all duration-300 hover:bg-[#750B6B] sm:flex"
                   size={"lg"}
                 >
                   {link.name}
                 </Button>
               ) : (
                 <div
-                  className={`transition-all duration-300 hover:text-purple-100 ${link.href == currentPath ? "text-2xl text-purple-200" : "text-xl"}`}
+                  className={`transition-all duration-300 hover:text-purple-100 ${link.href == currentPath ? "text-2xl text-purple-200" : "hidden text-xl md:flex"}`}
                 >
                   {link.name}
                 </div>

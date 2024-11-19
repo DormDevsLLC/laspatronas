@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { EmailTemplateCustomer } from "~/components/email-customer";
 import { EmailTemplateEstablishment } from "~/components/email-establishment";
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend("re_123456789");
 
 export async function POST(request: Request) {
   try {
