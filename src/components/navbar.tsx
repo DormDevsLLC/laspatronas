@@ -98,7 +98,6 @@ export default function Navbar({
       <nav className="flex h-16 w-screen items-center justify-between overflow-hidden bg-[#1c0230] p-4 text-white transition-all duration-300">
         <div className="sm:block md:hidden">
 
-          // Sheet for mobile 
           <TransitionLink href={"/"} className="ml-2 flex">
             <Sheet>
               <SheetTrigger>
