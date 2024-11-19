@@ -61,34 +61,38 @@ export default async function Home() {
               </Card>
             </TabsContent>
             <TabsContent value="delivery" className="h-full">
-              <Card className="h-full">
-                <CardHeader className="text-center">
-                  <CardTitle className="text-3xl font-bold">Delivery</CardTitle>
-                  <CardDescription className="text-lg">
-                    Place your order for delivery via DoorDash or UberEats!
-                  </CardDescription>
-                </CardHeader>
-                <CardFooter className="flex w-full items-center justify-center space-x-8">
-                  <Button size={"lg"}>
-                    <Link
-                      href={
-                        "https://www.doordash.com/store/las-patronas-mexican-food-orlando-24954132/?srsltid=AfmBOoonDalF7-BZDDohIf7SbGxe4cotEoJiY844t61zlxawHHke-CqE"
-                      }
-                    >
-                      Door Dash
-                    </Link>
-                  </Button>
-                  <Button size={"lg"}>
-                    <Link
-                      href={
-                        "https://www.ubereats.com/store/las-patronas-restaurant/4QP_I5fkVmW2npJmd59Zjw?srsltid=AfmBOooTZsg5OdYRdQ7gzRqF8Agr3vBf_DEHeyYIZ7y4VjPAL2LS-0zg"
-                      }
-                    >
-                      Uber Eats
-                    </Link>
-                  </Button>
-                </CardFooter>
-              </Card>
+              <div className="rounded-xl border-8 border-[#a80c94] bg-[#a80c94]">
+                <Card className="h-full rounded-xl border-8 border-[#200434] bg-[#f0ccf4]">
+                  <CardHeader className="text-center">
+                    <CardTitle className="text-3xl font-bold">
+                      Delivery
+                    </CardTitle>
+                    <CardDescription className="text-lg">
+                      Place your order for delivery via DoorDash or UberEats!
+                    </CardDescription>
+                  </CardHeader>
+                  <CardFooter className="flex w-full items-center justify-center space-x-8">
+                    <Button size={"lg"} className="bg-[#a80c94] text-white">
+                      <Link
+                        href={
+                          "https://www.doordash.com/store/las-patronas-mexican-food-orlando-24954132/?srsltid=AfmBOoonDalF7-BZDDohIf7SbGxe4cotEoJiY844t61zlxawHHke-CqE"
+                        }
+                      >
+                        Door Dash
+                      </Link>
+                    </Button>
+                    <Button size={"lg"} className="bg-[#a80c94] text-white">
+                      <Link
+                        href={
+                          "https://www.ubereats.com/store/las-patronas-restaurant/4QP_I5fkVmW2npJmd59Zjw?srsltid=AfmBOooTZsg5OdYRdQ7gzRqF8Agr3vBf_DEHeyYIZ7y4VjPAL2LS-0zg"
+                        }
+                      >
+                        Uber Eats
+                      </Link>
+                    </Button>
+                  </CardFooter>
+                </Card>
+              </div>
             </TabsContent>
           </Tabs>
         </div>

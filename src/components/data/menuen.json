@@ -1,0 +1,528 @@
+[
+    {
+      "id": "1",
+      "name": "Beef & Cheese or Chicken & Cheese Nachos",
+      "description": "Buy 1, Get 1 Free",
+      "price": 13.74,
+      "category": "Appetizer"
+    },
+    {
+      "id": "2",
+      "name": "Las Patronas Nachos",
+      "description": "Steak, grilled chicken, chorizo beans, pepper, onions, cheese, lettuce, and sour cream. Buy 1, Get 1 Free",
+      "price": 16.24,
+      "category": "Appetizer"
+    },
+    {
+      "id": "3",
+      "name": "Camarones Ala Diabla",
+      "description": "Shrimp sautéed in extra spicy salsa. Served with Spanish rice and sour cream salad.",
+      "price": 23.74,
+      "category": "Seafood Specialties"
+    },
+    {
+      "id": "4",
+      "name": "Filete de Pescado",
+      "description": "Fish fillet served grilled. Served with Spanish rice and sour cream salad.",
+      "price": 21.24,
+      "category": "Seafood Specialties"
+    },
+    {
+      "id": "5",
+      "name": "Camarones Mexicana",
+      "description": "Shrimp sautéed in spicy tomato salsa. Served with Spanish rice and sour cream salad.",
+      "price": 23.74,
+      "category": "Seafood Specialties"
+    },
+    {
+      "id": "6",
+      "name": "Camarones Rancheros",
+      "description": "Shrimp sautéed with mild tomato salsa. Served with Spanish rice and sour cream salad.",
+      "price": 23.74,
+      "category": "Seafood Specialties"
+    },
+    {
+      "id": "7",
+      "name": "Camarones Ala Mojo de Ajo",
+      "description": "Shrimp sautéed in garlic oil. Served with Spanish rice and sour cream salad.",
+      "price": 23.74,
+      "category": "Seafood Specialties"
+    },
+    {
+      "id": "8",
+      "name": "Cocktail de Camaron",
+      "description": "Chilled shrimp served in a homemade sauce. Served with Spanish rice and sour cream salad.",
+      "price": 21.24,
+      "category": "Seafood Specialties"
+    },
+    {
+      "id": "9",
+      "name": "Caldo de Mariscos",
+      "description": "Seafood medley soup prepared with shells on. Served with Spanish rice and sour cream salad.",
+      "price": 26.24,
+      "category": "Seafood Specialties"
+    },
+    {
+      "id": "10",
+      "name": "Carne Asada",
+      "description": "Thin sliced grilled steak with grilled onions. Served with rice, beans, pico de gallo, sour cream salad, and tortillas.",
+      "price": 22.49,
+      "category": "Steak Specialties"
+    },
+    {
+      "id": "11",
+      "name": "Bistec a la Mexicana",
+      "description": "Thinly sliced steak grilled with onions, tomatoes, and spicy jalapeño peppers. Served with rice, beans, pico de gallo, sour cream salad, and tortillas.",
+      "price": 22.49,
+      "category": "Steak Specialties"
+    },
+    {
+      "id": "12",
+      "name": "Bistec Salsa Verde",
+      "description": "Thinly sliced steak sautéed in green tomatillo salsa. Served with rice, beans, pico de gallo, sour cream salad, and tortillas.",
+      "price": 22.49,
+      "category": "Steak Specialties"
+    },
+    {
+      "id": "13",
+      "name": "Bistec Ranchero",
+      "description": "Thin-sliced grilled steak sautéed in mild salsa. Served with rice, beans, pico de gallo, sour cream salad, and tortillas.",
+      "price": 22.49,
+      "category": "Steak Specialties"
+    },
+    {
+      "id": "14",
+      "name": "Bistec a la Diabla",
+      "description": "Thinly sliced steak sautéed in spicy chipotle salsa. Served with rice, beans, pico de gallo, sour cream salad, and tortillas.",
+      "price": 22.49,
+      "category": "Steak Specialties"
+    },
+    {
+      "id": "15",
+      "name": "Pollo Asado",
+      "description": "Grilled chicken breast served with rice and beans.",
+      "price": 21.24,
+      "category": "Chicken Specialties"
+    },
+    {
+      "id": "16",
+      "name": "Pollo Empanizado",
+      "description": "Breaded chicken served with rice and beans.",
+      "price": 21.24,
+      "category": "Chicken Specialties"
+    },
+    {
+      "id": "17",
+      "name": "Pollo Loco",
+      "description": "Grilled chicken breast topped with your choice of salsa verde, ranchero salsa, or salsa diabla. Served with rice and beans.",
+      "price": 21.24,
+      "category": "Chicken Specialties"
+    },
+    {
+      "id": "18",
+      "name": "Pollo Chorizo",
+      "description": "Grilled chicken breast topped with chorizo sausage and cheese dip. Served with rice and beans.",
+      "price": 22.49,
+      "category": "Chicken Specialties"
+    },
+    {
+      "id": "19",
+      "name": "Pollo Salsa Champiñon",
+      "description": "Grilled chicken breast topped with mushrooms and cheese. Served with Spanish rice and broccoli.",
+      "price": 22.49,
+      "category": "Chicken Specialties"
+    },
+    {
+      "id": "20",
+      "name": "Pollo Mexicana",
+      "description": "Fajita chicken sautéed with spicy jalapeños and onions. Served with rice and refried beans.",
+      "price": 21.24,
+      "category": "Chicken Specialties"
+    },
+    {
+      "id": "21",
+      "name": "Classic Burrito",
+      "description": "Flour tortilla with meat of your choice, peppers, grilled onions, rice, and beans.",
+      "price": 17.49,
+      "category": "Mexican Tradicional Antojitos"
+    },
+    {
+      "id": "22",
+      "name": "Quesadillas",
+      "description": "Flour tortilla with the meat of your choice, peppers, and onions accompanied by rice and beans.",
+      "price": 17.49,
+      "category": "Mexican Tradicional Antojitos"
+    },
+    {
+      "id": "23",
+      "name": "Chimichangas (2 pcs)",
+      "description": "Two pulled chicken or pulled beef chimichangas cooked soft or crispy. Served with Spanish rice and sour cream salad.",
+      "price": 17.49,
+      "category": "Mexican Tradicional Antojitos"
+    },
+    {
+      "id": "24",
+      "name": "Burritos Supremo",
+      "description": "Flour tortilla with the meat of your choice, peppers, grilled onions, tomato, lettuce, cheese, and sour cream, bathed in burrito sauce with cheese dip accompanied by rice and beans.",
+      "price": 19.99,
+      "category": "Mexican Tradicional Antojitos"
+    },
+    {
+      "id": "25",
+      "name": "Flautas (4 pcs)",
+      "description": "Four shredded chicken fried corn tortillas, tomato, lettuce, cheese, cream, and accompanied by rice and beans.",
+      "price": 17.49,
+      "category": "Mexican Tradicional Antojitos"
+    },
+    {
+      "id": "26",
+      "name": "Enchiladas Verdes (3 pcs)",
+      "description": "Three enchiladas with your choice of pulled chicken, pulled beef, ground beef, or pulled pork.",
+      "price": 16.24,
+      "category": "Mexican Tradicional Antojitos"
+    },
+    {
+      "id": "27",
+      "name": "Enchiladas Rojas (3 pcs)",
+      "description": "Three enchiladas with your choice of pulled chicken, pulled beef, ground beef, or pulled pork.",
+      "price": 16.24,
+      "category": "Mexican Tradicional Antojitos"
+    },
+    {
+      "id": "28",
+      "name": "Burritas Patronas (3 pcs)",
+      "description": "Three flour tortillas with meat of your choice, accompanied by rice, beans, tomato, lettuce, cheese, and cream salad.",
+      "price": 19.99,
+      "category": "Mexican Tradicional Antojitos"
+    },
+    {
+      "id": "29",
+      "name": "Enchiladas de Mole",
+      "description": "Three chicken enchiladas topped with mole sauce. Served with Spanish rice and beans.",
+      "price": 16.24,
+      "category": "Mexican Tradicional Antojitos"
+    },
+    {
+      "id": "30",
+      "name": "Pork Enchiladas (3 pcs)",
+      "description": "Three pork enchiladas topped with green salsa and sour cream salad. Served with Spanish rice.",
+      "price": 16.24,
+      "category": "Mexican Tradicional Antojitos"
+    },
+    {
+      "id": "31",
+      "name": "Enchiladas Mexicanas (3 pcs)",
+      "description": "Three enchiladas with your choice of pulled chicken, pulled beef, ground beef, or pulled pork topped with green salsa, red salsa, cheese dip, and Mexican sausage on top with sour cream salad. Served with rice.",
+      "price": 17.49,
+      "category": "Mexican Tradicional Antojitos"
+    },
+    {
+      "id": "32",
+      "name": "Burrito Mexicano",
+      "description": "One large burrito filled with grilled chicken, steak, and chorizo topped with salsa verde, cheese dip, and red salsa.",
+      "price": 19.99,
+      "category": "Mexican Tradicional Antojitos"
+    },
+    {
+      "id": "33",
+      "name": "Queso con Carne",
+      "description": "Cheese dip with ground beef.",
+      "price": 11.24,
+      "category": "Appetizer"
+    },
+    {
+      "id": "34",
+      "name": "Guacamole with Cheese and Chicharrón",
+      "description": "Guacamole with cheese and pork rinds.",
+      "price": 13.74,
+      "category": "Appetizer"
+    },
+    {
+      "id": "35",
+      "name": "Cheese Dip",
+      "description": "Homemade fresh cheese dip.",
+      "price": 11.24,
+      "category": "Appetizer"
+    },
+    {
+      "id": "36",
+      "name": "Guacamole Dip",
+      "description": "Homemade with fresh whole avocados.",
+      "price": 13.74,
+      "category": "Appetizer"
+    },
+    {
+      "id": "37",
+      "name": "Queso Fundido",
+      "description": "Melted cheese served with tortillas.",
+      "price": 13.74,
+      "category": "Appetizer"
+    },
+    {
+      "id": "38",
+      "name": "Bean Dip",
+      "description": "Homemade fresh bean dip.",
+      "price": 8.74,
+      "category": "Appetizer"
+    },
+    {
+      "id": "39",
+      "name": "Queso Picante",
+      "description": "Cheese dip with jalapeños.",
+      "price": 11.24,
+      "category": "Appetizer"
+    },
+    {
+      "id": "40",
+      "name": "Stuffed Jalapeños",
+      "description": "Served with guacamole and sour cream.",
+      "price": 9.99,
+      "category": "Appetizer"
+    },
+    {
+      "id": "41",
+      "name": "Homemade Chips & Salsa",
+      "description": "Free with meal or entrée purchase.",
+      "price": 11.24,
+      "category": "Appetizer"
+    },
+    {
+      "id": "42",
+      "name": "Tostadas de Camarón",
+      "description": "Shrimp on a crispy corn tostada.",
+      "price": 12.49,
+      "category": "Appetizer"
+    },
+    {
+      "id": "43",
+      "name": "Pico de Gallo",
+      "description": "Diced tomatoes, onions, jalapeños, and cilantro.",
+      "price": 4.99,
+      "category": "Appetizer"
+    },
+    {
+      "id": "44",
+      "name": "Sliced Fresh Avocado",
+      "description": "Freshly sliced avocado.",
+      "price": 4.99,
+      "category": "Appetizer"
+    },
+    {
+      "id": "45",
+      "name": "Choriqueso",
+      "description": "Cheese dip with Mexican sausage.",
+      "price": 13.74,
+      "category": "Appetizer"
+    },
+    {
+      "id": "46",
+      "name": "Cheese Nachos or Bean & Cheese Nachos",
+      "description": "",
+      "price": 12.49,
+      "category": "Appetizer"
+    },
+    {
+      "id": "47",
+      "name": "Homemade Soups",
+      "description": "",
+      "price": 11.24,
+      "category": "Soups & Salads"
+    },
+    {
+      "id": "48",
+      "name": "Guacamole Salad",
+      "description": "Lettuce, tomato, cheese, and guacamole.",
+      "price": 3.74,
+      "category": "Soups & Salads"
+    },
+    {
+      "id": "49",
+      "name": "Taco Salad",
+      "description": "Lean beef or pulled chicken served over iceberg lettuce, tomato, Mexican cheese, refried beans, and sour cream in a crispy tortilla bowl.",
+      "price": 14.99,
+      "category": "Soups & Salads"
+    },
+    {
+      "id": "50",
+      "name": "Las Patronas Salad",
+      "description": "Grilled sliced steak or chicken, grilled peppers, and onions served over lettuce, tomato, Mexican cheese, and refried beans, topped with sour cream, all in a crispy tortilla bowl.",
+      "price": 16.24,
+      "category": "Soups & Salads"
+    },
+    {
+      "id": "51",
+      "name": "Sour Cream Salad",
+      "description": "Lettuce, tomato, cheese, and sour cream.",
+      "price": 3.74,
+      "category": "Soups & Salads"
+    },
+    {
+      "id": "52",
+      "name": "Sliced Fresh Half Avocado",
+      "description": "Fresh sliced half avocado.",
+      "price": 3.06,
+      "category": "Soups & Salads"
+    },
+    {
+      "id": "53",
+      "name": "Fajitas Mix",
+      "description": "Chicken breast and seasoned steak strips. Lightly seasoned and sautéed with fresh bell peppers and onions. Served with Spanish rice, refried beans, sour cream salad, and tortillas.",
+      "price": 23.74,
+      "category": "House Specialty"
+    },
+    {
+      "id": "54",
+      "name": "Parrillada Patronas (For 2)",
+      "description": "Steak, chicken, Mexican sausage, white fish, shrimp, chicharrón, queso fresco, and grilled jalapeño. Lightly seasoned and sautéed with fresh bell peppers and onions. Served with Spanish rice, refried beans, sour cream salad, and tortillas.",
+      "price": 47.49,
+      "category": "House Specialty"
+    },
+    {
+      "id": "55",
+      "name": "Fajitas de la Casa",
+      "description": "Chicken breast, lean steak, and tender shrimp. Lightly seasoned and sautéed with fresh bell peppers and onions. Served with Spanish rice, refried beans, sour cream salad, and tortillas.",
+      "price": 26.24,
+      "category": "House Specialty"
+    },
+    {
+      "id": "56",
+      "name": "Fajitas Carne",
+      "description": "Grilled seasoned steak strips. Lightly seasoned and sautéed with fresh bell peppers and onions. Served with Spanish rice, refried beans, sour cream salad, and tortillas.",
+      "price": 22.49,
+      "category": "House Specialty"
+    },
+    {
+      "id": "57",
+      "name": "Fajitas Camarón",
+      "description": "Grilled shrimp. Lightly seasoned and sautéed with fresh bell peppers and onions. Served with Spanish rice, refried beans, sour cream salad, and tortillas.",
+      "price": 27.49,
+      "category": "House Specialty"
+    },
+    {
+      "id": "58",
+      "name": "Fajitas del Mar",
+      "description": "Grilled shrimp and seafood medley. Lightly seasoned and sautéed with fresh bell peppers and onions. Served with Spanish rice, refried beans, sour cream salad, and tortillas.",
+      "price": 29.99,
+      "category": "House Specialty"
+    },
+    {
+      "id": "59",
+      "name": "Fajitas Pollo",
+      "description": "Grilled chicken breast strips. Lightly seasoned and sautéed with fresh bell peppers and onions. Served with Spanish rice, refried beans, sour cream salad, and tortillas.",
+      "price": 22.49,
+      "category": "House Specialty"
+    },
+    {
+      "id": "60",
+      "name": "Street Tacos",
+      "description": "Served with onions and cilantro, limes, and your choice of steak, carnitas, cochinita, birria, ground beef, pulled beef, or pulled chicken.",
+      "price": 3.74,
+      "category": "House Specialty Homemade"
+    },
+    {
+      "id": "61",
+      "name": "Quesabirrias",
+      "description": "Birria meat with flour tortillas, cheese, onions, cilantro, and consommé.",
+      "price": 17.49,
+      "category": "House Specialty Homemade"
+    },
+    {
+      "id": "62",
+      "name": "Patrona Taco (1 pc)",
+      "description": "Steak, chorizo, peppers, onions, and cheese with flour tortilla.",
+      "price": 6.24,
+      "category": "House Specialty Homemade"
+    },
+    {
+      "id": "63",
+      "name": "Las Patronas",
+      "description": "Steak, chorizo, peppers, onions, gratin cheese with rice, beans, and tortillas.",
+      "price": 21.24,
+      "category": "House Specialty Homemade"
+    },
+    {
+      "id": "64",
+      "name": "Las Piratas",
+      "description": "Pastor, pineapple, onions, gratin cheese with rice, beans, and tortillas.",
+      "price": 21.24,
+      "category": "House Specialty Homemade"
+    },
+    {
+      "id": "65",
+      "name": "Las Locas",
+      "description": "Pork chop, bacon, steak, mushrooms, onions, peppers, gratin cheese with rice, beans, and tortillas.",
+      "price": 22.49,
+      "category": "House Specialty Homemade"
+    },
+    {
+      "id": "66",
+      "name": "V9. Adelita",
+      "description": "Veggie and cheese quesadilla.",
+      "price": 16.24,
+      "category": "Vegetarian Delights"
+    },
+    {
+      "id": "67",
+      "name": "V6. One Bean Burrito & Two Cheese Enchiladas",
+      "description": "",
+      "price": 16.24,
+      "category": "Vegetarian Delights"
+    },
+    {
+      "id": "68",
+      "name": "V10. Vegetarian Burrito Grande",
+      "description": "Stuffed with vegetables, rice, and beans. Topped with salsa and cheese.",
+      "price": 16.24,
+      "category": "Vegetarian Delights"
+    },
+    {
+      "id": "69",
+      "name": "V7. One Bean & One Cheese Tostada, Rice",
+      "description": "",
+      "price": 16.24,
+      "category": "Vegetarian Delights"
+    },
+    {
+      "id": "70",
+      "name": "V1. One Bean Burrito & One Cheese Enchilada with Rice",
+      "description": "",
+      "price": 16.24,
+      "category": "Vegetarian Delights"
+    },
+    {
+      "id": "71",
+      "name": "V2. Two Cheese Enchiladas & One Bean Chalupa with Rice",
+      "description": "",
+      "price": 16.24,
+      "category": "Vegetarian Delights"
+    },
+    {
+      "id": "72",
+      "name": "V3. One Chile Relleno and One Mushroom Quesadilla with Rice",
+      "description": "",
+      "price": 16.24,
+      "category": "Vegetarian Delights"
+    },
+    {
+      "id": "73",
+      "name": "V4. One Mushroom Quesadilla with Rice & Beans",
+      "description": "",
+      "price": 16.24,
+      "category": "Vegetarian Delights"
+    },
+    {
+      "id": "74",
+      "name": "V5. One Chile Relleno and One Cheese Enchilada with Rice and Beans",
+      "description": "",
+      "price": 16.24,
+      "category": "Vegetarian Delights"
+    },
+    {
+      "id": "75",
+      "name": "V8. Vegetarian Fajitas",
+      "description": "Peppers, onions, mushrooms, broccoli, and tomato. Served with rice, sour cream salad, and tortillas.",
+      "price": 16.24,
+      "category": "Vegetarian Delights"
+    }
+  ]
+  
