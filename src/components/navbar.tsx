@@ -122,7 +122,9 @@ export default function Navbar({
                 </div>
 
                 <div
-                  className="text-2xl text-white sm:flex" onClick={() => changeLanguage()}>
+                  className="text-2xl text-white sm:flex"
+                  onClick={() => changeLanguage()}
+                >
                   {lang.includes("en") ? "Español" : "English"}
                 </div>
                 <div className="w-full border-t border-white"></div>
@@ -184,7 +186,7 @@ export default function Navbar({
                 </Button>
               ) : (
                 <div
-                  className={`transition-all duration-300 hover:text-purple-100 ${link.href == currentPath ? "text-2xl text-purple-200" : "hidden text-xl md:flex"}`}
+                  className={`hidden transition-all duration-300 hover:text-purple-100 md:flex ${link.href == currentPath ? "hidden text-2xl text-purple-200 md:flex" : "hidden text-xl md:flex"}`}
                 >
                   {link.name}
                 </div>
