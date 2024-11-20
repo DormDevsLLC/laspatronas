@@ -9,9 +9,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
   SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from "~/components/ui/sheet";
 
@@ -97,40 +95,62 @@ export default function Navbar({
     <>
       <nav className="flex h-16 w-screen items-center justify-between overflow-hidden bg-[#1c0230] p-4 text-white transition-all duration-300">
         <div className="sm:block md:hidden">
-
-          <TransitionLink href={"/"} className="ml-2 flex">
-            <Sheet>
-              <SheetTrigger>
-                <GiHamburgerMenu size={40} />
-              </SheetTrigger>
-              <SheetContent className="roundedw-[400px] bg-[#1c0230] p-4 sm:w-[540px]">
-                <SheetHeader>
+          <Sheet open={open} onOpenChange={setOpen} />
+          <Sheet>
+            <SheetTrigger>
+              <GiHamburgerMenu size={40} />
+            </SheetTrigger>
+            <SheetContent className="roundedw-[400px] bg-[#1c0230] p-4 sm:w-[540px]">
+              <SheetHeader>
+                <TransitionLink
+                  href={"/"}
+                  className="ml-2 flex"
+                  onClick={() => setOpen(false)}
+                >
                   <Image
                     src="/logo.png"
                     alt="Las Patronas UCF"
                     width={500}
                     height={300}
                   />
-                  <div className="relative my-4">
-                    <div className="absolute inset-0 flex items-center">
-                      <div className="w-full border-t border-white"></div>
-                    </div>
+                </TransitionLink>
+
+                <div className="relative my-4">
+                  <div className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t border-white"></div>
                   </div>
-                  <div className="text-2xl text-white sm:flex">Espanol</div>
+                </div>
+
+                <div
+                  className="text-2xl text-white sm:flex" onClick={() => changeLanguage()}>
+                  {lang.includes("en") ? "Español" : "English"}
+                </div>
+                <div className="w-full border-t border-white"></div>
+
+                <TransitionLink href="/en/about" onClick={() => setOpen(false)}>
+                  <div className="text-2xl text-white sm:flex">
+                    {lang.includes("en") ? "About" : "Acerca de"}
+                  </div>
                   <div className="w-full border-t border-white"></div>
-                  <div className="text-2xl text-white sm:flex">About</div>
+                </TransitionLink>
+
+                <TransitionLink href="/en/menu" onClick={() => setOpen(false)}>
+                  <div className="text-2xl text-white sm:flex">
+                    {lang.includes("en") ? "Menu" : "Menú"}
+                  </div>
                   <div className="w-full border-t border-white"></div>
-                  <div className="text-2xl text-white sm:flex">Menu</div>
+                </TransitionLink>
+
+                <TransitionLink href="/en/order" onClick={() => setOpen(false)}>
+                  <div className="text-2xl text-white sm:flex">
+                    {lang.includes("en") ? "Order" : "Ordenar"}
+                  </div>
                   <div className="w-full border-t border-white"></div>
-                  <div className="text-2xl text-white sm:flex">Order</div>
-                  <div className="w-full border-t border-white"></div>
-                  <SheetTitle></SheetTitle>
-                  <SheetDescription></SheetDescription>
-                </SheetHeader>
-                <button className="absolute right-5 top-2 text-white">X</button>
-              </SheetContent>
-            </Sheet>
-          </TransitionLink>
+                </TransitionLink>
+              </SheetHeader>
+              <button className="absolute right-5 top-2 text-white">X</button>
+            </SheetContent>
+          </Sheet>
         </div>
 
         <div className="hidden items-center justify-center sm:flex">
