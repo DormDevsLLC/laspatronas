@@ -1,7 +1,7 @@
 "use client";
 
 // Import necessary components and hooks
-import { Minus, Search, Trash } from "lucide-react";
+import { ChevronUp, Minus, Search, Trash } from "lucide-react";
 import { useRouter } from "next/navigation"; // Import useRouter
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useToast } from "~/hooks/use-toast"; // Custom toast hook for notifications
@@ -72,6 +72,7 @@ export default function OrderPage({ language }: RestaurantMenuProps) {
   // Refs for section elements and cart
   const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
   const cartRef = useRef<HTMLDivElement | null>(null);
+  const topRef = useRef<HTMLDivElement | null>(null);
 
   // Callback to register section refs for smooth scrolling
   const registerSectionRef = useCallback(
@@ -235,6 +236,13 @@ export default function OrderPage({ language }: RestaurantMenuProps) {
     const element = sectionRefs.current[category];
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  // Function to scroll to the top of the page
+  const scrollToTop = () => {
+    if (topRef.current) {
+      topRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -519,10 +527,10 @@ export default function OrderPage({ language }: RestaurantMenuProps) {
 
   // Main component rendering
   return (
-    <div className="w-full rounded-xl border-8 border-[#a80c94] bg-[#a80c94]">
+    <div className="mb-12 w-full rounded-xl border-8 border-[#a80c94] bg-[#a80c94]">
       <div className="w-full rounded-xl border-8 border-[#200434] bg-[#f0ccf4] p-4 md:p-12">
         {/* Header */}
-        <h1 className="mb-6 text-3xl font-bold">
+        <h1 className="mb-6 text-3xl font-bold" ref={topRef}>
           {language === "en" ? "Our Menu" : "Nuestro Menú"}
         </h1>
 
@@ -566,8 +574,18 @@ export default function OrderPage({ language }: RestaurantMenuProps) {
                 </Button>
               ))}
             </div>
-            <Button onClick={scrollToCart} className="ml-2 flex-shrink-0">
+            <Button
+              onClick={scrollToCart}
+              className="ml-2 flex-shrink-0 bg-[#a80c94] text-white"
+            >
               {language === "en" ? "Checkout" : "Pagar"}
+            </Button>
+            <Button
+              onClick={scrollToTop}
+              className="ml-2 flex-shrink-0 bg-[#a80c94] text-white"
+              size={"icon"}
+            >
+              <ChevronUp />
             </Button>
           </div>
           {/* Desktop Layout */}
@@ -594,6 +612,16 @@ export default function OrderPage({ language }: RestaurantMenuProps) {
                 className="animate-fade-right bg-[#a80c94] text-white"
               >
                 {language === "en" ? "Checkout" : "Pagar"}
+              </Button>
+              <Button
+                onClick={scrollToTop}
+                style={{
+                  animationDelay: `${(categories.length + 1) * 75 + 100}ms`,
+                }}
+                className="animate-fade-right bg-[#a80c94] text-white"
+                size={"icon"}
+              >
+                <ChevronUp />
               </Button>
             </div>
           </div>

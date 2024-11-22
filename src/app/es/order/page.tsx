@@ -56,9 +56,7 @@ export default async function Home() {
               </TabsTrigger>
             </TabsList>
             <TabsContent value="pickup">
-              <Card className="h-full items-center">
-                <OrderPage language="es" />
-              </Card>
+              <OrderPage language="es" />
             </TabsContent>
             <TabsContent value="delivery" className="h-full">
               <div className="rounded-xl border-8 border-[#a80c94] bg-[#a80c94]">

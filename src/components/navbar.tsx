@@ -2,9 +2,9 @@
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
+import { GiHamburgerMenu } from "react-icons/gi";
 import TransitionLink from "./transition-link";
 import { Button } from "./ui/button";
-import { GiHamburgerMenu } from "react-icons/gi";
 
 import {
   Sheet,
@@ -100,7 +100,7 @@ export default function Navbar({
             <SheetTrigger>
               <GiHamburgerMenu size={40} />
             </SheetTrigger>
-            <SheetContent className="roundedw-[400px] bg-[#1c0230] p-4 sm:w-[540px]">
+            <SheetContent className="bg-[#1c0230] p-4 sm:w-[540px]">
               <SheetHeader>
                 <TransitionLink
                   href={"/"}
@@ -156,7 +156,11 @@ export default function Navbar({
         </div>
 
         <div className="hidden items-center justify-center sm:flex">
-          <TransitionLink href={"/"} className="ml-2 flex">
+          <TransitionLink
+            href={"/"}
+            className="ml-2 flex"
+            onClick={() => setOpen(false)}
+          >
             <div className="flex items-center justify-center">
               <Image
                 src="/logo.png"
@@ -176,7 +180,11 @@ export default function Navbar({
             {lang.includes("en") ? "Español" : "English"}
           </div>
           {links.map((link) => (
-            <TransitionLink href={link.href} key={link.href}>
+            <TransitionLink
+              href={link.href}
+              key={link.href}
+              onClick={() => setOpen(false)}
+            >
               {link.href === "/es/order" || link.href === "/en/order" ? (
                 <Button
                   className="hidden bg-[#a40c96] text-xl transition-all duration-300 hover:bg-[#750B6B] sm:flex"
