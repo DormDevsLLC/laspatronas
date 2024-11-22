@@ -519,8 +519,8 @@ export default function OrderPage({ language }: RestaurantMenuProps) {
 
   // Main component rendering
   return (
-    <div className="rounded-xl border-8 border-[#a80c94] bg-[#a80c94]">
-      <div className="container mx-auto rounded-xl border-8 border-[#200434] bg-[#f0ccf4] p-4 md:p-12">
+    <div className="w-full rounded-xl border-8 border-[#a80c94] bg-[#a80c94]">
+      <div className="w-full rounded-xl border-8 border-[#200434] bg-[#f0ccf4] p-4 md:p-12">
         {/* Header */}
         <h1 className="mb-6 text-3xl font-bold">
           {language === "en" ? "Our Menu" : "Nuestro Menú"}
