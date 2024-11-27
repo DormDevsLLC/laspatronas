@@ -1,7 +1,14 @@
 "use client";
 
 // Import necessary components and hooks
-import { ChevronUp, Minus, Search, Trash } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  ChevronUp,
+  Minus,
+  Search,
+  Trash,
+} from "lucide-react";
 import { useRouter } from "next/navigation"; // Import useRouter
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useToast } from "~/hooks/use-toast"; // Custom toast hook for notifications
@@ -560,33 +567,43 @@ export default function OrderPage({ language }: RestaurantMenuProps) {
         {/* Navigation for categories and cart */}
         <nav className="sticky top-0 z-10 mb-8 bg-[#f0ccf4] py-4">
           {/* Mobile Layout */}
-          <div className="flex justify-between md:hidden">
-            <div className="flex flex-nowrap items-center space-x-2 overflow-x-auto">
-              {categories.map((category) => (
-                <Button
-                  key={category}
-                  variant="outline"
-                  size={"sm"}
-                  onClick={() => scrollToSection(category)}
-                  className="flex-shrink-0 bg-[#f8cca4] text-sm"
-                >
-                  {category}
-                </Button>
-              ))}
+          <div className="flex-col justify-between space-y-2 md:hidden">
+            <div className="flex items-center justify-center">
+              <div>
+                <ArrowLeft className="h-4 w-4" />
+              </div>
+              <div className="flex flex-nowrap items-center space-x-2 overflow-x-auto">
+                {categories.map((category) => (
+                  <Button
+                    key={category}
+                    variant="outline"
+                    size={"sm"}
+                    onClick={() => scrollToSection(category)}
+                    className="flex-shrink-0 bg-[#f8cca4] text-sm"
+                  >
+                    {category}
+                  </Button>
+                ))}
+              </div>
+              <div>
+                <ArrowRight className="h-4 w-4" />
+              </div>
             </div>
-            <Button
-              onClick={scrollToCart}
-              className="ml-2 flex-shrink-0 bg-[#a80c94] text-white"
-            >
-              {language === "en" ? "Checkout" : "Pagar"}
-            </Button>
-            <Button
-              onClick={scrollToTop}
-              className="ml-2 flex-shrink-0 bg-[#a80c94] text-white"
-              size={"icon"}
-            >
-              <ChevronUp />
-            </Button>
+            <div className="flex justify-center space-x-4">
+              <Button
+                onClick={scrollToCart}
+                className="flex-shrink-0 bg-[#a80c94] text-white"
+              >
+                {language === "en" ? "Checkout" : "Pagar"}
+              </Button>
+              <Button
+                onClick={scrollToTop}
+                className="flex-shrink-0 bg-[#a80c94] text-white"
+                size={"icon"}
+              >
+                <ChevronUp />
+              </Button>
+            </div>
           </div>
           {/* Desktop Layout */}
           <div className="hidden items-center justify-between md:flex md:flex-wrap">
@@ -628,60 +645,77 @@ export default function OrderPage({ language }: RestaurantMenuProps) {
         </nav>
 
         {/* Menu sections */}
-        {categories.map((category) => (
-          <section
-            key={category}
-            ref={(el) => registerSectionRef(category, el)}
-            className="mb-12 scroll-mt-20"
-          >
-            <h2
-              className="mb-4 text-2xl font-bold"
-              id={`section-${category.toLowerCase().replace(" ", "-")}`}
-            >
-              {category}
-            </h2>
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {filteredItems
-                .filter((item) => item.category === category)
-                .map((item, index) => (
-                  <Card
-                    key={item.id}
-                    className="flex animate-fade-right flex-col justify-between border-none bg-[#f8cca4]"
-                    style={{
-                      animationDelay: `${index * 150 + 200}ms`,
-                    }}
-                  >
-                    <CardHeader>
-                      <CardTitle>{item.name}</CardTitle>
-                    </CardHeader>
-                    <CardContent className="flex-grow">
-                      <p>{item.description}</p>
-                    </CardContent>
-                    <CardFooter className="mt-auto">
-                      <div className="flex w-full items-center justify-between">
-                        <p className="mt-2 font-bold">
-                          ${item.price.toFixed(2)}
-                        </p>
-                        <Button
-                          onClick={() => addToCart(item)}
-                          disabled={!restaurantIsOpen}
-                          className="bg-[#a80c94] text-white"
-                        >
-                          {restaurantIsOpen
-                            ? language === "en"
-                              ? "Add to Cart"
-                              : "Añadir al Carrito"
-                            : language === "en"
-                              ? "Closed"
-                              : "Cerrado"}
-                        </Button>
-                      </div>
-                    </CardFooter>
-                  </Card>
-                ))}
-            </div>
-          </section>
-        ))}
+        {categories.some((category) =>
+          filteredItems.some((item) => item.category === category),
+        ) ? (
+          categories.map((category) => {
+            const categoryItems = filteredItems.filter(
+              (item) => item.category === category,
+            );
+
+            // Only render the category section if there are items in it
+            if (categoryItems.length === 0) return null;
+
+            return (
+              <section
+                key={category}
+                ref={(el) => registerSectionRef(category, el)}
+                className="mb-12 scroll-mt-20"
+              >
+                <h2
+                  className="mb-4 text-2xl font-bold"
+                  id={`section-${category.toLowerCase().replace(" ", "-")}`}
+                >
+                  {category}
+                </h2>
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+                  {categoryItems.map((item, index) => (
+                    <Card
+                      key={item.id}
+                      className="flex animate-fade-right flex-col justify-between border-none bg-[#f8cca4]"
+                      style={{
+                        animationDelay: `${index * 150 + 200}ms`,
+                      }}
+                    >
+                      <CardHeader>
+                        <CardTitle>{item.name}</CardTitle>
+                      </CardHeader>
+                      <CardContent className="flex-grow">
+                        <p>{item.description}</p>
+                      </CardContent>
+                      <CardFooter className="mt-auto">
+                        <div className="flex w-full items-center justify-between">
+                          <p className="mt-2 font-bold">
+                            ${item.price.toFixed(2)}
+                          </p>
+                          <Button
+                            onClick={() => addToCart(item)}
+                            disabled={!restaurantIsOpen}
+                            className="bg-[#a80c94] text-white"
+                          >
+                            {restaurantIsOpen
+                              ? language === "en"
+                                ? "Add to Cart"
+                                : "Añadir al Carrito"
+                              : language === "en"
+                                ? "Closed"
+                                : "Cerrado"}
+                          </Button>
+                        </div>
+                      </CardFooter>
+                    </Card>
+                  ))}
+                </div>
+              </section>
+            );
+          })
+        ) : (
+          <div className="text-2xl font-bold">
+            {language === "en"
+              ? "No Items Found"
+              : "No se encontraron artículos"}
+          </div>
+        )}
 
         {/* Cart section */}
         <div className="mt-8" ref={cartRef}>
@@ -908,8 +942,8 @@ export default function OrderPage({ language }: RestaurantMenuProps) {
               {/* Disclaimer */}
               <p className="mt-4 text-sm text-gray-500">
                 {language === "en"
-                  ? "Please note: Purchases for pickup orders must be made in-store."
-                  : "Por favor, ten en cuenta: Las compras para pedidos de recogida deben hacerse en la tienda."}
+                  ? "Please note: Purchases for pickup orders must be made in-store. Prices or discounts are applied at the time of purchase."
+                  : "Por favor, ten en cuenta: Las compras para pedidos de recogida deben hacerse en la tienda. Los precios o descuentos se aplican en el momento de la compra."}
               </p>
 
               {/* Checkout Button */}
