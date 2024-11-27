@@ -1,527 +1,814 @@
 [
   {
     "id": "1",
-    "name": "Nachos de Carne y Queso o Pollo y Queso",
-    "description": "Compra 1, obtén 1 gratis",
-    "price": 13.74,
-    "category": "Aperitivo"
+    "name": "Totopos Caseros y Salsa",
+    "description": "Crujientes totopos de tortilla recién fritos, servidos con nuestra salsa casera picante. Gratis con la compra de una comida o plato principal.",
+    "price": 8.99,
+    "category": "Entrantes"
   },
   {
     "id": "2",
-    "name": "Nachos Las Patronas",
-    "description": "Bistec, pollo a la parrilla, frijoles con chorizo, pimiento, cebollas, queso, lechuga y crema agria. Compra 1, obtén 1 gratis",
-    "price": 16.24,
-    "category": "Aperitivo"
+    "name": "Pico de Gallo",
+    "description": "Una refrescante mezcla de tomate picado, cebolla, jalapeños y cilantro, llena de sabores auténticos mexicanos.",
+    "price": 3.99,
+    "category": "Entrantes"
   },
   {
     "id": "3",
-    "name": "Camarones a la Diabla",
-    "description": "Camarones salteados en salsa extra picante. Servidos con arroz español y ensalada de crema agria.",
-    "price": 23.74,
-    "category": "Especialidades de Mariscos"
+    "name": "Rebanadas de Aguacate Fresco",
+    "description": "Rebanadas de aguacate perfectamente maduro y cremoso, recién preparadas para ti.",
+    "price": 3.99,
+    "category": "Entrantes"
   },
   {
     "id": "4",
-    "name": "Filete de Pescado",
-    "description": "Filete de pescado servido a la parrilla. Servido con arroz español y ensalada de crema agria.",
-    "price": 21.24,
-    "category": "Especialidades de Mariscos"
+    "name": "Dip de Frijoles",
+    "description": "Delicioso y cremoso dip de frijoles casero, perfecto para acompañar con nuestros totopos crujientes.",
+    "price": 6.99,
+    "category": "Entrantes"
   },
   {
     "id": "5",
-    "name": "Camarones a la Mexicana",
-    "description": "Camarones salteados en salsa de tomate picante. Servidos con arroz español y ensalada de crema agria.",
-    "price": 23.74,
-    "category": "Especialidades de Mariscos"
+    "name": "Dip de Queso",
+    "description": "Indulgente y sedoso dip de queso casero, un verdadero deleite reconfortante.",
+    "price": 8.99,
+    "category": "Entrantes"
   },
   {
     "id": "6",
-    "name": "Camarones Rancheros",
-    "description": "Camarones salteados con salsa de tomate suave. Servidos con arroz español y ensalada de crema agria.",
-    "price": 23.74,
-    "category": "Especialidades de Mariscos"
+    "name": "Queso Fundido",
+    "description": "Queso derretido y chisporroteante servido con tortillas calientes, perfecto para mojar y saborear.",
+    "price": 10.99,
+    "category": "Entrantes"
   },
   {
     "id": "7",
-    "name": "Camarones al Mojo de Ajo",
-    "description": "Camarones salteados en aceite de ajo. Servidos con arroz español y ensalada de crema agria.",
-    "price": 23.74,
-    "category": "Especialidades de Mariscos"
+    "name": "Dip de Guacamole",
+    "description": "Guacamole recién preparado con aguacates maduros, lleno de sabores naturales.",
+    "price": 10.99,
+    "category": "Entrantes"
   },
   {
     "id": "8",
-    "name": "Cóctel de Camarón",
-    "description": "Camarones fríos servidos en una salsa casera. Servidos con arroz español y ensalada de crema agria.",
-    "price": 21.24,
-    "category": "Especialidades de Mariscos"
+    "name": "Dip de Queso y Carne Molida",
+    "description": "Queso suave y cremoso combinado con sabrosa carne molida sazonada.",
+    "price": 8.99,
+    "category": "Entrantes"
   },
   {
     "id": "9",
-    "name": "Caldo de Mariscos",
-    "description": "Sopa de surtido de mariscos preparada con conchas. Servida con arroz español y ensalada de crema agria.",
-    "price": 26.24,
-    "category": "Especialidades de Mariscos"
+    "name": "Queso con Jalapeño",
+    "description": "Una versión picante de nuestro queso cremoso, infusionado con jalapeños ardientes.",
+    "price": 8.99,
+    "category": "Entrantes"
   },
   {
     "id": "10",
-    "name": "Carne Asada",
-    "description": "Bistec a la parrilla en rodajas finas con cebollas asadas. Servido con arroz, frijoles, pico de gallo, ensalada de crema agria y tortillas.",
-    "price": 22.49,
-    "category": "Especialidades de Carne"
+    "name": "Queso con Chorizo",
+    "description": "Nuestro rico y cremoso queso mezclado con chorizo sabroso y lleno de sabor.",
+    "price": 10.99,
+    "category": "Entrantes"
   },
   {
     "id": "11",
-    "name": "Bistec a la Mexicana",
-    "description": "Bistec en rodajas finas a la parrilla con cebollas, tomates y jalapeños picantes. Servido con arroz, frijoles, pico de gallo, ensalada de crema agria y tortillas.",
-    "price": 22.49,
-    "category": "Especialidades de Carne"
+    "name": "Nachos con Queso",
+    "description": "Nachos crujientes generosamente cubiertos con queso derretido y pegajoso.",
+    "price": 9.99,
+    "category": "Entrantes"
   },
   {
     "id": "12",
-    "name": "Bistec en Salsa Verde",
-    "description": "Bistec en rodajas finas salteado en salsa verde de tomatillo. Servido con arroz, frijoles, pico de gallo, ensalada de crema agria y tortillas.",
-    "price": 22.49,
-    "category": "Especialidades de Carne"
+    "name": "Nachos con Frijoles y Queso",
+    "description": "Nachos crujientes cubiertos con cremosos frijoles refritos y bañados en queso derretido.",
+    "price": 9.99,
+    "category": "Entrantes"
   },
   {
     "id": "13",
-    "name": "Bistec Ranchero",
-    "description": "Bistec a la parrilla en rodajas finas salteado en salsa suave. Servido con arroz, frijoles, pico de gallo, ensalada de crema agria y tortillas.",
-    "price": 22.49,
-    "category": "Especialidades de Carne"
+    "name": "Nachos con Carne y Queso",
+    "description": "Nachos crujientes apilados con carne sazonada y una capa de queso derretido.",
+    "price": 10.99,
+    "category": "Entrantes"
   },
   {
     "id": "14",
-    "name": "Bistec a la Diabla",
-    "description": "Bistec en rodajas finas salteado en salsa de chipotle picante. Servido con arroz, frijoles, pico de gallo, ensalada de crema agria y tortillas.",
-    "price": 22.49,
-    "category": "Especialidades de Carne"
+    "name": "Nachos con Pollo y Queso",
+    "description": "Nachos crujientes coronados con pollo a la parrilla tierno y queso derretido.",
+    "price": 10.99,
+    "category": "Entrantes"
   },
   {
     "id": "15",
-    "name": "Pollo Asado",
-    "description": "Pechuga de pollo a la parrilla servida con arroz y frijoles.",
-    "price": 21.24,
-    "category": "Especialidades de Pollo"
+    "name": "Nachos Las Patronas",
+    "description": "Nuestro aperitivo insignia: nachos cargados con jugoso bistec, pollo a la parrilla, chorizo picante, frijoles, pimientos, cebollas, queso derretido, lechuga crujiente y una cucharada de crema agria.",
+    "price": 12.99,
+    "category": "Entrantes"
   },
   {
     "id": "16",
-    "name": "Pollo Empanizado",
-    "description": "Pollo empanizado servido con arroz y frijoles.",
-    "price": 21.24,
-    "category": "Especialidades de Pollo"
+    "name": "Jalapeños Rellenos",
+    "description": "Jalapeños picantes rellenos a la perfección, servidos con cremoso guacamole y crema agria.",
+    "price": 7.99,
+    "category": "Entrantes"
   },
   {
     "id": "17",
-    "name": "Pollo Loco",
-    "description": "Pechuga de pollo a la parrilla cubierta con tu elección de salsa verde, salsa ranchera o salsa diabla. Servido con arroz y frijoles.",
-    "price": 21.24,
-    "category": "Especialidades de Pollo"
+    "name": "Tostadas de Camarón",
+    "description": "Crujientes tostadas cubiertas con suculentos camarones y frescos ingredientes.",
+    "price": 9.99,
+    "category": "Entrantes"
   },
   {
     "id": "18",
-    "name": "Pollo con Chorizo",
-    "description": "Pechuga de pollo a la parrilla cubierta con chorizo y queso derretido. Servido con arroz y frijoles.",
-    "price": 22.49,
-    "category": "Especialidades de Pollo"
+    "name": "Guacamole con Queso y Chicharrón",
+    "description": "Nuestro guacamole fresco cubierto con queso rallado y crujientes chicharrones para un toque extra.",
+    "price": 10.99,
+    "category": "Entrantes"
   },
   {
     "id": "19",
-    "name": "Pollo en Salsa de Champiñones",
-    "description": "Pechuga de pollo a la parrilla cubierta con champiñones y queso. Servido con arroz español y brócoli.",
-    "price": 22.49,
-    "category": "Especialidades de Pollo"
+    "name": "Sopa de Pollo y Arroz con Verduras",
+    "description": "Un reconfortante tazón de sopa abundante de pollo y arroz cargada con verduras frescas.",
+    "price": 8.99,
+    "category": "Entrantes"
   },
   {
     "id": "20",
-    "name": "Pollo a la Mexicana",
-    "description": "Pollo fajita salteado con jalapeños picantes y cebollas. Servido con arroz y frijoles refritos.",
-    "price": 21.24,
-    "category": "Especialidades de Pollo"
+    "name": "Sopa de Tortilla con Pollo",
+    "description": "Una cálida y sabrosa sopa de tortilla llena de tiernos trozos de pollo.",
+    "price": 8.99,
+    "category": "Entrantes"
   },
   {
     "id": "21",
-    "name": "Burrito Clásico",
-    "description": "Tortilla de harina con carne a tu elección, pimientos, cebollas a la parrilla, arroz y frijoles.",
-    "price": 17.49,
-    "category": "Antojitos Tradicionales Mexicanos"
+    "name": "Ensalada de Bistec de la Casa",
+    "description": "Jugoso bistec a la parrilla sobre una fresca cama de lechuga, pimientos, cebollas, pepinos, brócoli, tomates, cremosas rebanadas de aguacate, queso y tu elección de aderezo.",
+    "price": 11.99,
+    "category": "Ensaladas"
   },
   {
     "id": "22",
-    "name": "Quesadillas",
-    "description": "Tortilla de harina con carne a tu elección, pimientos y cebollas acompañada de arroz y frijoles.",
-    "price": 17.49,
-    "category": "Antojitos Tradicionales Mexicanos"
+    "name": "Ensalada de Pollo a la Parrilla de la Casa",
+    "description": "Tierna pechuga de pollo a la parrilla sobre lechuga fresca, pimientos vibrantes, cebollas, pepinos, brócoli, tomates, cremosas rebanadas de aguacate, queso y tu aderezo favorito.",
+    "price": 11.99,
+    "category": "Ensaladas"
   },
   {
     "id": "23",
-    "name": "Chimichangas (2 piezas)",
-    "description": "Dos chimichangas de pollo desmenuzado o carne desmenuzada cocinadas suaves o crujientes. Servidas con arroz español y ensalada de crema agria.",
-    "price": 17.49,
-    "category": "Antojitos Tradicionales Mexicanos"
+    "name": "Ensalada de Pollo Empanizado de la Casa",
+    "description": "Crujiente pollo empanizado sobre lechuga fresca, pimientos coloridos, cebollas, pepinos, brócoli, jugosos tomates, cremosas rebanadas de aguacate, queso y tu elección de aderezo.",
+    "price": 11.99,
+    "category": "Ensaladas"
   },
   {
     "id": "24",
-    "name": "Burrito Supremo",
-    "description": "Tortilla de harina con carne a tu elección, pimientos, cebollas a la parrilla, tomate, lechuga, queso y crema agria, bañado en salsa de burrito con queso derretido acompañado de arroz y frijoles.",
-    "price": 19.99,
-    "category": "Antojitos Tradicionales Mexicanos"
+    "name": "Ensalada de Camarones a la Parrilla de la Casa",
+    "description": "Suculentos camarones a la parrilla sobre lechuga crujiente, pimientos, cebollas, pepinos, brócoli, tomates maduros, rebanadas de aguacate, queso y aderezada con tu aderezo favorito.",
+    "price": 11.99,
+    "category": "Ensaladas"
   },
   {
     "id": "25",
-    "name": "Flautas (4 piezas)",
-    "description": "Cuatro tortillas de maíz fritas de pollo desmenuzado, tomate, lechuga, queso, crema y acompañadas de arroz y frijoles.",
-    "price": 17.49,
-    "category": "Antojitos Tradicionales Mexicanos"
+    "name": "Ensalada de Tilapia a la Parrilla de la Casa",
+    "description": "Delicada tilapia a la parrilla sobre una fresca mezcla de lechuga, pimientos, cebollas, pepinos, brócoli, tomates, rebanadas de aguacate, queso y tu elección de aderezo.",
+    "price": 11.99,
+    "category": "Ensaladas"
   },
   {
     "id": "26",
-    "name": "Enchiladas Verdes (3 piezas)",
-    "description": "Tres enchiladas con tu elección de pollo desmenuzado, carne desmenuzada, carne molida o cerdo desmenuzado.",
-    "price": 16.24,
-    "category": "Antojitos Tradicionales Mexicanos"
+    "name": "Ensalada Clásica",
+    "description": "Una refrescante mezcla de lechuga crujiente, pimientos vibrantes, cebollas, pepinos, brócoli, jugosos tomates, cremosas rebanadas de aguacate, queso, todo aderezado con tu elección de aderezo.",
+    "price": 7.99,
+    "category": "Ensaladas"
   },
   {
     "id": "27",
-    "name": "Enchiladas Rojas (3 piezas)",
-    "description": "Tres enchiladas con tu elección de pollo desmenuzado, carne desmenuzada, carne molida o cerdo desmenuzado.",
-    "price": 16.24,
-    "category": "Antojitos Tradicionales Mexicanos"
+    "name": "Ensalada Taco de Res",
+    "description": "Una deliciosa mezcla de lechuga iceberg, tomates, queso mexicano, frijoles refritos y crema agria, todo anidado en un crujiente tazón de tortilla.",
+    "price": 11.99,
+    "category": "Ensaladas"
   },
   {
     "id": "28",
-    "name": "Burritas Patronas (3 piezas)",
-    "description": "Tres tortillas de harina con carne a tu elección, acompañadas de arroz, frijoles, tomate, lechuga, queso y ensalada de crema.",
-    "price": 19.99,
-    "category": "Antojitos Tradicionales Mexicanos"
+    "name": "Ensalada Taco de Pollo",
+    "description": "Una deliciosa mezcla de lechuga iceberg, tomates, queso mexicano, frijoles refritos y crema agria, todo anidado en un crujiente tazón de tortilla.",
+    "price": 11.99,
+    "category": "Ensaladas"
   },
   {
     "id": "29",
-    "name": "Enchiladas de Mole",
-    "description": "Tres enchiladas de pollo cubiertas con salsa de mole. Servidas con arroz español y frijoles.",
-    "price": 16.24,
-    "category": "Antojitos Tradicionales Mexicanos"
+    "name": "Ensalada Las Patronas de Bistec",
+    "description": "Pimientos y cebollas a la parrilla combinados con lechuga fresca, tomate, queso mexicano, frijoles refritos y crema agria, servidos en un crujiente tazón de tortilla.",
+    "price": 12.99,
+    "category": "Ensaladas"
   },
   {
     "id": "30",
-    "name": "Enchiladas de Cerdo (3 piezas)",
-    "description": "Tres enchiladas de cerdo cubiertas con salsa verde y ensalada de crema agria. Servidas con arroz español.",
-    "price": 16.24,
-    "category": "Antojitos Tradicionales Mexicanos"
+    "name": "Ensalada Las Patronas de Pollo",
+    "description": "Pimientos y cebollas a la parrilla combinados con lechuga fresca, tomate, queso mexicano, frijoles refritos y crema agria, servidos en un crujiente tazón de tortilla.",
+    "price": 12.99,
+    "category": "Ensaladas"
   },
   {
     "id": "31",
-    "name": "Enchiladas Mexicanas (3 piezas)",
-    "description": "Tres enchiladas con tu elección de pollo desmenuzado, carne desmenuzada, carne molida o cerdo desmenuzado cubiertas con salsa verde, salsa roja, queso derretido y chorizo mexicano encima con ensalada de crema agria. Servidas con arroz.",
-    "price": 17.49,
-    "category": "Antojitos Tradicionales Mexicanos"
+    "name": "Ensalada Las Patronas de Bistec y Camarones",
+    "description": "Una mezcla abundante de bistec y camarones a la parrilla con pimientos, cebollas, lechuga fresca, tomate, queso mexicano, frijoles refritos y crema agria en un crujiente tazón de tortilla.",
+    "price": 16.98,
+    "category": "Ensaladas"
   },
   {
     "id": "32",
-    "name": "Burrito Mexicano",
-    "description": "Un gran burrito relleno de pollo a la parrilla, bistec y chorizo cubierto con salsa verde, queso derretido y salsa roja.",
-    "price": 19.99,
-    "category": "Antojitos Tradicionales Mexicanos"
+    "name": "Ensalada Las Patronas de Pollo y Camarones",
+    "description": "Una mezcla abundante de pollo y camarones a la parrilla con pimientos, cebollas, lechuga fresca, tomate, queso mexicano, frijoles refritos y crema agria en un crujiente tazón de tortilla.",
+    "price": 16.98,
+    "category": "Ensaladas"
   },
   {
     "id": "33",
-    "name": "Queso con Carne",
-    "description": "Dip de queso con carne molida.",
-    "price": 11.24,
-    "category": "Aperitivo"
+    "name": "Ensalada de Guacamole",
+    "description": "Una fresca ensalada de lechuga crujiente, tomate maduro, queso y cremoso guacamole.",
+    "price": 2.99,
+    "category": "Ensaladas"
   },
   {
     "id": "34",
-    "name": "Guacamole con Queso y Chicharrón",
-    "description": "Guacamole con queso y chicharrón.",
-    "price": 13.74,
-    "category": "Aperitivo"
+    "name": "Ensalada de Crema Agria",
+    "description": "Una fresca mezcla de lechuga, jugoso tomate, queso, coronada con crema agria ácida.",
+    "price": 2.99,
+    "category": "Ensaladas"
   },
   {
     "id": "35",
-    "name": "Dip de Queso",
-    "description": "Dip de queso fresco casero.",
-    "price": 11.24,
-    "category": "Aperitivo"
+    "name": "Medio Aguacate Fresco en Rebanadas",
+    "description": "Una porción de medio aguacate perfectamente maduro y recién rebanado.",
+    "price": 2.45,
+    "category": "Ensaladas"
   },
   {
     "id": "36",
-    "name": "Guacamole",
-    "description": "Hecho en casa con aguacates enteros frescos.",
-    "price": 13.74,
-    "category": "Aperitivo"
+    "name": "Fajitas Mixtas",
+    "description": "Jugosa pechuga de pollo y tiras de bistec sazonado salteadas con pimientos frescos y cebollas. Servidas con arroz español, frijoles refritos y una ensalada de crema agria.",
+    "price": 18.99,
+    "category": "Especialidades de la Casa"
   },
   {
     "id": "37",
-    "name": "Queso Fundido",
-    "description": "Queso derretido servido con tortillas.",
-    "price": 13.74,
-    "category": "Aperitivo"
+    "name": "Fajitas de la Casa",
+    "description": "Un trío de pechuga de pollo a la parrilla, bistec magro y camarones tiernos salteados con pimientos frescos y cebollas. Servidas con arroz español, frijoles refritos y una ensalada de crema agria.",
+    "price": 20.99,
+    "category": "Especialidades de la Casa"
   },
   {
     "id": "38",
-    "name": "Dip de Frijoles",
-    "description": "Dip de frijoles frescos caseros.",
-    "price": 8.74,
-    "category": "Aperitivo"
+    "name": "Fajitas de Camarón",
+    "description": "Suculentos camarones a la parrilla salteados con pimientos frescos y cebollas. Servidas con arroz español, frijoles refritos y una ensalada de crema agria.",
+    "price": 21.99,
+    "category": "Especialidades de la Casa"
   },
   {
     "id": "39",
-    "name": "Queso Picante",
-    "description": "Dip de queso con jalapeños.",
-    "price": 11.24,
-    "category": "Aperitivo"
+    "name": "Fajitas de Mariscos",
+    "description": "Una delicia del mar de camarones a la parrilla y surtido de mariscos salteados con pimientos frescos y cebollas. Servidas con arroz español, frijoles refritos y una ensalada de crema agria.",
+    "price": 23.99,
+    "category": "Especialidades de la Casa"
   },
   {
     "id": "40",
-    "name": "Jalapeños Rellenos",
-    "description": "Servidos con guacamole y crema agria.",
-    "price": 9.99,
-    "category": "Aperitivo"
+    "name": "Fajitas de Pollo",
+    "description": "Tiernas tiras de pechuga de pollo a la parrilla salteadas con pimientos frescos y cebollas. Servidas con arroz español, frijoles refritos y una ensalada de crema agria.",
+    "price": 17.99,
+    "category": "Especialidades de la Casa"
   },
   {
     "id": "41",
-    "name": "Chips y Salsa Caseros",
-    "description": "Gratis con la compra de comida o plato principal.",
-    "price": 11.24,
-    "category": "Aperitivo"
+    "name": "Barbacoa Patronas (para 2 personas)",
+    "description": "Un festín abundante de bistec, pollo, chorizo mexicano, pescado blanco, camarones, crujiente chicharrón, queso fresco y jalapeños a la parrilla. Perfecto para compartir.",
+    "price": 37.99,
+    "category": "Especialidades de la Casa"
   },
   {
     "id": "42",
-    "name": "Tostadas de Camarón",
-    "description": "Camarones en una tostada de maíz crujiente.",
-    "price": 12.49,
-    "category": "Aperitivo"
+    "name": "Las Patronas",
+    "description": "Sabroso bistec y chorizo salteados con pimientos y cebollas, cubiertos con queso gratinado derretido. Servidos con arroz, frijoles y tortillas calientes.",
+    "price": 16.99,
+    "category": "Tacos"
   },
   {
     "id": "43",
-    "name": "Pico de Gallo",
-    "description": "Tomates en cubos, cebollas, jalapeños y cilantro.",
-    "price": 4.99,
-    "category": "Aperitivo"
+    "name": "Las Piratas",
+    "description": "Delicioso pastor de cerdo con piña dulce y cebollas, cubierto con queso gratinado derretido. Servido con arroz, frijoles y tortillas calientes.",
+    "price": 16.99,
+    "category": "Tacos"
   },
   {
     "id": "44",
-    "name": "Aguacate Fresco en Rodajas",
-    "description": "Aguacate recién cortado en rodajas.",
-    "price": 4.99,
-    "category": "Aperitivo"
+    "name": "Las Locas",
+    "description": "Una mezcla abundante de chuleta de cerdo, tocino, bistec, champiñones, cebollas, pimientos y queso gratinado derretido. Servido con arroz, frijoles y tortillas calientes.",
+    "price": 17.99,
+    "category": "Tacos"
   },
   {
     "id": "45",
-    "name": "Choriqueso",
-    "description": "Dip de queso con chorizo mexicano.",
-    "price": 13.74,
-    "category": "Aperitivo"
+    "name": "Quesabirrias",
+    "description": "Sabrosa carne de birria en tortillas de harina calientes con queso, cebollas, cilantro y un lado de rico consomé para mojar.",
+    "price": 13.99,
+    "category": "Tacos"
   },
   {
     "id": "46",
-    "name": "Nachos de Queso o Nachos de Frijoles y Queso",
-    "description": "",
-    "price": 12.49,
-    "category": "Aperitivo"
+    "name": "Taco de Calle de Bistec",
+    "description": "Jugoso taco de bistec de calle cubierto con cebollas frescas, cilantro y un toque de limón.",
+    "price": 2.99,
+    "category": "Tacos"
   },
   {
     "id": "47",
-    "name": "Sopas Caseras",
-    "description": "",
-    "price": 11.24,
-    "category": "Sopas y Ensaladas"
+    "name": "Taco de Calle de Carnitas",
+    "description": "Tierno taco de carnitas adornado con cebollas, cilantro y un toque de limón.",
+    "price": 2.99,
+    "category": "Tacos"
   },
   {
     "id": "48",
-    "name": "Ensalada de Guacamole",
-    "description": "Lechuga, tomate, queso y guacamole.",
-    "price": 3.74,
-    "category": "Sopas y Ensaladas"
+    "name": "Taco de Calle de Cochinita",
+    "description": "Sabroso taco de cochinita cubierto con cebollas, cilantro y un toque de limón.",
+    "price": 2.99,
+    "category": "Tacos"
   },
   {
     "id": "49",
-    "name": "Ensalada Taco",
-    "description": "Carne magra o pollo desmenuzado servido sobre lechuga iceberg, tomate, queso mexicano, frijoles refritos y crema agria en un tazón de tortilla crujiente.",
-    "price": 14.99,
-    "category": "Sopas y Ensaladas"
+    "name": "Taco de Calle de Birria",
+    "description": "Delicioso taco de birria adornado con cebollas, cilantro y lima fresca.",
+    "price": 2.99,
+    "category": "Tacos"
   },
   {
     "id": "50",
-    "name": "Ensalada Las Patronas",
-    "description": "Bistec en rodajas a la parrilla o pollo, pimientos y cebollas a la parrilla servidos sobre lechuga, tomate, queso mexicano y frijoles refritos, cubierto con crema agria, todo en un tazón de tortilla crujiente.",
-    "price": 16.24,
-    "category": "Sopas y Ensaladas"
+    "name": "Taco de Carne Molida",
+    "description": "Taco de carne molida sazonada cubierto con cebollas, cilantro y un toque de limón.",
+    "price": 2.99,
+    "category": "Tacos"
   },
   {
     "id": "51",
-    "name": "Ensalada de Crema Agria",
-    "description": "Lechuga, tomate, queso y crema agria.",
-    "price": 3.74,
-    "category": "Sopas y Ensaladas"
+    "name": "Taco de Calle de Carne Deshebrada",
+    "description": "Taco de carne deshebrada adornado con cebollas frescas, cilantro y limón.",
+    "price": 2.99,
+    "category": "Tacos"
   },
   {
     "id": "52",
-    "name": "Medio Aguacate Fresco en Rodajas",
-    "description": "Medio aguacate fresco en rodajas.",
-    "price": 3.06,
-    "category": "Sopas y Ensaladas"
+    "name": "Taco de Calle de Pollo Deshebrado",
+    "description": "Tierno taco de pollo deshebrado cubierto con cebollas, cilantro y un toque de limón.",
+    "price": 2.99,
+    "category": "Tacos"
   },
   {
     "id": "53",
-    "name": "Fajitas Mixtas",
-    "description": "Tiras de pechuga de pollo y bistec sazonado. Ligeramente sazonado y salteado con pimientos frescos y cebollas. Servido con arroz español, frijoles refritos, ensalada de crema agria y tortillas.",
-    "price": 23.74,
-    "category": "Especialidad de la Casa"
+    "name": "Taco Patrona",
+    "description": "Una sabrosa combinación de bistec, chorizo, pimientos, cebollas y queso derretido envuelto en una cálida tortilla de harina.",
+    "price": 4.99,
+    "category": "Tacos"
   },
   {
     "id": "54",
-    "name": "Parrillada Patronas (Para 2)",
-    "description": "Bistec, pollo, chorizo mexicano, pescado blanco, camarones, chicharrón, queso fresco y jalapeño a la parrilla. Ligeramente sazonado y salteado con pimientos frescos y cebollas. Servido con arroz español, frijoles refritos, ensalada de crema agria y tortillas.",
-    "price": 47.49,
-    "category": "Especialidad de la Casa"
+    "name": "Opción 1",
+    "description": "Una combinación satisfactoria de un burrito de frijoles y una enchilada de queso, servidos con arroz español.",
+    "price": 12.99,
+    "category": "Delicias Vegetarianas"
   },
   {
     "id": "55",
-    "name": "Fajitas de la Casa",
-    "description": "Pechuga de pollo, bistec magro y camarones tiernos. Ligeramente sazonado y salteado con pimientos frescos y cebollas. Servido con arroz español, frijoles refritos, ensalada de crema agria y tortillas.",
-    "price": 26.24,
-    "category": "Especialidad de la Casa"
+    "name": "Opción 2",
+    "description": "Dos enchiladas de queso y una crujiente chalupa de frijoles, servidos con arroz español.",
+    "price": 12.99,
+    "category": "Delicias Vegetarianas"
   },
   {
     "id": "56",
-    "name": "Fajitas de Carne",
-    "description": "Tiras de bistec sazonado a la parrilla. Ligeramente sazonado y salteado con pimientos frescos y cebollas. Servido con arroz español, frijoles refritos, ensalada de crema agria y tortillas.",
-    "price": 22.49,
-    "category": "Especialidad de la Casa"
+    "name": "Opción 3",
+    "description": "Un sabroso chile relleno acompañado de una quesadilla de champiñones, servidos con arroz español.",
+    "price": 12.99,
+    "category": "Delicias Vegetarianas"
   },
   {
     "id": "57",
-    "name": "Fajitas de Camarón",
-    "description": "Camarones a la parrilla. Ligeramente sazonado y salteado con pimientos frescos y cebollas. Servido con arroz español, frijoles refritos, ensalada de crema agria y tortillas.",
-    "price": 27.49,
-    "category": "Especialidad de la Casa"
+    "name": "Opción 4",
+    "description": "Una deliciosa quesadilla de champiñones servida con arroz español y frijoles refritos.",
+    "price": 12.99,
+    "category": "Delicias Vegetarianas"
   },
   {
     "id": "58",
-    "name": "Fajitas del Mar",
-    "description": "Camarones a la parrilla y surtido de mariscos. Ligeramente sazonado y salteado con pimientos frescos y cebollas. Servido con arroz español, frijoles refritos, ensalada de crema agria y tortillas.",
-    "price": 29.99,
-    "category": "Especialidad de la Casa"
+    "name": "Opción 5",
+    "description": "Un sabroso chile relleno y una enchilada de queso, servidos con arroz español y frijoles refritos.",
+    "price": 12.99,
+    "category": "Delicias Vegetarianas"
   },
   {
     "id": "59",
-    "name": "Fajitas de Pollo",
-    "description": "Tiras de pechuga de pollo a la parrilla. Ligeramente sazonado y salteado con pimientos frescos y cebollas. Servido con arroz español, frijoles refritos, ensalada de crema agria y tortillas.",
-    "price": 22.49,
-    "category": "Especialidad de la Casa"
+    "name": "Opción 6",
+    "description": "Un abundante burrito de frijoles acompañado de dos enchiladas de queso.",
+    "price": 12.99,
+    "category": "Delicias Vegetarianas"
   },
   {
     "id": "60",
-    "name": "Tacos Callejeros",
-    "description": "Servidos con cebollas y cilantro, limones y tu elección de bistec, carnitas, cochinita, birria, carne molida, carne desmenuzada o pollo desmenuzado.",
-    "price": 3.74,
-    "category": "Especialidad Casera"
+    "name": "Opción 7",
+    "description": "Crujientes tostadas de frijoles y queso servidas con arroz español.",
+    "price": 12.99,
+    "category": "Delicias Vegetarianas"
   },
   {
     "id": "61",
-    "name": "Quesabirrias",
-    "description": "Carne de birria con tortillas de harina, queso, cebollas, cilantro y consomé.",
-    "price": 17.49,
-    "category": "Especialidad Casera"
+    "name": "Opción 8",
+    "description": "Fajitas vegetarianas chisporroteantes con pimientos, cebollas, champiñones, brócoli y tomates. Servidas con arroz, ensalada de crema agria y tortillas calientes.",
+    "price": 12.99,
+    "category": "Delicias Vegetarianas"
   },
   {
     "id": "62",
-    "name": "Taco Patrona (1 pieza)",
-    "description": "Bistec, chorizo, pimientos, cebollas y queso con tortilla de harina.",
-    "price": 6.24,
-    "category": "Especialidad Casera"
+    "name": "Opción 9",
+    "description": "Una quesadilla a la parrilla rellena de vegetales frescos y queso derretido.",
+    "price": 12.99,
+    "category": "Delicias Vegetarianas"
   },
   {
     "id": "63",
-    "name": "Las Patronas",
-    "description": "Bistec, chorizo, pimientos, cebollas, queso gratinado con arroz, frijoles y tortillas.",
-    "price": 21.24,
-    "category": "Especialidad Casera"
+    "name": "Opción 10",
+    "description": "Un burrito grande lleno de vegetales, arroz, frijoles y cubierto con salsa y queso derretido.",
+    "price": 12.99,
+    "category": "Delicias Vegetarianas"
   },
   {
     "id": "64",
-    "name": "Las Piratas",
-    "description": "Pastor, piña, cebollas, queso gratinado con arroz, frijoles y tortillas.",
-    "price": 21.24,
-    "category": "Especialidad Casera"
+    "name": "Filete de Pescado",
+    "description": "Un delicado filete de pescado a la parrilla a la perfección, servido con arroz español y una refrescante ensalada de crema agria.",
+    "price": 16.99,
+    "category": "Especialidades del Mar"
   },
   {
     "id": "65",
-    "name": "Las Locas",
-    "description": "Chuleta de cerdo, tocino, bistec, champiñones, cebollas, pimientos, queso gratinado con arroz, frijoles y tortillas.",
-    "price": 22.49,
-    "category": "Especialidad Casera"
+    "name": "Camarones a la Diabla",
+    "description": "Jugosos camarones salteados en una salsa 'Diabla' extra picante, servidos con arroz y una refrescante ensalada de crema agria.",
+    "price": 18.99,
+    "category": "Especialidades del Mar"
   },
   {
     "id": "66",
-    "name": "V9. Adelita",
-    "description": "Quesadilla de vegetales y queso.",
-    "price": 16.24,
-    "category": "Delicias Vegetarianas"
+    "name": "Camarones a la Mexicana",
+    "description": "Suculentos camarones salteados en una salsa mexicana de tomate picante, servidos con arroz y una ensalada de crema agria.",
+    "price": 18.99,
+    "category": "Especialidades del Mar"
   },
   {
     "id": "67",
-    "name": "V6. Un Burrito de Frijoles y Dos Enchiladas de Queso",
-    "description": "",
-    "price": 16.24,
-    "category": "Delicias Vegetarianas"
+    "name": "Camarones Rancheros",
+    "description": "Jugosos camarones salteados en una suave salsa ranchera de tomate, servidos con arroz y una refrescante ensalada de crema agria.",
+    "price": 18.99,
+    "category": "Especialidades del Mar"
   },
   {
     "id": "68",
-    "name": "V10. Burrito Grande Vegetariano",
-    "description": "Relleno de vegetales, arroz y frijoles. Cubierto con salsa y queso.",
-    "price": 16.24,
-    "category": "Delicias Vegetarianas"
+    "name": "Camarones al Mojo de Ajo",
+    "description": "Camarones salteados en aromático aceite de ajo, servidos con arroz español y una ensalada de crema agria.",
+    "price": 18.99,
+    "category": "Especialidades del Mar"
   },
   {
     "id": "69",
-    "name": "V7. Una Tostada de Frijoles y Queso, Arroz",
-    "description": "",
-    "price": 16.24,
-    "category": "Delicias Vegetarianas"
+    "name": "Cóctel de Camarón",
+    "description": "Camarones fríos servidos en nuestra salsa cóctel casera, acompañados de arroz español y una ensalada de crema agria.",
+    "price": 16.99,
+    "category": "Especialidades del Mar"
   },
   {
     "id": "70",
-    "name": "V1. Un Burrito de Frijoles y Una Enchilada de Queso con Arroz",
-    "description": "",
-    "price": 16.24,
-    "category": "Delicias Vegetarianas"
+    "name": "Caldo de Mariscos",
+    "description": "Un abundante caldo de surtido de mariscos preparado con mariscos con cáscara, servido con arroz español y una ensalada de crema agria.",
+    "price": 20.99,
+    "category": "Especialidades del Mar"
   },
   {
     "id": "71",
-    "name": "V2. Dos Enchiladas de Queso y Una Chalupa de Frijoles con Arroz",
-    "description": "",
-    "price": 16.24,
-    "category": "Delicias Vegetarianas"
+    "name": "Carne Asada",
+    "description": "Tierna carne asada a la parrilla en rebanadas delgadas con cebollas caramelizadas. Servida con arroz, frijoles, pico de gallo fresco, ensalada de crema agria y tortillas calientes.",
+    "price": 17.99,
+    "category": "Especialidades de Bistec"
   },
   {
     "id": "72",
-    "name": "V3. Un Chile Relleno y Una Quesadilla de Champiñones con Arroz",
-    "description": "",
-    "price": 16.24,
-    "category": "Delicias Vegetarianas"
+    "name": "Bistec Ranchero",
+    "description": "Bistec a la parrilla en rebanadas delgadas salteado en una suave salsa ranchera. Servido con arroz, frijoles, pico de gallo, ensalada de crema agria y tortillas calientes.",
+    "price": 17.99,
+    "category": "Especialidades de Bistec"
   },
   {
     "id": "73",
-    "name": "V4. Una Quesadilla de Champiñones con Arroz y Frijoles",
-    "description": "",
-    "price": 16.24,
-    "category": "Delicias Vegetarianas"
+    "name": "Bistec en Salsa Verde",
+    "description": "Bistec en rebanadas delgadas salteado en una salsa verde de tomatillo picante. Servido con arroz, frijoles, pico de gallo, ensalada de crema agria y tortillas calientes.",
+    "price": 17.99,
+    "category": "Especialidades de Bistec"
   },
   {
     "id": "74",
-    "name": "V5. Un Chile Relleno y Una Enchilada de Queso con Arroz y Frijoles",
-    "description": "",
-    "price": 16.24,
-    "category": "Delicias Vegetarianas"
+    "name": "Bistec a la Diabla",
+    "description": "Bistec en rebanadas delgadas salteado en una salsa de chipotle picante. Servido con arroz, frijoles, pico de gallo, ensalada de crema agria y tortillas calientes.",
+    "price": 17.99,
+    "category": "Especialidades de Bistec"
   },
   {
     "id": "75",
-    "name": "V8. Fajitas Vegetarianas",
-    "description": "Pimientos, cebollas, champiñones, brócoli y tomate. Servido con arroz, ensalada de crema agria y tortillas.",
-    "price": 16.24,
-    "category": "Delicias Vegetarianas"
+    "name": "Pollo a la Mexicana",
+    "description": "Tierno pollo estilo fajita salteado con jalapeños picantes y cebollas. Servido con arroz y frijoles refritos.",
+    "price": 16.99,
+    "category": "Especialidades de Pollo"
+  },
+  {
+    "id": "76",
+    "name": "Pollo Asado",
+    "description": "Jugosa pechuga de pollo a la parrilla servida con arroz y frijoles refritos.",
+    "price": 16.99,
+    "category": "Especialidades de Pollo"
+  },
+  {
+    "id": "77",
+    "name": "Pollo Loco con Salsa Verde",
+    "description": "Pechuga de pollo a la parrilla bañada en salsa verde picante, servida con arroz y frijoles.",
+    "price": 16.99,
+    "category": "Especialidades de Pollo"
+  },
+  {
+    "id": "78",
+    "name": "Pollo Loco con Salsa Ranchera",
+    "description": "Pechuga de pollo a la parrilla cubierta con sabrosa salsa ranchera, servida con arroz y frijoles.",
+    "price": 16.99,
+    "category": "Especialidades de Pollo"
+  },
+  {
+    "id": "79",
+    "name": "Pollo Loco con Salsa Diabla",
+    "description": "Pechuga de pollo a la parrilla bañada en salsa diabla picante, servida con arroz y frijoles.",
+    "price": 16.99,
+    "category": "Especialidades de Pollo"
+  },
+  {
+    "id": "80",
+    "name": "Pollo Empanizado",
+    "description": "Crujiente pollo empanizado servido con arroz y frijoles refritos.",
+    "price": 16.99,
+    "category": "Especialidades de Pollo"
+  },
+  {
+    "id": "81",
+    "name": "Pollo con Salsa de Champiñones",
+    "description": "Pechuga de pollo a la parrilla cubierta con champiñones salteados y queso derretido. Servida con arroz español y brócoli al vapor.",
+    "price": 17.99,
+    "category": "Especialidades de Pollo"
+  },
+  {
+    "id": "82",
+    "name": "Pollo con Chorizo",
+    "description": "Pechuga de pollo a la parrilla cubierta con sabroso chorizo y queso derretido. Servida con arroz y frijoles.",
+    "price": 17.99,
+    "category": "Especialidades de Pollo"
+  },
+  {
+    "id": "83",
+    "name": "Enchiladas con Mole",
+    "description": "Tres enchiladas de pollo bañadas en rica salsa de mole, servidas con arroz español y frijoles.",
+    "price": 12.99,
+    "category": "Mexicano Tradicional"
+  },
+  {
+    "id": "84",
+    "name": "Enchiladas Verdes de Pollo Deshebrado",
+    "description": "Tres enchiladas de pollo deshebrado cubiertas con salsa verde picante.",
+    "price": 12.99,
+    "category": "Mexicano Tradicional"
+  },
+  {
+    "id": "85",
+    "name": "Enchiladas Verdes de Carne Deshebrada",
+    "description": "Tres enchiladas de carne deshebrada bañadas en salsa verde sabrosa.",
+    "price": 12.99,
+    "category": "Mexicano Tradicional"
+  },
+  {
+    "id": "86",
+    "name": "Enchiladas Verdes de Carne Molida",
+    "description": "Tres enchiladas de carne molida sazonada cubiertas con salsa verde.",
+    "price": 12.99,
+    "category": "Mexicano Tradicional"
+  },
+  {
+    "id": "87",
+    "name": "Enchiladas Verdes de Cerdo Deshebrado",
+    "description": "Tres enchiladas de cerdo deshebrado bañadas en salsa verde picante.",
+    "price": 12.99,
+    "category": "Mexicano Tradicional"
+  },
+  {
+    "id": "88",
+    "name": "Enchiladas de Cerdo",
+    "description": "Tres enchiladas de cerdo cubiertas con salsa verde, servidas con una ensalada de crema agria y arroz español.",
+    "price": 12.99,
+    "category": "Mexicano Tradicional"
+  },
+  {
+    "id": "89",
+    "name": "Enchiladas Rojas de Pollo Deshebrado",
+    "description": "Tres enchiladas de pollo deshebrado bañadas en rica salsa roja.",
+    "price": 12.99,
+    "category": "Mexicano Tradicional"
+  },
+  {
+    "id": "90",
+    "name": "Enchiladas Rojas de Carne Deshebrada",
+    "description": "Tres enchiladas de carne deshebrada cubiertas con sabrosa salsa roja.",
+    "price": 12.99,
+    "category": "Mexicano Tradicional"
+  },
+  {
+    "id": "91",
+    "name": "Enchiladas Rojas de Carne Molida",
+    "description": "Tres enchiladas de carne molida sazonada bañadas en salsa roja.",
+    "price": 12.99,
+    "category": "Mexicano Tradicional"
+  },
+  {
+    "id": "92",
+    "name": "Enchiladas Rojas de Cerdo Deshebrado",
+    "description": "Tres enchiladas de cerdo deshebrado cubiertas con deliciosa salsa roja.",
+    "price": 12.99,
+    "category": "Mexicano Tradicional"
+  },
+  {
+    "id": "93",
+    "name": "Enchiladas Mexicanas de Pollo Deshebrado",
+    "description": "Tres enchiladas de pollo deshebrado cubiertas con salsas verde y roja, queso derretido y chorizo mexicano. Servidas con ensalada de crema agria y arroz.",
+    "price": 13.99,
+    "category": "Mexicano Tradicional"
+  },
+  {
+    "id": "94",
+    "name": "Enchiladas Mexicanas de Carne Deshebrada",
+    "description": "Tres enchiladas de carne deshebrada con salsas verde y roja, queso derretido y chorizo mexicano. Servidas con ensalada de crema agria y arroz.",
+    "price": 13.99,
+    "category": "Mexicano Tradicional"
+  },
+  {
+    "id": "95",
+    "name": "Enchiladas Mexicanas de Carne Molida",
+    "description": "Tres enchiladas de carne molida bañadas en salsas verde y roja, queso derretido y chorizo mexicano. Servidas con ensalada de crema agria y arroz.",
+    "price": 13.99,
+    "category": "Mexicano Tradicional"
+  },
+  {
+    "id": "96",
+    "name": "Enchiladas Mexicanas de Cerdo Deshebrado",
+    "description": "Tres enchiladas de cerdo deshebrado cubiertas con salsas verde y roja, queso derretido y chorizo mexicano. Servidas con ensalada de crema agria y arroz.",
+    "price": 13.99,
+    "category": "Mexicano Tradicional"
+  },
+  {
+    "id": "97",
+    "name": "Taquitos",
+    "description": "Cuatro tortillas de maíz fritas y crujientes rellenas de pollo deshebrado, cubiertas con tomate, lechuga, queso y crema agria. Servidas con arroz y frijoles.",
+    "price": 13.99,
+    "category": "Mexicano Tradicional"
+  },
+  {
+    "id": "98",
+    "name": "Quesadillas de Pollo Deshebrado",
+    "description": "Tortilla de harina a la parrilla rellena con pollo deshebrado, pimientos y cebollas. Servida con arroz y frijoles.",
+    "price": 13.99,
+    "category": "Mexicano Tradicional"
+  },
+  {
+    "id": "99",
+    "name": "Quesadillas de Carne Deshebrada",
+    "description": "Tortilla de harina a la parrilla rellena con carne deshebrada, pimientos y cebollas. Servida con arroz y frijoles.",
+    "price": 13.99,
+    "category": "Mexicano Tradicional"
+  },
+  {
+    "id": "100",
+    "name": "Quesadillas de Carne Molida",
+    "description": "Tortilla de harina a la parrilla rellena con carne molida sazonada, pimientos y cebollas. Servida con arroz y frijoles.",
+    "price": 13.99,
+    "category": "Mexicano Tradicional"
+  },
+  {
+    "id": "101",
+    "name": "Quesadillas de Cerdo Deshebrado",
+    "description": "Tortilla de harina a la parrilla rellena con cerdo deshebrado, pimientos y cebollas. Servida con arroz y frijoles.",
+    "price": 13.99,
+    "category": "Mexicano Tradicional"
+  },
+  {
+    "id": "102",
+    "name": "Burrito Supremo de Pollo Deshebrado",
+    "description": "Un burrito supremo de pollo deshebrado con pimientos, cebollas a la parrilla, tomate, lechuga, queso y crema agria, bañado en salsa de burrito y queso derretido. Servido con arroz y frijoles.",
+    "price": 15.99,
+    "category": "Mexicano Tradicional"
+  },
+  {
+    "id": "103",
+    "name": "Burrito Supremo de Carne Deshebrada",
+    "description": "Un burrito supremo de carne deshebrada con pimientos, cebollas a la parrilla, tomate, lechuga, queso y crema agria, bañado en salsa de burrito y queso derretido. Servido con arroz y frijoles.",
+    "price": 15.99,
+    "category": "Mexicano Tradicional"
+  },
+  {
+    "id": "104",
+    "name": "Burrito Supremo de Carne Molida",
+    "description": "Un burrito supremo de carne molida con pimientos, cebollas a la parrilla, tomate, lechuga, queso y crema agria, bañado en salsa de burrito y queso derretido. Servido con arroz y frijoles.",
+    "price": 15.99,
+    "category": "Mexicano Tradicional"
+  },
+  {
+    "id": "105",
+    "name": "Burrito Supremo de Cerdo Deshebrado",
+    "description": "Un burrito supremo de cerdo deshebrado con pimientos, cebollas a la parrilla, tomate, lechuga, queso y crema agria, bañado en salsa de burrito y queso derretido. Servido con arroz y frijoles.",
+    "price": 15.99,
+    "category": "Mexicano Tradicional"
+  },
+  {
+    "id": "106",
+    "name": "Burritos Las Patronas de Pollo Deshebrado",
+    "description": "Tres burritos de pollo deshebrado en tortillas de harina, cubiertos con queso, crema agria y pico de gallo. Servidos con arroz y frijoles.",
+    "price": 15.99,
+    "category": "Mexicano Tradicional"
+  },
+  {
+    "id": "107",
+    "name": "Burritos Las Patronas de Carne Deshebrada",
+    "description": "Tres burritos de carne deshebrada en tortillas de harina, cubiertos con queso, crema agria y pico de gallo. Servidos con arroz y frijoles.",
+    "price": 15.99,
+    "category": "Mexicano Tradicional"
+  },
+  {
+    "id": "108",
+    "name": "Burritos Las Patronas de Carne Molida",
+    "description": "Tres burritos de carne molida en tortillas de harina, cubiertos con queso, crema agria y pico de gallo. Servidos con arroz y frijoles.",
+    "price": 15.99,
+    "category": "Mexicano Tradicional"
+  },
+  {
+    "id": "109",
+    "name": "Burritos Las Patronas de Cerdo Deshebrado",
+    "description": "Tres burritos de cerdo deshebrado en tortillas de harina, cubiertos con queso, crema agria y pico de gallo. Servidos con arroz y frijoles.",
+    "price": 15.99,
+    "category": "Mexicano Tradicional"
+  },
+  {
+    "id": "110",
+    "name": "Burrito Mexicano",
+    "description": "Un burrito colosal relleno de pollo a la parrilla, bistec y chorizo, cubierto con salsa verde, queso derretido y salsa roja.",
+    "price": 15.99,
+    "category": "Mexicano Tradicional"
+  },
+  {
+    "id": "111",
+    "name": "Burrito Clásico de Pollo Deshebrado",
+    "description": "Un burrito clásico de pollo deshebrado con pimientos, cebollas a la parrilla, arroz y frijoles envuelto en una tortilla de harina.",
+    "price": 13.99,
+    "category": "Mexicano Tradicional"
+  },
+  {
+    "id": "112",
+    "name": "Burrito Clásico de Carne Deshebrada",
+    "description": "Un burrito clásico de carne deshebrada con pimientos, cebollas a la parrilla, arroz y frijoles envuelto en una tortilla de harina.",
+    "price": 13.99,
+    "category": "Mexicano Tradicional"
+  },
+  {
+    "id": "113",
+    "name": "Burrito Clásico de Carne Molida",
+    "description": "Un burrito clásico de carne molida con pimientos, cebollas a la parrilla, arroz y frijoles envuelto en una tortilla de harina.",
+    "price": 13.99,
+    "category": "Mexicano Tradicional"
+  },
+  {
+    "id": "114",
+    "name": "Burrito Clásico de Cerdo Deshebrado",
+    "description": "Un burrito clásico de cerdo deshebrado con pimientos, cebollas a la parrilla, arroz y frijoles envuelto en una tortilla de harina.",
+    "price": 13.99,
+    "category": "Mexicano Tradicional"
+  },
+  {
+    "id": "115",
+    "name": "Chimichangas de Pollo Deshebrado",
+    "description": "Dos crujientes chimichangas de pollo deshebrado servidas con arroz español y una ensalada de crema agria.",
+    "price": 13.99,
+    "category": "Mexicano Tradicional"
+  },
+  {
+    "id": "116",
+    "name": "Chimichangas de Carne Deshebrada",
+    "description": "Dos crujientes chimichangas de carne deshebrada servidas con arroz español y una ensalada de crema agria.",
+    "price": 13.99,
+    "category": "Mexicano Tradicional"
   }
 ]
