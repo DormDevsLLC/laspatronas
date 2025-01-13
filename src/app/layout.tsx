@@ -4,6 +4,7 @@ import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 
 import Footer from "~/components/footer";
+import SpecialsDialog from "~/components/specials-dialog";
 import { Toaster } from "~/components/ui/toaster";
 
 export const metadata: Metadata = {
@@ -31,6 +32,7 @@ export default function RootLayout({
     <html lang="en" className={`${GeistSans.variable} bg-lime-100`}>
       <body>
         <main className="h-screen overflow-x-hidden bg-lime-100">
+          <SpecialsDialog />
           <div className="min-h-screen">{children}</div>
           <Footer />
         </main>
