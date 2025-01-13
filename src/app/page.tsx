@@ -3,13 +3,21 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import Navbar from "~/components/navbar";
 import Open from "~/components/open";
+import RotatingBackground from "~/components/rotating-bg";
 import TransitionLink from "~/components/transition-link";
 import { Button } from "~/components/ui/button";
+import { Card } from "~/components/ui/card";
 
 export default function Home() {
   // Stateful data
   const [language, setLang] = useState("en");
   let startLang;
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check if the user is on a mobile device
+  useEffect(() => {
+    setIsMobile(window.innerWidth <= 768);
+  }, []);
 
   // Get the language of the web client
   useEffect(() => {
@@ -29,63 +37,31 @@ export default function Home() {
           setLang(lang);
         }}
       />
-      <div
-        id="transition-page"
-        className="relative flex h-[92.5vh] w-screen items-center justify-between overflow-hidden"
-      >
-        {/* Left-hand image */}
-        <div className="flex h-full w-full items-center justify-center lg:w-5/12 lg:items-start lg:justify-normal">
-          <div className="relative mb-12 h-auto w-full px-8 md:mb-36 md:px-12 lg:m-20 lg:px-0">
-            <Image
-              src="/patronas-hero-header.png"
-              alt="Hero"
-              layout="responsive"
-              width={100} // Set aspect ratio by defining width
-              height={60} // Set aspect ratio by defining height
-              objectFit="contain" // Maintains the aspect ratio of the image
-              className="animate-fade-right animate-delay-300"
-            />
-
-            {/* Buttons below the image */}
-            <div className="mt-6 flex animate-fade-right justify-center space-x-28 pt-4 animate-delay-500">
-              <Open language={language} />
-            </div>
-            {/* Buttons below the image */}
-            <div className="mt-8 flex animate-fade-right items-center justify-center animate-delay-700">
-              <TransitionLink
-                href={language.includes("en") ? "/en/order" : "/es/order"}
-              >
-                <Button
-                  size={"lg"}
-                  className="mr-4 bg-[#1c0230] transition-all duration-300 hover:-translate-y-1 md:p-7 md:text-2xl"
-                >
-                  {language.includes("en") ? "Order Now" : "Ordenar Ahora"}
-                </Button>
-              </TransitionLink>
-              <TransitionLink
-                href={language.includes("en") ? "/en/about" : "/es/about"}
-              >
-                <Button
-                  size={"lg"}
-                  className="bg-[#1c0230] transition-all duration-300 hover:-translate-y-1 md:p-7 md:text-2xl"
-                >
-                  {language.includes("en") ? "Learn More" : "Aprende Más"}
-                </Button>
-              </TransitionLink>
-            </div>
+      <div className="relative flex h-[95vh] w-screen items-center justify-between overflow-hidden">
+        <div className="absolute left-0 top-0 z-0 h-full w-full">
+          <RotatingBackground />
+        </div>
+        <Card className="absolute bottom-0 left-1/2 z-10 mb-8 flex w-11/12 -translate-x-1/2 animate-fade flex-col border-[#a80c94] bg-[#1c0230] animate-delay-300 md:h-1/4 md:w-1/3">
+          <div className="my-2 flex w-full items-center justify-center">
+            {!isMobile && (
+              <Image
+                src="/logo.png"
+                alt="Las Patronas UCF"
+                width={125}
+                height={125}
+              />
+            )}
           </div>
-        </div>
-
-        {/* Right-hand image */}
-        <div className="relative hidden h-full w-4/12 animate-fade-left lg:flex">
-          <Image
-            src="/hero-flowers.png"
-            alt="Hero"
-            layout="fill"
-            objectFit="fill" // Ensures the image covers the full height and width
-            className="right-0"
-          />
-        </div>
+          <Open language={language} />
+          <div className="my-2 flex w-full justify-center gap-4">
+            <TransitionLink href={language == "en" ? "/en/order" : "/es/order"}>
+              <Button className="bg-[#a80c94]">Order</Button>
+            </TransitionLink>{" "}
+            <TransitionLink href={language == "en" ? "/en/about" : "/es/about"}>
+              <Button className="bg-[#a80c94]">About</Button>
+            </TransitionLink>
+          </div>
+        </Card>
       </div>
     </>
   );

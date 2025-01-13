@@ -155,6 +155,10 @@ export default function Navbar({
           </Sheet>
         </div>
 
+        <div className="absolute right-0 top-0 mt-2 -translate-x-1/2 md:hidden">
+          <Image src={"/logo.png"} width={50} height={50} alt="logo" />
+        </div>
+
         <div className="hidden items-center justify-center sm:flex">
           <TransitionLink
             href={"/"}

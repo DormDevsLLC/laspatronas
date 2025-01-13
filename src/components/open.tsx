@@ -119,7 +119,7 @@ export default function Open({ language }: { language: string }) {
     getIsOpen(language);
 
   return (
-    <div className="w-full flex-col content-center items-center justify-center text-center text-3xl lg:text-4xl">
+    <div className="w- flex-col content-center items-center justify-center px-2 text-center text-xl text-white lg:text-xl">
       <div>
         {today}'s {language.includes("en") ? "Hours" : "Horas"}:{" "}
         {displayOpenTime} - {displayCloseTime}

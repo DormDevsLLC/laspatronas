@@ -28,8 +28,7 @@ export default function SpecialsDialog() {
 
   // Check if today is Taco Tuesday
   const today = new Date();
-  //   const tacoTuesday = today.getDay() === 2;
-  const tacoTuesday = true;
+  const tacoTuesday = today.getDay() === 2;
 
   // Check if the current time is between 2pm and 5pm (LUNCH SPECIAL!!!)
   const currentTime = today.getHours();
@@ -41,12 +40,12 @@ export default function SpecialsDialog() {
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="w-3/4 rounded-xl">
+      <DialogContent className="w-3/4 rounded-xl border-[#a80c94] bg-[#1c0230] text-white">
         <DialogHeader>
           <DialogTitle className="text-xl">
             {tacoTuesday ? "Today is Taco Tuesday!" : "It's Time for Lunch!"}
           </DialogTitle>
-          <DialogDescription className="text-base text-black md:text-xl">
+          <DialogDescription className="text-base text-white md:text-xl">
             {tacoTuesday
               ? "Enjoy our amazing chicken, beef, or pork tacos for only $1 each! Available for Dine-In and Carry Out."
               : "Enjoy our savory and affordable lunch special between 2pm and 5pm"}
