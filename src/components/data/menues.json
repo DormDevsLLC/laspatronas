@@ -810,5 +810,26 @@
     "description": "Dos crujientes chimichangas de carne deshebrada servidas con arroz español y una ensalada de crema agria.",
     "price": 13.99,
     "category": "Mexicano Tradicional"
+  },
+  {
+    "id": "117",
+    "name": "Taco de Res - $1",
+    "description": "Nuestro tradicional taco callejero de res con carne molida sazonada, cebolla y cilantro.",
+    "price": 1,
+    "category": "Martes de Tacos"
+  },
+  {
+    "id": "118",
+    "name": "Taco de Pollo - $1",
+    "description": "Nuestro tradicional taco callejero de pollo con carne molida sazonada, cebolla y cilantro.",
+    "price": 1,
+    "category": "Martes de Tacos"
+  },
+  {
+    "id": "119",
+    "name": "Taco de Cerdo - $1",
+    "description": "Nuestro tradicional taco callejero de cerdo con carne molida sazonada, cebolla y cilantro.",
+    "price": 1,
+    "category": "Martes de Tacos"
   }
 ]

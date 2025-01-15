@@ -810,5 +810,26 @@
     "description": "Two crispy pulled beef chimichangas served with Spanish rice and a sour cream salad.",
     "price": 13.99,
     "category": "Traditional Mexican"
+  },
+  {
+    "id": "117",
+    "name": "Beef Taco - $1",
+    "description": "Our traditional beef street taco with seasoned ground beef, onions, and cilantro.",
+    "price": 1,
+    "category": "Taco Tuesday"
+  },
+  {
+    "id": "118",
+    "name": "Chicken Taco - $1",
+    "description": "Our traditional chicken street taco with seasoned ground beef, onions, and cilantro.",
+    "price": 1,
+    "category": "Taco Tuesday"
+  },
+  {
+    "id": "119",
+    "name": "Pork Taco - $1",
+    "description": "Our traditional pork street taco with seasoned ground beef, onions, and cilantro.",
+    "price": 1,
+    "category": "Taco Tuesday"
   }
 ]

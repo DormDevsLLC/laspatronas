@@ -5,6 +5,7 @@ import {
   ArrowLeft,
   ArrowRight,
   ChevronUp,
+  Loader2,
   Minus,
   Search,
   Trash,
@@ -44,9 +45,31 @@ interface RestaurantMenuProps {
 
 export default function OrderPage({ language }: RestaurantMenuProps) {
   const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(false);
 
   // Select the appropriate menu items based on the language
-  const menuItems = language === "en" ? menuItemsEn : menuItemsEs;
+  let menuItems = language === "en" ? menuItemsEn : menuItemsEs;
+
+  // If today is Tuesday, sort the "Taco Tuesday" category items first
+  const today = new Date().getDay();
+  const isTacoTuesday = today === 2; // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+
+  if (isTacoTuesday) {
+    menuItems.sort((a, b) => {
+      if (a.category === "Taco Tuesday" && b.category !== "Taco Tuesday") {
+        return -1;
+      } else if (
+        a.category !== "Taco Tuesday" &&
+        b.category === "Taco Tuesday"
+      ) {
+        return 1;
+      }
+      return 0;
+    });
+  } else {
+    // Remove the "Taco Tuesday" category if it's not Tuesday
+    menuItems = menuItems.filter((item) => item.category !== "Taco Tuesday");
+  }
 
   // State variables for search term, cart, and filtered items
   const [searchTerm, setSearchTerm] = useState("");
@@ -359,6 +382,7 @@ export default function OrderPage({ language }: RestaurantMenuProps) {
   // Function to handle checkout and place the order
   const handleCheckout = async () => {
     if (cart === null) return;
+    setLoading(true);
 
     if (!restaurantIsOpen) {
       // Notify the user if the restaurant is closed
@@ -492,6 +516,7 @@ export default function OrderPage({ language }: RestaurantMenuProps) {
       });
 
       // Clear cart and customer information after order is placed
+      setLoading(false);
       setCart([]);
       setCustomerName("");
       setCustomerPhone("");
@@ -566,7 +591,6 @@ export default function OrderPage({ language }: RestaurantMenuProps) {
 
         {/* Navigation for categories and cart */}
         <nav className="sticky top-0 z-10 mb-8 bg-[#f0ccf4] py-4">
-          {/* Mobile Layout */}
           <div className="flex-col justify-between space-y-2 md:hidden">
             <div className="flex items-center justify-center">
               <div>
@@ -579,7 +603,7 @@ export default function OrderPage({ language }: RestaurantMenuProps) {
                     variant="outline"
                     size={"sm"}
                     onClick={() => scrollToSection(category)}
-                    className="flex-shrink-0 bg-[#f8cca4] text-sm"
+                    className={`bg-${category === "Taco Tuesday" ? "[#a80c94] text-white" : "[#f8cca4]"}`}
                   >
                     {category}
                   </Button>
@@ -613,7 +637,7 @@ export default function OrderPage({ language }: RestaurantMenuProps) {
                   key={category}
                   variant="outline"
                   onClick={() => scrollToSection(category)}
-                  className="animate-fade-right border-none bg-[#f8cca4]"
+                  className={`animate-fade-right border-none bg-${category === "Taco Tuesday" ? "[#a80c94] text-white" : "[#f8cca4]"}`}
                   style={{
                     animationDelay: `${index * 75 + 100}ms`,
                   }}
@@ -952,13 +976,19 @@ export default function OrderPage({ language }: RestaurantMenuProps) {
                 onClick={handleCheckout}
                 disabled={!isFormValid || !restaurantIsOpen}
               >
-                {restaurantIsOpen
-                  ? language === "en"
-                    ? "Checkout"
-                    : "Pagar"
-                  : language === "en"
-                    ? "Closed"
-                    : "Cerrado"}
+                {loading ? (
+                  <Loader2 className="animate-spin" />
+                ) : restaurantIsOpen ? (
+                  language === "en" ? (
+                    "Checkout"
+                  ) : (
+                    "Pagar"
+                  )
+                ) : language === "en" ? (
+                  "Closed"
+                ) : (
+                  "Cerrado"
+                )}
               </Button>
             </div>
           )}

@@ -12,7 +12,7 @@ export default function Home() {
   // Stateful data
   const [language, setLang] = useState("en");
   let startLang;
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(true);
 
   // Check if the user is on a mobile device
   useEffect(() => {
@@ -55,10 +55,14 @@ export default function Home() {
           <Open language={language} />
           <div className="my-2 flex w-full justify-center gap-4">
             <TransitionLink href={language == "en" ? "/en/order" : "/es/order"}>
-              <Button className="bg-[#a80c94]">Order</Button>
+              <Button className="bg-[#a80c94]">
+                {language == "en" ? "Order" : "Ordenar"}
+              </Button>
             </TransitionLink>{" "}
             <TransitionLink href={language == "en" ? "/en/about" : "/es/about"}>
-              <Button className="bg-[#a80c94]">About</Button>
+              <Button className="bg-[#a80c94]">
+                {language == "en" ? "About" : "Acerca de"}
+              </Button>
             </TransitionLink>
           </div>
         </Card>
