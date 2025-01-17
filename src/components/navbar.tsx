@@ -71,22 +71,18 @@ export default function Navbar({
     } else {
       // Grab the current url and swap
       if (lang.includes("en")) {
-        const newPath = currentPath.replace("/en", "/es");
-        handleTransition(newPath);
-      } else {
-        const newPath = currentPath.replace("/es", "/en");
-        handleTransition(newPath);
-      }
-
-      // Change the language
-      if (lang.includes("en")) {
         setLang("es");
         setParentLanguage?.("es");
         setLinks(esLinks);
+        const newPath = currentPath.replace("/en", "/es");
+        console.log("Changing path to: ", newPath);
+        handleTransition(newPath);
       } else {
         setLang("en");
         setParentLanguage?.("en");
         setLinks(enLinks);
+        const newPath = currentPath.replace("/es", "/en");
+        handleTransition(newPath);
       }
     }
   }

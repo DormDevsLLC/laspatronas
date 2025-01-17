@@ -11,7 +11,7 @@ import {
   Trash,
 } from "lucide-react";
 import { useRouter } from "next/navigation"; // Import useRouter
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useToast } from "~/hooks/use-toast"; // Custom toast hook for notifications
 import menuItemsEn from "./data/menuen.json"; // English menu items data
 import menuItemsEs from "./data/menues.json"; // Spanish menu items data
@@ -47,29 +47,77 @@ export default function OrderPage({ language }: RestaurantMenuProps) {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
 
-  // Select the appropriate menu items based on the language
-  let menuItems = language === "en" ? menuItemsEn : menuItemsEs;
-
   // If today is Tuesday, sort the "Taco Tuesday" category items first
-  const today = new Date().getDay();
-  const isTacoTuesday = today === 2; // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+  const today = new Date();
+  const isTacoTuesday = true; // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
 
-  if (isTacoTuesday) {
-    menuItems.sort((a, b) => {
-      if (a.category === "Taco Tuesday" && b.category !== "Taco Tuesday") {
-        return -1;
-      } else if (
-        a.category !== "Taco Tuesday" &&
-        b.category === "Taco Tuesday"
-      ) {
-        return 1;
-      }
-      return 0;
-    });
-  } else {
-    // Remove the "Taco Tuesday" category if it's not Tuesday
-    menuItems = menuItems.filter((item) => item.category !== "Taco Tuesday");
-  }
+  // Check if the time is between 11:30 AM and 2:00 PM
+  const currentTime = today.getHours() + today.getMinutes() / 60;
+  const lunchSpecial = currentTime >= 11.5 && currentTime <= 14;
+
+  const menuItems = useMemo(() => {
+    let items = language === "en" ? menuItemsEn : menuItemsEs;
+
+    if (isTacoTuesday) {
+      items.sort((a, b) => {
+        if (
+          (a.category === "Taco Tuesday" || a.category === "Martes de Tacos") &&
+          b.category !== "Taco Tuesday" &&
+          b.category !== "Martes de Tacos"
+        ) {
+          return -1;
+        } else if (
+          (a.category !== "Taco Tuesday" &&
+            a.category !== "Martes de Tacos" &&
+            b.category === "Taco Tuesday") ||
+          b.category === "Martes de Tacos"
+        ) {
+          return 1;
+        }
+        return 0;
+      });
+
+      items = items.filter(
+        (item) => item.category !== "Lunch Special (11:30 AM to 2:00 PM)",
+      );
+      items = items.filter(
+        (item) => item.category !== "Especial de Almuerzo (11:30 AM a 2:00 PM)",
+      );
+    } else if (lunchSpecial) {
+      items.sort((a, b) => {
+        if (
+          (a.category === "Lunch Special (11:30 AM to 2:00 PM)" ||
+            a.category === "Especial de Almuerzo (11:30 AM a 2:00 PM)") &&
+          b.category !== "Lunch Special (11:30 AM to 2:00 PM)" &&
+          b.category !== "Especial de Almuerzo (11:30 AM a 2:00 PM)"
+        ) {
+          return -1;
+        } else if (
+          a.category !== "Lunch Special (11:30 AM to 2:00 PM)" &&
+          a.category !== "Especial de Almuerzo (11:30 AM a 2:00 PM)" &&
+          (b.category === "Lunch Special (11:30 AM to 2:00 PM)" ||
+            b.category === "Especial de Almuerzo (11:30 AM a 2:00 PM)")
+        ) {
+          return 1;
+        }
+        return 0;
+      });
+
+      items = items.filter((item) => item.category !== "Taco Tuesday");
+      items = items.filter((item) => item.category !== "Martes de Tacos");
+    } else {
+      items = items.filter((item) => item.category !== "Taco Tuesday");
+      items = items.filter((item) => item.category !== "Martes de Tacos");
+      items = items.filter(
+        (item) => item.category !== "Lunch Special (11:30 AM to 2:00 PM)",
+      );
+      items = items.filter(
+        (item) => item.category !== "Especial de Almuerzo (11:30 AM a 2:00 PM)",
+      );
+    }
+
+    return items;
+  }, [language, isTacoTuesday, lunchSpecial]);
 
   // State variables for search term, cart, and filtered items
   const [searchTerm, setSearchTerm] = useState("");
@@ -112,66 +160,32 @@ export default function OrderPage({ language }: RestaurantMenuProps) {
     [],
   );
 
-  // Load cart from localStorage when the component mounts or when language changes
   useEffect(() => {
     if (typeof window !== "undefined") {
       const savedCart = localStorage.getItem("cart");
       if (savedCart) {
         const parsedCart = JSON.parse(savedCart) as CartItem[];
-
         if (parsedCart.length > 0) {
-          // Check if the first item exists in the current menu data
-          const firstItemInMenu = menuItems.find(
-            (menuItem) => menuItem.id === parsedCart[0]!.id,
-          );
-
-          if (firstItemInMenu) {
-            // The cart items are in the current language
-            setCart(
-              parsedCart
-                .map((cartItem) => {
-                  // Find the corresponding menu item to update name and description
-                  const menuItem = menuItems.find(
-                    (item) => item.id === cartItem.id,
-                  );
-                  if (menuItem) {
-                    return { ...menuItem, quantity: cartItem.quantity };
-                  } else {
-                    // If item not found, exclude it from the cart
-                    return null;
-                  }
-                })
-                .filter(Boolean) as CartItem[],
-            );
-          } else {
-            // The cart items are in a different language
-            // Map over the cart items and replace them using the correct menu data
-            const updatedCart = parsedCart
+          setCart(
+            parsedCart
               .map((cartItem) => {
-                // Find the corresponding item in the current menu data
-                const correspondingItem = menuItems.find(
-                  (menuItem) => menuItem.id === cartItem.id,
+                const menuItem = menuItems.find(
+                  (item) => item.id === cartItem.id,
                 );
-                if (correspondingItem) {
-                  return { ...correspondingItem, quantity: cartItem.quantity };
-                } else {
-                  // If item not found, exclude it from the cart
-                  return null;
-                }
+                return menuItem
+                  ? { ...menuItem, quantity: cartItem.quantity }
+                  : null;
               })
-              .filter(Boolean) as CartItem[];
-            setCart(updatedCart);
-          }
+              .filter(Boolean) as CartItem[],
+          );
         } else {
-          // Cart is empty
           setCart([]);
         }
       } else {
-        // No cart in localStorage
         setCart([]);
       }
     }
-  }, [language, menuItems]); // Add language and menuItems as dependencies
+  }, [language]);
 
   // Save cart to localStorage whenever it changes
   useEffect(() => {
@@ -603,7 +617,7 @@ export default function OrderPage({ language }: RestaurantMenuProps) {
                     variant="outline"
                     size={"sm"}
                     onClick={() => scrollToSection(category)}
-                    className={`bg-${category === "Taco Tuesday" ? "[#a80c94] text-white" : "[#f8cca4]"}`}
+                    className={`bg-${category === "Taco Tuesday" || category === "Lunch Special (11:30 AM to 2:00 PM)" || category === "Martes de Tacos" || category === "Especial de Almuerzo (11:30 AM a 2:00 PM)" ? "[#a80c94] text-white" : "[#f8cca4]"}`}
                   >
                     {category}
                   </Button>
@@ -637,7 +651,7 @@ export default function OrderPage({ language }: RestaurantMenuProps) {
                   key={category}
                   variant="outline"
                   onClick={() => scrollToSection(category)}
-                  className={`animate-fade-right border-none bg-${category === "Taco Tuesday" ? "[#a80c94] text-white" : "[#f8cca4]"}`}
+                  className={`animate-fade-right border-none bg-${category === "Taco Tuesday" || category === "Lunch Special (11:30 AM to 2:00 PM)" || category === "Martes de Tacos" || category === "Especial de Almuerzo (11:30 AM a 2:00 PM)" ? "[#a80c94] text-white" : "[#f8cca4]"}`}
                   style={{
                     animationDelay: `${index * 75 + 100}ms`,
                   }}

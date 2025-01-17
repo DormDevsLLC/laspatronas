@@ -831,5 +831,47 @@
     "description": "Nuestro tradicional taco callejero de cerdo con carne molida sazonada, cebolla y cilantro.",
     "price": 1,
     "category": "Martes de Tacos"
+  },
+  {
+    "id": "120",
+    "name": "Chimichangas de Pollo con Arroz y Frijoles",
+    "description": "Dos chimichangas de pollo servidas con arroz español y frijoles refritos. Un favorito delicioso para el almuerzo.",
+    "price": 11.99,
+    "category": "Especial de Almuerzo (11:30 AM a 2:00 PM)"
+  },
+  {
+    "id": "121",
+    "name": "Chimichangas de Res con Arroz y Frijoles",
+    "description": "Dos chimichangas de res servidas con arroz español y frijoles refritos. Perfecto para satisfacer tus antojos del almuerzo.",
+    "price": 11.99,
+    "category": "Especial de Almuerzo (11:30 AM a 2:00 PM)"
+  },
+  {
+    "id": "122",
+    "name": "Burrito Supremo de Pollo",
+    "description": "Un burrito de pollo abundante cargado con pimientos, cebollas a la parrilla, lechuga, tomate, crema agria y queso.",
+    "price": 11.99,
+    "category": "Especial de Almuerzo (11:30 AM a 2:00 PM)"
+  },
+  {
+    "id": "123",
+    "name": "Burrito Supremo de Res",
+    "description": "Un burrito de res satisfactorio lleno de pimientos, cebollas a la parrilla, lechuga, tomate, crema agria y queso.",
+    "price": 11.99,
+    "category": "Especial de Almuerzo (11:30 AM a 2:00 PM)"
+  },
+  {
+    "id": "124",
+    "name": "2 Tacos de Pollo con Arroz y Frijoles",
+    "description": "Dos tacos de pollo cubiertos con cebolla y cilantro. Servidos con arroz español y frijoles refritos para una comida completa.",
+    "price": 11.99,
+    "category": "Especial de Almuerzo (11:30 AM a 2:00 PM)"
+  },
+  {
+    "id": "125",
+    "name": "2 Tacos de Res con Arroz y Frijoles",
+    "description": "Dos tacos de res cubiertos con cebolla y cilantro. Servidos con arroz español y frijoles refritos para un almuerzo satisfactorio.",
+    "price": 11.99,
+    "category": "Especial de Almuerzo (11:30 AM a 2:00 PM)"
   }
 ]

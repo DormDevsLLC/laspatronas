@@ -831,5 +831,47 @@
     "description": "Our traditional pork street taco with seasoned ground beef, onions, and cilantro.",
     "price": 1,
     "category": "Taco Tuesday"
+  },
+  {
+    "id": "120",
+    "name": "Chicken Chimichangas with Rice and Beans",
+    "description": "Two chicken chimichangas served with Spanish rice and refried beans. A flavorful lunchtime favorite.",
+    "price": 11.99,
+    "category": "Lunch Special (11:30 AM to 2:00 PM)"
+  },
+  {
+    "id": "121",
+    "name": "Steak Chimichangas with Rice and Beans",
+    "description": "Two steak chimichangas served with Spanish rice and refried beans. Perfect for satisfying your lunchtime cravings.",
+    "price": 11.99,
+    "category": "Lunch Special (11:30 AM to 2:00 PM)"
+  },
+  {
+    "id": "122",
+    "name": "Supreme Chicken Burrito",
+    "description": "A hearty chicken burrito loaded with peppers, grilled onions, lettuce, tomato, sour cream, and cheese.",
+    "price": 11.99,
+    "category": "Lunch Special (11:30 AM to 2:00 PM)"
+  },
+  {
+    "id": "123",
+    "name": "Supreme Steak Burrito",
+    "description": "A satisfying steak burrito packed with peppers, grilled onions, lettuce, tomato, sour cream, and cheese.",
+    "price": 11.99,
+    "category": "Lunch Special (11:30 AM to 2:00 PM)"
+  },
+  {
+    "id": "124",
+    "name": "2 Chicken Tacos with Rice and Beans",
+    "description": "Two chicken tacos topped with onions and cilantro. Served with Spanish rice and refried beans for a complete meal.",
+    "price": 11.99,
+    "category": "Lunch Special (11:30 AM to 2:00 PM)"
+  },
+  {
+    "id": "125",
+    "name": "2 Steak Tacos with Rice and Beans",
+    "description": "Two steak tacos topped with onions and cilantro. Served with Spanish rice and refried beans for a fulfilling lunch.",
+    "price": 11.99,
+    "category": "Lunch Special (11:30 AM to 2:00 PM)"
   }
 ]

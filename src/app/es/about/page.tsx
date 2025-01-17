@@ -24,7 +24,7 @@ import Navbar from "~/components/navbar";
 export default function About() {
   return (
     <>
-      <Navbar language="es-ES" />
+      <Navbar language="es-US" />
       <div
         id="transition-page"
         className="container mx-auto px-4 py-8 sm:px-6 sm:py-16 lg:px-8"
