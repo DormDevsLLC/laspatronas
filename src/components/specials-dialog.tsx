@@ -54,8 +54,8 @@ export default function SpecialsDialog() {
           <DialogDescription className="text-base text-white md:text-xl">
             {tacoTuesday
               ? language === "en"
-                ? "Enjoy our amazing chicken, beef, or pork tacos for only $1 each! Available for Dine-In and Carry Out."
-                : "Disfruta de nuestros increíbles tacos de pollo, res o cerdo por solo $1 cada uno. Disponibles para comer en el restaurante o para llevar."
+                ? "Enjoy our amazing chicken, beef, or pork tacos for only $1 each! Available for Dine-In Only."
+                : "Disfruta de nuestros increíbles tacos de pollo, res o cerdo por solo $1 cada uno. Disponibles para comer en el restaurante."
               : language === "en"
                 ? "Enjoy our savory and affordable lunch special between 2pm and 5pm"
                 : "Disfruta de nuestro delicioso y asequible especial de almuerzo entre las 2 p.m. y las 5 p.m."}

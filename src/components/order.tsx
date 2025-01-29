@@ -49,7 +49,7 @@ export default function OrderPage({ language }: RestaurantMenuProps) {
 
   // If today is Tuesday, sort the "Taco Tuesday" category items first
   const today = new Date();
-  const isTacoTuesday = true; // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+  const isTacoTuesday = today.getDay() == 2; // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
 
   // Check if the time is between 11:30 AM and 2:00 PM
   const currentTime = today.getHours() + today.getMinutes() / 60;
@@ -728,13 +728,22 @@ export default function OrderPage({ language }: RestaurantMenuProps) {
                           </p>
                           <Button
                             onClick={() => addToCart(item)}
-                            disabled={!restaurantIsOpen}
+                            disabled={
+                              !restaurantIsOpen ||
+                              item.category == "Taco Tuesday" ||
+                              item.category == "Martes de Tacos"
+                            }
                             className="bg-[#a80c94] text-white"
                           >
                             {restaurantIsOpen
-                              ? language === "en"
-                                ? "Add to Cart"
-                                : "Añadir al Carrito"
+                              ? item.category === "Taco Tuesday" ||
+                                item.category === "Martes de Tacos"
+                                ? language === "en"
+                                  ? "In-Store Only"
+                                  : "Solo en Tienda"
+                                : language === "en"
+                                  ? "Add to Cart"
+                                  : "Añadir al Carrito"
                               : language === "en"
                                 ? "Closed"
                                 : "Cerrado"}
