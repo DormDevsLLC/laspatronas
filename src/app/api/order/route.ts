@@ -31,7 +31,7 @@ export async function POST(request: Request) {
 
     // Send email to customer
     await resend.emails.send({
-      from: "no-reply@dvidal.dev", // Replace with your verified sender
+      from: "orders@laspatronasucf.com", // Replace with your verified sender
       to: customerEmail,
       subject: subjectCustomer,
       react: EmailTemplateCustomer({ customerName, orderDetails, language }),
@@ -39,7 +39,7 @@ export async function POST(request: Request) {
 
     // Send email to establishment
     await resend.emails.send({
-      from: "no-reply@dvidal.dev", // Replace with your verified sender
+      from: "orders@laspatronasucf.com", // Replace with your verified sender
       to: "dylanvidal1205@gmail.com",
       subject: subjectEstablishment,
       react: EmailTemplateEstablishment({
