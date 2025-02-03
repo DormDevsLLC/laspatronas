@@ -40,7 +40,7 @@ export async function POST(request: Request) {
     // Send email to establishment
     await resend.emails.send({
       from: "orders@laspatronasucf.com", // Replace with your verified sender
-      to: "dylanvidal1205@gmail.com",
+      to: "laspatronasorlandorestaurant@gmail.com",
       subject: subjectEstablishment,
       react: EmailTemplateEstablishment({
         customerName,
